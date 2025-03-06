@@ -1,3 +1,11 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-printf("Hello World!\n");
+
+int main (void) {
+    printf("Hello World!\n");
+
+    return (0);
+}
+
