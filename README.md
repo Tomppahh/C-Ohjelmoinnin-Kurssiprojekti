@@ -8,6 +8,7 @@
 # 30min Pohjan luonti (Valikko+Kysy tiedosto) 
 # 1h 30min addNode aliohjelma, Makefile ja linkedlist.h ja .c luonti
 # 1h Luotu tiedoston lukeminen ja listan etuperin tulostus
+# 1h Loppu korjailua sekä raportin kirjoittelua.
 
 
 # /////Tommi/////
