@@ -26,8 +26,8 @@ void filename(char *pFileName, char *pSentence) {
 }
 
 int main (void) {
-    NODE *pStart = NULL, *pEnd = NULL;
-    NODE *pNew = NULL, *ptr = NULL;
+    NODE *pStart = NULL;
+    
     int iSelection;
     char aReadName[LENGTH], aWriteName[LENGTH];
 

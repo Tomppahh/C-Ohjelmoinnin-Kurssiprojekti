@@ -19,6 +19,6 @@ NODE *empty(NODE *pA);
 void writeFile(NODE *pA, char* pFileName);
 void writeFileReverse(NODE *pA, char *pFileName);
 NODE *readFile(NODE *pA, char *pFileName);
-
+void updatePreviousPointers(NODE *pA);
 
 #endif
