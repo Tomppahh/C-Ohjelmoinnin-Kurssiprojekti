@@ -41,3 +41,20 @@ NODE *empty(NODE *pA) {
     }
     return(pA);
 }
+
+void writeFile(NODE *pA, char* pFileName) {
+    File *Write = NULL;
+
+    if ((Write = fopen(pFileName, "w")) == NULL) {
+        perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
+        exit(0);
+    }
+
+    NODE *ptr = pA;
+    while (ptr != NULL) {
+        fprintf(Write, "%s,%d\n", ptr->aName, ptr->iCount);
+        ptr = ptr->pNext;
+    }
+
+    return;
+}
