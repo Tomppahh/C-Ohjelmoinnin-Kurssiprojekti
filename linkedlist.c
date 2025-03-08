@@ -53,7 +53,7 @@ NODE *empty(NODE *pA) {
         free(ptr);
         ptr = pA;
     }
-    return(pA);
+    return(NULL);
 }
 
 NODE *readFile(NODE *pA, char *pFileName) {
