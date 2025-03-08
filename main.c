@@ -97,7 +97,7 @@ int main (void) {
         printf("\n");
 
     } while(iSelection != 0);
-    printf("Kiitos ohjelman käytöstä.");
+    printf("Kiitos ohjelman käytöstä.\n");
     return (0);
 }
 
