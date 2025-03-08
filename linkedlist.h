@@ -7,7 +7,7 @@
 
 typedef struct node {
     char aName[LENGTH];
-    int iNumber;
+    int iCount;
     struct node *pNext;
     struct node *pPrevious;
 } NODE;
