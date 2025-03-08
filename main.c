@@ -53,7 +53,7 @@ NODE *addNode(NODE *pA, char *pName, int iCount) {
     strcpy(pNew->pName, pName);
     pNew->iCount = iCount;
     pNew->pNext = NULL;
-    pNew->pPrev = NULL;
+    pNew->pPrevious = NULL;
 
     if (pA == NULL) {
         pA = pNew;
