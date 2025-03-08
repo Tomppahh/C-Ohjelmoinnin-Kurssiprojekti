@@ -5,7 +5,7 @@
 
 
 int menu (void) {
-    int iSelection = 0;
+    int iSelection = 5;
     printf("Valitse haluamasi toiminto:\n");
     printf("1) Lue tiedosto\n");
     printf("2) Tallenna lista etuperin\n");
@@ -26,8 +26,8 @@ void filename(char *pFileName, char *pSentence) {
 }
 
 int main (void) {
-    NODE *pStart = NULL, *pEnd = NULL;
-    NODE *pNew = NULL, *ptr = NULL;
+    NODE *pStart = NULL;
+    
     int iSelection;
     char aReadName[LENGTH], aWriteName[LENGTH];
 
