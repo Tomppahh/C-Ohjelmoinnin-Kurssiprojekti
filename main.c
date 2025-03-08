@@ -4,12 +4,12 @@
 
 #define LENGTH 30
 
-typedef struct customer {
+typedef struct node {
     char name[LENGTH];
     int iNumber;
-    struct customer *pNext;
-    struct customer *pPrevious;
-} CUSTOMER;
+    struct node *pNext;
+    struct node *pPrevious;
+} NODE;
 
 
 int menu (void) {
@@ -32,8 +32,8 @@ void filename(char *pFileName, char *pSentence) {
     return;
 }
 
-CUSTOMER *empty(CUSTOMER *pA) {
-    CUSTOMER *ptr = pA;
+NODE *empty(NODE *pA) {
+    NODE *ptr = pA;
     while (ptr != NULL) {
         pA = ptr->pNext;
         free(ptr);
@@ -69,8 +69,8 @@ NODE *addNode(NODE *pA, char *pName, int iCount) {
 }
 
 int main (void) {
-    CUSTOMER *pStart = NULL, *pEnd = NULL;
-    CUSTOMER *pNew = NULL, *ptr = NULL;
+    NODE *pStart = NULL, *pEnd = NULL;
+    NODE *pNew = NULL, *ptr = NULL;
     int iSelection;
     char aReadName[LENGTH], aWriteName[LENGTH];
 
