@@ -5,7 +5,7 @@
 #define LENGTH 30
 
 typedef struct node {
-    char name[LENGTH];
+    char aName[LENGTH];
     int iNumber;
     struct node *pNext;
     struct node *pPrevious;
