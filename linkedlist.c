@@ -58,11 +58,11 @@ void readFile(NODE *pA, char *pFileName) {
 
     while ((fgets(aRow,ROW,Read)) != NULL) {
         if ((p1 = strtok(aRow, ";")) == NULL) {
-            printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan");
+            printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan", aRow);
             exit(0);
         }
         if ((p2 = strtok(NULL, "\n")) == NULL) {
-            printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan");
+            printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan", aRow);
             exit(0);
         }
 
