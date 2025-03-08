@@ -48,7 +48,7 @@ int main (void) {
             writeFileReverse(pStart, aWriteName);
 
         } else if (iSelection == 4) {
-            empty(pStart);
+            pStart = empty(pStart);
         } else if (iSelection == 0) {
             printf("Lopetetaan.\n");
         } else {
