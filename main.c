@@ -4,6 +4,14 @@
 
 #define LENGTH 30
 
+typedef struct customer {
+    char name[LENGTH];
+    int iNumber;
+    struct customer *pNext;
+    struct customer *pPrevious;
+} CUSTOMER;
+
+
 int menu (void) {
     int iSelection = 0;
     printf("1) Lue tiedosto\n");
@@ -24,8 +32,19 @@ void filename(char *pFileName, char *pSentence) {
     return;
 }
 
+CUSTOMER *empty(CUSTOMER *pA) {
+    CUSTOMER *ptr = pA;
+    while (ptr != NULL) {
+        pA = ptr->pNext;
+        free(ptr);
+        ptr = pA;
+    }
+    return(pA);
+}
 
 int main (void) {
+    CUSTOMER *pStart = NULL, *pEnd = NULL;
+    CUSTOMER *pNew = NULL, *ptr = NULL;
     int iSelection;
     char aReadName[LENGTH], aWriteName[LENGTH];
 
@@ -42,7 +61,7 @@ int main (void) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
 
         } else if (iSelection == 4) {
-
+            empty(pStart);
         } else if (iSelection == 0) {
             printf("Lopetetaan.\n");
         } else {
