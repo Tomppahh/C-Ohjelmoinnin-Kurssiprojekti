@@ -18,4 +18,4 @@
 # /////Eelis/////
 # 1h Miitti
 # 30min linkitetyn listan luonti ja tyhjennys aliohjelma + git ignore lisäys
-# 1,5h Korjailua ja testausta, sekä raporttien kirjoittelua
+# 1,5h Korjailua ja testausta, sekä raporttien kirjoittelua.
