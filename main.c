@@ -18,7 +18,7 @@ int menu (void) {
     printf("2) Tallenna lista etuperin\n");
     printf("3) Tallenna lista takaperin\n");
     printf("4) Tyhjennä lista\n");
-    printf("0) Lopeta");
+    printf("0) Lopeta\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
     getchar();
