@@ -57,7 +57,7 @@ void readFile(NODE *pA, char *pFileName) {
     fgets(aRow,ROW,Read); // Poistetaan ensimmäinen rivi
 
     while ((fgets(aRow,ROW,Read)) != NULL) {
-        if ((p1 = strtok(aRivi, ";")) == NULL) {
+        if ((p1 = strtok(aRow, ";")) == NULL) {
             printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan");
             exit(0);
         }
@@ -75,7 +75,7 @@ void readFile(NODE *pA, char *pFileName) {
 }
 
 void writeFile(NODE *pA, char* pFileName) {
-    File *Write = NULL;
+    FILE *Write = NULL;
     NODE *ptr = pA;
 
     if ((Write = fopen(pFileName, "w")) == NULL) {
