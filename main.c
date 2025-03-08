@@ -5,7 +5,7 @@
 
 
 int menu (void) {
-    int iSelection = 5;
+    int iSelection = 0;
     printf("Valitse haluamasi toiminto:\n");
     printf("1) Lue tiedosto\n");
     printf("2) Tallenna lista etuperin\n");
