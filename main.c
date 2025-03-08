@@ -36,9 +36,11 @@ int main (void) {
 
         if(iSelection == 1) {
             filename(aReadName, "Anna luettavan atiedoston nimi: ");
+            readFile(pA, aReadName);
 
         } else if (iSelection == 2) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFile(pA, aWriteName);
 
         } else if (iSelection == 3) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
