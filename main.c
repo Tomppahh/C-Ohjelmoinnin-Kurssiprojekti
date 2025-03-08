@@ -1,15 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-#define LENGTH 30
-
-typedef struct node {
-    char aName[LENGTH];
-    int iNumber;
-    struct node *pNext;
-    struct node *pPrevious;
-} NODE;
+#include "linkedlist.h"
 
 
 int menu (void) {
@@ -42,31 +34,7 @@ NODE *empty(NODE *pA) {
     return(pA);
 }
 
-NODE *addNode(NODE *pA, char *pName, int iCount) {
-    NODE *pNew = NULL, *ptr = NULL;
 
-    if ((pNew = (NODE*)malloc(sizeof(NODE))) == NULL) {
-        perror("Muistin varaus epäonnistui, lopetetaan");
-        exit(0);
-    }
-
-    strcpy(pNew->pName, pName);
-    pNew->iCount = iCount;
-    pNew->pNext = NULL;
-    pNew->pPrevious = NULL;
-
-    if (pA == NULL) {
-        pA = pNew;
-    } else {
-        ptr = pA;
-        while (ptr->pNext != NULL) {
-            ptr = ptr->pNext;
-        }
-        ptr->pNext = pNew;
-    }
-
-    return(pA);
-}
 
 int main (void) {
     NODE *pStart = NULL, *pEnd = NULL;
