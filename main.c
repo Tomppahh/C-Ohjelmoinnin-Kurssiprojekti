@@ -37,6 +37,7 @@ int main (void) {
         if(iSelection == 1) {
             filename(aReadName, "Anna luettavan tiedoston nimi: ");
             pStart = readFile(pStart, aReadName);
+            updatePreviousPointers(pStart); // Update previous pointers
 
         } else if (iSelection == 2) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
@@ -44,6 +45,7 @@ int main (void) {
 
         } else if (iSelection == 3) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFileReverse(pStart, aWriteName);
 
         } else if (iSelection == 4) {
             empty(pStart);

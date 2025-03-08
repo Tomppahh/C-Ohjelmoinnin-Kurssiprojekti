@@ -33,6 +33,18 @@ NODE *createNode(NODE *pA, char *pName, int iCount) {
     return(pA);
 }
 
+void updatePreviousPointers(NODE *pA)
+{
+    NODE *ptr = pA;
+    NODE *prev = NULL;
+
+    while (ptr != NULL)
+    {
+        ptr->pPrevious = prev;
+        prev = ptr;
+        ptr = ptr->pNext;
+    }
+}
 
 NODE *empty(NODE *pA) {
     NODE *ptr = pA;
@@ -89,6 +101,34 @@ void writeFile(NODE *pA, char* pFileName) {
     while (ptr != NULL) {
         fprintf(Write, "%s,%d\n", ptr->aName, ptr->iCount);
         ptr = ptr->pNext;
+    }
+
+    fclose(Write);
+
+    return;
+}
+
+void writeFileReverse(NODE *pA, char *pFileName)
+{
+    FILE *Write = NULL;
+    NODE *ptr = pA;
+
+    if ((Write = fopen(pFileName, "w")) == NULL)
+    {
+        perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
+        exit(0);
+    }
+    // listan loppuun
+    while (ptr != NULL && ptr->pNext != NULL)
+    {
+        ptr = ptr->pNext;
+    }
+
+    // käy lista läpi väärin päin
+    while (ptr != NULL)
+    {
+        fprintf(Write, "%s,%d\n", ptr->aName, ptr->iCount);
+        ptr = ptr->pPrevious;
     }
 
     fclose(Write);
