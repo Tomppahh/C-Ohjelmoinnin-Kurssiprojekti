@@ -17,7 +17,7 @@ typedef struct node {
 NODE *addNode(NODE *pA, char *pName, int iCount);
 NODE *empty(NODE *pA);
 void writeFile(NODE *pA, char* pFileName);
-void readFile(NODE *pA, char *pFileName);
+NODE *readFile(NODE *pA, char *pFileName);
 
 
 #endif

@@ -44,7 +44,7 @@ NODE *empty(NODE *pA) {
     return(pA);
 }
 
-void readFile(NODE *pA, char *pFileName) {
+NODE *readFile(NODE *pA, char *pFileName) {
     FILE *Read = NULL;
     char aRow[ROW], *p1=NULL,*p2=NULL;
 
