@@ -35,12 +35,12 @@ int main (void) {
         iSelection = menu();
 
         if(iSelection == 1) {
-            filename(aReadName, "Anna luettavan atiedoston nimi: ");
-            readFile(pA, aReadName);
+            filename(aReadName, "Anna luettavan tiedoston nimi: ");
+            readFile(pStart, aReadName);
 
         } else if (iSelection == 2) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
-            writeFile(pA, aWriteName);
+            writeFile(pStart, aWriteName);
 
         } else if (iSelection == 3) {
             filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
