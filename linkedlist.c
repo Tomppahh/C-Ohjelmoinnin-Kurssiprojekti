@@ -68,6 +68,7 @@ void readFile(NODE *pA, char *pFileName) {
 
         pA = createNode(pA, p1, atoi(p2));
 
+        fclose(Read);
     }
 
     return;
@@ -87,6 +88,8 @@ void writeFile(NODE *pA, char* pFileName) {
         fprintf(Write, "%s,%d\n", ptr->aName, ptr->iCount);
         ptr = ptr->pNext;
     }
+
+    fclose(Write);
 
     return;
 }
