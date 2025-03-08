@@ -68,10 +68,12 @@ void readFile(NODE *pA, char *pFileName) {
 
         pA = createNode(pA, p1, atoi(p2));
 
-        fclose(Read);
+        
     }
 
-    return;
+    fclose(Read);
+
+    return (pA);
 
 }
 
