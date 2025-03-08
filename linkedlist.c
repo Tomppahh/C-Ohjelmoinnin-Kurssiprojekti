@@ -30,3 +30,14 @@ NODE *addNode(NODE *pA, char *pName, int iCount) {
 
     return(pA);
 }
+
+
+NODE *empty(NODE *pA) {
+    NODE *ptr = pA;
+    while (ptr != NULL) {
+        pA = ptr->pNext;
+        free(ptr);
+        ptr = pA;
+    }
+    return(pA);
+}

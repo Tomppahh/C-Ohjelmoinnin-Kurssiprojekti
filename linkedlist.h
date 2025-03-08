@@ -15,6 +15,7 @@ typedef struct node {
 // Functions
 
 NODE *addNode(NODE *pA, char *pName, int iCount);
+NODE *empty(NODE *pA);
 
 
 #endif

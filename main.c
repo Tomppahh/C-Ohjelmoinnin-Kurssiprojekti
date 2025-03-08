@@ -24,18 +24,6 @@ void filename(char *pFileName, char *pSentence) {
     return;
 }
 
-NODE *empty(NODE *pA) {
-    NODE *ptr = pA;
-    while (ptr != NULL) {
-        pA = ptr->pNext;
-        free(ptr);
-        ptr = pA;
-    }
-    return(pA);
-}
-
-
-
 int main (void) {
     NODE *pStart = NULL, *pEnd = NULL;
     NODE *pNew = NULL, *ptr = NULL;
