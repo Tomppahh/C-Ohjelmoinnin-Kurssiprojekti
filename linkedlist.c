@@ -13,7 +13,7 @@ NODE *addNode(NODE *pA, char *pName, int iCount) {
         exit(0);
     }
 
-    strcpy(pNew->pName, pName);
+    strcpy(pNew->aName, pName);
     pNew->iCount = iCount;
     pNew->pNext = NULL;
     pNew->pPrevious = NULL;
