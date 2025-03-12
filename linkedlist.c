@@ -210,6 +210,10 @@ NODE *sortDecending(NODE *pLeft, NODE *pRight) {
         return pLeft;
     }
 
+    printf("Merging: %s (%d) with %s (%d)\n", 
+           pLeft ? pLeft->aName : "NULL", pLeft ? pLeft->iCount : 0,
+           pRight ? pRight->aName : "NULL", pRight ? pRight->iCount : 0);
+
     if(pLeft->iCount > pRight->iCount) {
         result = pLeft;
         result->pNext = sortDecending(pLeft->pNext, pRight); // Recursive call to this subprogram
@@ -243,9 +247,6 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
 
     splitList(pA, &LeftHalf, &RightHalf);
 
-    printf("Splitting Done: LeftHalf = %s, RightHalf = %s\n", 
-        LeftHalf ? LeftHalf->aName : "NULL", 
-        RightHalf ? RightHalf->aName : "NULL");
     
     // Recursive call to this subprogram
     LeftHalf = mergeSort(LeftHalf);
