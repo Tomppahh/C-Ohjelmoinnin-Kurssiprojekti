@@ -231,7 +231,10 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
         return pA; // Base case
     }
 
-    NODE *LeftHalf, *RightHalf; // Create 2 new empty NODE structures which will then be used to store the list halfs
+    // Create 2 new empty NODE structures which will then be used to store the list halfs
+
+    NODE *LeftHalf;
+    NODE *RightHalf; 
 
     splitList(ptr, LeftHalf, RightHalf);
     
