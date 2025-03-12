@@ -176,6 +176,11 @@ int listLength(NODE *pA) { // Returns the length of the linked list
 }
 
 void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
+    if (pA == NULL || pA->pNext == NULL) { // Base case: 0 or 1 node
+        *pLeft = pA;
+        *pRight = NULL;
+        return;
+    }
 
     NODE *slow = pA;
     NODE *fast = pA->pNext; // Will start one step ahead of slow to get correct middle split and prevent duplication
@@ -226,10 +231,8 @@ NODE *sortDecending(NODE *pLeft, NODE *pRight) {
 }
 
 NODE *mergeSort(NODE *pA) { // Merge sort algorithm
-    NODE *ptr = pA;
     
-
-    if (ptr == NULL || ptr->pNext == NULL) {
+    if (pA == NULL || pA->pNext == NULL) {
         return pA; // Base case
     }
 
@@ -238,14 +241,14 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
     NODE *LeftHalf = NULL;
     NODE *RightHalf = NULL; 
 
-    splitList(ptr, &LeftHalf, &RightHalf);
+    splitList(pA, &LeftHalf, &RightHalf);
     
     // Recursive call to this subprogram
     LeftHalf = mergeSort(LeftHalf);
     RightHalf = mergeSort(RightHalf);
 
     // Sorts and returns the sorted list
-    ptr = sortDecending(LeftHalf, RightHalf);
+    pA = sortDecending(LeftHalf, RightHalf);
 
-    return (ptr);
+    return (pA);
 }
