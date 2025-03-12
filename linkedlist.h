@@ -22,7 +22,7 @@ NODE *readFile(NODE *pA, char *pFileName);
 NODE *sortAscending(NODE *pA);
 void updatePreviousPointers(NODE *pA);
 int listLength(NODE *pA);
-void splitList(NODE* pA, NODE *pLeft, NODE *pRight);
+void splitList(NODE* pA, NODE **pLeft, NODE **pRight);
 NODE *sortDecending(NODE *pLeft, NODE *pRight);
 NODE *mergeSort(NODE *pA);
 

@@ -187,8 +187,8 @@ void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
         fast = fast->pNext;
     }
 
-    pLeft = pA; // First half of the list. Starts from the head and currently is basicly the whole list.
-    pRight = slow->pNext; // Second half of the list
+    *pLeft = pA; // First half of the list. Starts from the head and currently is basicly the whole list.
+    *pRight = slow->pNext; // Second half of the list
     slow->pNext = NULL; // Break the list at the point where second half starts which will make so that the first half ends at this point.
 
     return;
