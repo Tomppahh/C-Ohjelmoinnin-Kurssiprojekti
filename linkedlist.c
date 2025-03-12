@@ -175,7 +175,7 @@ int listLength(NODE *pA) { // Returns the length of the linked list
     return (iCount);
 }
 
-void splitList(NODE* pA, NODE *pLeft, NODE *pRight) {
+void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
 
     NODE *slow = pA;
     NODE *fast = pA->pNext; // Will start one step ahead of slow to get correct middle split and prevent duplication
@@ -238,7 +238,7 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
     NODE *LeftHalf = NULL;
     NODE *RightHalf = NULL; 
 
-    splitList(ptr, LeftHalf, RightHalf);
+    splitList(ptr, &LeftHalf, &RightHalf);
     
     // Recursive call to this subprogram
     LeftHalf = mergeSort(LeftHalf);
