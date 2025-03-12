@@ -242,6 +242,10 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
     NODE *RightHalf = NULL; 
 
     splitList(pA, &LeftHalf, &RightHalf);
+
+    printf("Splitting Done: LeftHalf = %s, RightHalf = %s\n", 
+        LeftHalf ? LeftHalf->aName : "NULL", 
+        RightHalf ? RightHalf->aName : "NULL");
     
     // Recursive call to this subprogram
     LeftHalf = mergeSort(LeftHalf);
