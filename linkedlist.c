@@ -233,8 +233,8 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
 
     // Create 2 new empty NODE structures which will then be used to store the list halfs
 
-    NODE *LeftHalf;
-    NODE *RightHalf; 
+    NODE *LeftHalf = NULL;
+    NODE *RightHalf = NULL; 
 
     splitList(ptr, LeftHalf, RightHalf);
     
