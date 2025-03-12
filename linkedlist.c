@@ -211,8 +211,10 @@ NODE *sortDecending(NODE *pLeft, NODE *pRight) {
     } else if (pLeft->iCount == pRight->iCount) { // If the iCounts are ecual
         iEcual = strcmp(pLeft->aName, pRight->aName);
         if (iEcual < 0) {
+            result = pRight;
             result->pNext = sortDecending(pLeft->pNext, pRight);
         } else {
+            result = pLeft;
             result->pNext = sortDecending(pLeft, pRight->pNext);
         }
     } else {
@@ -243,7 +245,7 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
     RightHalf = mergeSort(RightHalf);
 
     // Sorts and returns the sorted list
-    ptr = sortDecending(&LeftHalf, &RightHalf);
+    ptr = sortDecending(LeftHalf, RightHalf);
 
     return (ptr);
 }
