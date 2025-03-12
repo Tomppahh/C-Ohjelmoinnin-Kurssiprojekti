@@ -243,7 +243,7 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
     RightHalf = mergeSort(RightHalf);
 
     // Sorts and returns the sorted list
-    ptr = sortDecending(LeftHalf, RightHalf);
+    ptr = sortDecending(&LeftHalf, &RightHalf);
 
     return (ptr);
 }
