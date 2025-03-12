@@ -188,7 +188,7 @@ void splitList(NODE* pA, NODE *pLeft, NODE *pRight) {
     }
 
     pLeft = pA; // First half of the list. Starts from the head and currently is basicly the whole list.
-    pRight = slow->pNext // Second half of the list
+    pRight = slow->pNext; // Second half of the list
     slow->pNext = NULL; // Break the list at the point where second half starts which will make so that the first half ends at this point.
 
     return;
@@ -228,19 +228,19 @@ NODE *mergeSort(NODE *pA) { // Merge sort algorithm
     
 
     if (ptr == NULL || ptr->pNext == NULL) {
-        return; // Base case
+        return pA; // Base case
     }
 
     NODE *LeftHalf, *RightHalf; // Create 2 new empty NODE structures which will then be used to store the list halfs
 
-    splitList(ptr, &LeftHalf, &RightHalf);
+    splitList(ptr, LeftHalf, RightHalf);
     
     // Recursive call to this subprogram
     LeftHalf = mergeSort(LeftHalf);
     RightHalf = mergeSort(RightHalf);
 
     // Sorts and returns the sorted list
-    ptr = sortDecending(LeftHalf, RightHalf)
+    ptr = sortDecending(LeftHalf, RightHalf);
 
     return (ptr);
 }
