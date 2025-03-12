@@ -54,9 +54,11 @@ int main (void) {
         } else if (iSelection == 5) {
             pStart = sortAscending(pStart);
             updatePreviousPointers(pStart); //update previous pointers
+            printf("Lista lajiteltu nousevaan järjestykseen.")
         } else if (iSelection == 6) {
             pStart = mergeSort(pStart);
             updatePreviousPointers(pStart); //update previous pointers
+            printf("Lista lajiteltu laskevaan järjestykseen.")
         } else if (iSelection == 0) {
             printf("Lopetetaan.\n");
         } else {
