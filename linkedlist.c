@@ -200,31 +200,25 @@ void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
 }
 
 NODE *sortDecending(NODE *pLeft, NODE *pRight) {
-    NODE *result = NULL;
-    int iEcual;
-
-    if (pLeft == NULL) {
-        return pRight;
-    }
-    if (pRight == NULL) {
-        return pLeft;
-    }
+    if (pLeft == NULL) return pRight;
+    if (pRight == NULL) return pLeft;
 
     printf("Merging: %s (%d) with %s (%d)\n", 
-           pLeft ? pLeft->aName : "NULL", pLeft ? pLeft->iCount : 0,
-           pRight ? pRight->aName : "NULL", pRight ? pRight->iCount : 0);
+           pLeft->aName, pLeft->iCount,
+           pRight->aName, pRight->iCount);
 
-    if(pLeft->iCount > pRight->iCount) {
+    NODE *result = NULL;
+
+    if (pLeft->iCount > pRight->iCount) {
         result = pLeft;
-        result->pNext = sortDecending(pLeft->pNext, pRight); // Recursive call to this subprogram
-    } else if (pLeft->iCount == pRight->iCount) { // If the iCounts are ecual
-        iEcual = strcmp(pLeft->aName, pRight->aName);
-        if (iEcual < 0) {
+        result->pNext = sortDecending(pLeft->pNext, pRight);
+    } else if (pLeft->iCount == pRight->iCount) { 
+        if (strcmp(pLeft->aName, pRight->aName) < 0) {
             result = pRight;
-            result->pNext = sortDecending(pLeft->pNext, pRight);
+            result->pNext = sortDecending(pLeft, pRight->pNext);
         } else {
             result = pLeft;
-            result->pNext = sortDecending(pLeft, pRight->pNext);
+            result->pNext = sortDecending(pLeft->pNext, pRight);
         }
     } else {
         result = pRight;
