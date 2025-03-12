@@ -200,6 +200,8 @@ void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
 }
 
 NODE *sortDecending(NODE *pLeft, NODE *pRight) {
+    NODE *result = NULL;
+    
     if (pLeft == NULL) return pRight;
     if (pRight == NULL) return pLeft;
 
