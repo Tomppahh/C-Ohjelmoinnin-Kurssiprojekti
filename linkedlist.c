@@ -203,12 +203,6 @@ NODE *sortDecending(NODE *pLeft, NODE *pRight) {
     if (pLeft == NULL) return pRight;
     if (pRight == NULL) return pLeft;
 
-    printf("Merging: %s (%d) with %s (%d)\n", 
-           pLeft->aName, pLeft->iCount,
-           pRight->aName, pRight->iCount);
-
-    NODE *result = NULL;
-
     if (pLeft->iCount > pRight->iCount) {
         result = pLeft;
         result->pNext = sortDecending(pLeft->pNext, pRight);
