@@ -135,3 +135,31 @@ void writeFileReverse(NODE *pA, char *pFileName)
 
     return;
 }
+
+NODE *sortAscending(NODE *pA) {
+    if (pA == NULL) return NULL; //if pointer is NULL nothing happens.
+    int swap;
+    NODE *ptr;
+    NODE *last = NULL;
+    //sorting until no swaps are required
+    do {
+        swap = 0;
+        ptr = pA;
+        //Comparing current node with the next node primary for numbers and secondary for names in alphabetical order. 
+        while (ptr->pNext != last) {
+            if (ptr->iCount > ptr->pNext->iCount || (ptr->iCount == ptr->pNext->iCount && strcmp(ptr->aName, ptr->pNext->aName) > 0)) {
+               int tempCount = ptr->iCount;
+               char tempName[30];
+               strcpy(tempName, ptr->aName);
+               ptr->iCount = ptr->pNext->iCount;
+               strcpy(ptr->aName, ptr->pNext->aName);
+               ptr->pNext->iCount = tempCount;
+               strcpy(ptr->pNext->aName, tempName);
+               swap = 1;
+            }
+            ptr = ptr->pNext;
+        }
+        last = ptr;
+    } while (swap); //repeats the whole process if atleast one swap was performed.
+    return pA;
+}

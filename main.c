@@ -11,6 +11,8 @@ int menu (void) {
     printf("2) Tallenna lista etuperin\n");
     printf("3) Tallenna lista takaperin\n");
     printf("4) Tyhjennä lista\n");
+    printf("5) Järjestä nousevaan järjestykseen\n");
+    printf("6) Järjestä laskevaan järjestykseen\n");
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
@@ -49,6 +51,9 @@ int main (void) {
 
         } else if (iSelection == 4) {
             pStart = empty(pStart);
+        } else if (iSelection == 5) {
+            pStart = sortAscending(pStart);
+            updatePreviousPointers(pStart); //update previous pointers
         } else if (iSelection == 0) {
             printf("Lopetetaan.\n");
         } else {
