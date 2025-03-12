@@ -54,6 +54,8 @@ int main (void) {
         } else if (iSelection == 5) {
             pStart = sortAscending(pStart);
             updatePreviousPointers(pStart); //update previous pointers
+        } else if (iSelection == 6) {
+            pStart = mergeSort(pStart);
         } else if (iSelection == 0) {
             printf("Lopetetaan.\n");
         } else {

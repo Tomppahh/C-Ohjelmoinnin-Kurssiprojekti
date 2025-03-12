@@ -136,7 +136,7 @@ void writeFileReverse(NODE *pA, char *pFileName)
     return;
 }
 
-NODE *sortAscending(NODE *pA) {
+NODE *sortAscending(NODE *pA) { // Bubble sort algorithm
     if (pA == NULL) return NULL; //if pointer is NULL nothing happens.
     int swap;
     NODE *ptr;
@@ -162,4 +162,85 @@ NODE *sortAscending(NODE *pA) {
         last = ptr;
     } while (swap); //repeats the whole process if atleast one swap was performed.
     return pA;
+}
+
+int listLength(NODE *pA) { // Returns the length of the linked list
+    int iCount = 0;
+    NODE *ptr = pA;
+
+    while(ptr != NULL) {
+        ptr = ptr->pNext;
+        iCount++;
+    }
+    return (iCount);
+}
+
+void splitList(NODE* pA, NODE *pLeft, NODE *pRight) {
+
+    NODE *slow = pA;
+    NODE *fast = pA->pNext; // Will start one step ahead of slow to get correct middle split and prevent duplication
+
+    // slow will approach the mid way point and when fast reaches the end of the list we will know that slow is at the middle
+    while (fast != NULL && fast->pNext != NULL) {
+        slow = slow->pNext;
+        fast = fast->pNext;
+        fast = fast->pNext;
+    }
+
+    pLeft = pA; // First half of the list. Starts from the head and currently is basicly the whole list.
+    pRight = slow->pNext // Second half of the list
+    slow->pNext = NULL; // Break the list at the point where second half starts which will make so that the first half ends at this point.
+
+    return;
+}
+
+NODE *sortDecending(NODE *pLeft, NODE *pRight) {
+    NODE *result = NULL;
+    int iEcual;
+
+    if (pLeft == NULL) {
+        return pRight;
+    }
+    if (pRight == NULL) {
+        return pLeft;
+    }
+
+    if(pLeft->iCount > pRight->iCount) {
+        result = pLeft;
+        result->pNext = sortDecending(pLeft->pNext, pRight); // Recursive call to this subprogram
+    } else if (pLeft->iCount == pRight->iCount) { // If the iCounts are ecual
+        iEcual = strcmp(pLeft->aName, pRight->aName);
+        if (iEcual < 0) {
+            result->pNext = sortDecending(pLeft->pNext, pRight);
+        } else {
+            result->pNext = sortDecending(pLeft, pRight->pNext);
+        }
+    } else {
+        result = pRight;
+        result->pNext = sortDecending(pLeft, pRight->pNext);
+    }
+
+    return result;
+}
+
+NODE *mergeSort(NODE *pA) { // Merge sort algorithm
+    NODE *ptr = pA;
+    
+
+    if (ptr == NULL || ptr->pNext == NULL) {
+        return; // Base case
+    }
+
+    NODE *LeftHalf, *RightHalf; // Create 2 new empty NODE structures which will then be used to store the list halfs
+
+    splitList(ptr, &LeftHalf, &RightHalf);
+    
+    // Recursive call to this subprogram
+    LeftHalf = mergeSort(LeftHalf);
+    RightHalf = mergeSort(RightHalf);
+
+    // Sorts and returns the sorted list
+    ptr = sortDecending(LeftHalf, RightHalf)
+
+    return (ptr);
 }
