@@ -14,7 +14,7 @@ typedef struct node {
 
 // Functions
 
-NODE *addNode(NODE *pA, char *pName, int iCount);
+NODE *createNode(NODE *pA, char *pName, int iCount);
 NODE *empty(NODE *pA);
 void writeFile(NODE *pA, char* pFileName);
 void writeFileReverse(NODE *pA, char *pFileName);
