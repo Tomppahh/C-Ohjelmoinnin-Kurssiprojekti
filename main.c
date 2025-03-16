@@ -68,6 +68,7 @@ int main (void) {
         printf("\n");
 
     } while(iSelection != 0);
+    pStart = empty(pStart);
     printf("Kiitos ohjelman käytöstä.\n");
     return (0);
 }
