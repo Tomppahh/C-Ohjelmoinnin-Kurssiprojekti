@@ -7,10 +7,10 @@
 
 #define ROW 60
 
-NODE *createNode(NODE *pA, char *pName, int iCount) {
-    NODE *pNew = NULL, *ptr = NULL;
+NODE_LL *createNode(NODE_LL *pA, char *pName, int iCount) {
+    NODE_LL *pNew = NULL, *ptr = NULL;
 
-    if ((pNew = (NODE*)malloc(sizeof(NODE))) == NULL) {
+    if ((pNew = (NODE_LL*)malloc(sizeof(NODE_LL))) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
@@ -33,10 +33,10 @@ NODE *createNode(NODE *pA, char *pName, int iCount) {
     return(pA);
 }
 
-void updatePreviousPointers(NODE *pA)
+void updatePreviousPointers(NODE_LL *pA)
 {
-    NODE *ptr = pA;
-    NODE *prev = NULL;
+    NODE_LL *ptr = pA;
+    NODE_LL *prev = NULL;
 
     while (ptr != NULL)
     {
@@ -46,8 +46,8 @@ void updatePreviousPointers(NODE *pA)
     }
 }
 
-NODE *empty(NODE *pA) {
-    NODE *ptr = pA;
+NODE_LL *empty(NODE_LL *pA) {
+    NODE_LL *ptr = pA;
     while (ptr != NULL) {
         pA = ptr->pNext;
         free(ptr);
@@ -56,7 +56,7 @@ NODE *empty(NODE *pA) {
     return(pA);
 }
 
-NODE *readFile(NODE *pA, char *pFileName) {
+NODE_LL *readFile(NODE_LL *pA, char *pFileName) {
     FILE *Read = NULL;
     char aRow[ROW], *p1=NULL,*p2=NULL;
 
@@ -89,9 +89,9 @@ NODE *readFile(NODE *pA, char *pFileName) {
 
 }
 
-void writeFile(NODE *pA, char* pFileName) {
+void writeFile(NODE_LL *pA, char* pFileName) {
     FILE *Write = NULL;
-    NODE *ptr = pA;
+    NODE_LL *ptr = pA;
 
     if ((Write = fopen(pFileName, "w")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
@@ -108,10 +108,10 @@ void writeFile(NODE *pA, char* pFileName) {
     return;
 }
 
-void writeFileReverse(NODE *pA, char *pFileName)
+void writeFileReverse(NODE_LL *pA, char *pFileName)
 {
     FILE *Write = NULL;
-    NODE *ptr = pA;
+    NODE_LL *ptr = pA;
 
     if ((Write = fopen(pFileName, "w")) == NULL)
     {
@@ -136,11 +136,11 @@ void writeFileReverse(NODE *pA, char *pFileName)
     return;
 }
 
-NODE *sortAscending(NODE *pA) { // Bubble sort algorithm
+NODE_LL *sortAscending(NODE_LL *pA) { // Bubble sort algorithm
     if (pA == NULL) return NULL; //if pointer is NULL nothing happens.
     int swap;
-    NODE *ptr;
-    NODE *last = NULL;
+    NODE_LL *ptr;
+    NODE_LL *last = NULL;
     //sorting until no swaps are required
     do {
         swap = 0;
@@ -164,9 +164,9 @@ NODE *sortAscending(NODE *pA) { // Bubble sort algorithm
     return pA;
 }
 
-int listLength(NODE *pA) { // Returns the length of the linked list
+int listLength(NODE_LL *pA) { // Returns the length of the linked list
     int iCount = 0;
-    NODE *ptr = pA;
+    NODE_LL *ptr = pA;
 
     while(ptr != NULL) {
         ptr = ptr->pNext;
@@ -175,15 +175,15 @@ int listLength(NODE *pA) { // Returns the length of the linked list
     return (iCount);
 }
 
-void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
+void splitList(NODE_LL* pA, NODE_LL **pLeft, NODE_LL **pRight) {
     if (pA == NULL || pA->pNext == NULL) { // Base case: 0 or 1 node
         *pLeft = pA;
         *pRight = NULL;
         return;
     }
 
-    NODE *slow = pA;
-    NODE *fast = pA->pNext; // Will start one step ahead of slow to get correct middle split and prevent duplication
+    NODE_LL *slow = pA;
+    NODE_LL *fast = pA->pNext; // Will start one step ahead of slow to get correct middle split and prevent duplication
 
     // slow will approach the mid way point and when fast reaches the end of the list we will know that slow is at the middle
     while (fast != NULL && fast->pNext != NULL) {
@@ -199,8 +199,8 @@ void splitList(NODE* pA, NODE **pLeft, NODE **pRight) {
     return;
 }
 
-NODE *sortDecending(NODE *pLeft, NODE *pRight) {
-    NODE *result = NULL;
+NODE_LL *sortDecending(NODE_LL *pLeft, NODE_LL *pRight) {
+    NODE_LL *result = NULL;
     
     if (pLeft == NULL) return pRight;
     if (pRight == NULL) return pLeft;
@@ -224,16 +224,16 @@ NODE *sortDecending(NODE *pLeft, NODE *pRight) {
     return result;
 }
 
-NODE *mergeSort(NODE *pA) { // Merge sort algorithm
+NODE_LL *mergeSort(NODE_LL *pA) { // Merge sort algorithm
     
     if (pA == NULL || pA->pNext == NULL) {
         return pA; // Base case
     }
 
-    // Create 2 new empty NODE structures which will then be used to store the list halfs
+    // Create 2 new empty node structures which will then be used to store the list halfs
 
-    NODE *LeftHalf = NULL;
-    NODE *RightHalf = NULL; 
+    NODE_LL *LeftHalf = NULL;
+    NODE_LL *RightHalf = NULL; 
 
     splitList(pA, &LeftHalf, &RightHalf);
 
