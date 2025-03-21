@@ -75,23 +75,31 @@ void writeFileTree(const char* filename, NODE_BT* root) {
     fclose(write);
 } 
 
+// Calls the print function.
+void printTree(NODE_BT root) {
+    int iPrintedCount = 0;
+    printTreeHelper(root, 0, &iPrintedCount);
+}
+
 // Function that prints the tree as a tree like structure
-void printTree(NODE_BT* root, int iSpace) {
-    if (root == NULL) {
+void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
+    if (root == NULL || *printedCount >= MAX_PRINTED_NODES) {
         return;
     }
-    
+
     iSpace += COUNT;
 
-    printTree(root->right, iSpace);
+    printTreeHelper(root->right, iSpace, iPrinted);
 
-    printf("\n");
-    for (int i = COUNT; i < iSpace; i++) {
-        printf(" ");
+    if (*iPrinted < MAX_PRINTED_NODES) {
+        printf("\n");
+        for (int i = SPACING; i < space; i++)
+            printf(" ");
+        printf("%6d\n", root->data);  // Allocate 6 spaces for alignment
+        (*printedCount)++;
     }
-    printf("%d\n", root->iCount);
 
-    printTree(root->left, iSpace);
+    printTreeHelper(root->left, iSpace, iPrinted);
 
     return;
 }
