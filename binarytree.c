@@ -79,6 +79,7 @@ void writeFileTree(const char* filename, NODE_BT* root) {
 void printTree(NODE_BT* root) {
     int iPrintedCount = 0;
     printTreeHelper(root, 0, &iPrintedCount);
+    return;
 }
 
 // Function that prints the tree as a tree like structure
