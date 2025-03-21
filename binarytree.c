@@ -83,10 +83,10 @@ void printTree(NODE_BT* root, int iSpace) {
     
     iSpace += COUNT;
 
-    printTree(root->right, space);
+    printTree(root->right, iSpace);
 
     printf("\n");
-    for (int i = COUNT; i < space; i++) {
+    for (int i = COUNT; i < iSpace; i++) {
         printf(" ");
     }
     printf("%d\n", root->iCount);
