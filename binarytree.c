@@ -83,7 +83,7 @@ void printTree(NODE_BT root) {
 
 // Function that prints the tree as a tree like structure
 void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
-    if (root == NULL || *printedCount >= MAX_PRINTED_NODES) {
+    if (root == NULL || *iPrinted >= MAX_PRINTED_NODES) {
         return;
     }
 
@@ -93,9 +93,9 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
 
     if (*iPrinted < MAX_PRINTED_NODES) {
         printf("\n");
-        for (int i = SPACING; i < space; i++)
+        for (int i = SPACING; i < iSpace; i++)
             printf(" ");
-        printf("%6d\n", root->data);  // Allocate 6 spaces for alignment
+        printf("%6d\n", root->iCount);  // Allocate 6 spaces for alignment
         (*printedCount)++;
     }
 
