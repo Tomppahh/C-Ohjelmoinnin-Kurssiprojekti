@@ -78,21 +78,25 @@ void writeFileTree(const char* filename, NODE_BT* root) {
 // Calls the print function.
 void printTree(NODE_BT* root) {
     int iPrintedCount = 0;
-    printTreeHelper(root, 0, &iPrintedCount);
+    int iMaxPrinted = 0;
+
+    printf("Anna kuinka monta alkiota tulostetaan: ");
+    scanf("%d", iMaxPrinted);
+    printTreeHelper(root, 0, &iPrintedCount, iMaxPrinted);
     return;
 }
 
 // Function that prints the tree as a tree like structure
-void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
-    if (root == NULL || *iPrinted >= MAX_PRINTED_NODES) {
+void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) {
+    if (root == NULL || *iPrinted >= iMaxPrinted) {
         return;
     }
 
     iSpace += SPACING;
 
-    printTreeHelper(root->right, iSpace, iPrinted);
+    printTreeHelper(root->right, iSpace, iPrinted, iMaxPrinted);
 
-    if (*iPrinted < MAX_PRINTED_NODES) {
+    if (*iPrinted < iMaxPrinted) {
         printf("\n");
         for (int i = SPACING; i < iSpace; i++)
             printf(" ");
@@ -100,7 +104,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
         (*iPrinted)++;
     }
 
-    printTreeHelper(root->left, iSpace, iPrinted);
+    printTreeHelper(root->left, iSpace, iPrinted, iMaxPrinted);
 
     return;
 }
