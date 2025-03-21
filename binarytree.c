@@ -82,7 +82,7 @@ void printTree(NODE_BT* root) {
     do {
     printf("Anna kuinka monta alkiota tulostetaan(0 - 100): ");
     scanf("%d", &iMaxPrinted);
-    } while (iMaxPrinted > 0 || iMaxPrinted =< 100);
+    } while (iMaxPrinted > 0 || iMaxPrinted <= 100);
     
     printTreeHelper(root, 0, &iPrintedCount, iMaxPrinted);
     return;
