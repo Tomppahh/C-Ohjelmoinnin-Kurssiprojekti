@@ -83,7 +83,7 @@ void printTree(NODE_BT* root) {
         printf("Anna kuinka monta alkiota tulostetaan(0 - 100): ");
         scanf("%d", &iMaxPrinted);
         if(iMaxPrinted > 0 || iMaxPrinted <= 100) {
-            printf("Tässä on binääripuun ensimmäiset %d alkiota:\n");
+            printf("Tässä on binääripuun ensimmäiset %d alkiota:\n", iMaxPrinted);
         } else {
             printf("Virheellinen syöte.");
             iMaxPrinted = -1;
