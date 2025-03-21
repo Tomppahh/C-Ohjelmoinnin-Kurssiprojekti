@@ -75,20 +75,32 @@ void writeFileTree(const char* filename, NODE_BT* root) {
     fclose(write);
 } 
 
+// Asks the amount of nodes to be printed
+int askValue(void) {
+    int iValue = 0;
+    printf("\n");
+    printf("Anna kuinka monta alkiota tulostetaan (1 - 100): ");
+    scanf("%d", &iValue);
+    getchar();
+    return(iValue);
+}
+
 // Calls the print function.
 void printTree(NODE_BT* root) {
     int iPrintedCount = 0;
     int iMaxPrinted = 0;
+    
     do {
-        printf("Anna kuinka monta alkiota tulostetaan(0 - 100): ");
-        scanf("%d", &iMaxPrinted);
-        if(iMaxPrinted > 0 || iMaxPrinted <= 100) {
-            printf("Tässä on binääripuun ensimmäiset %d alkiota:\n", iMaxPrinted);
+        iMaxPrinted = askValue();
+
+        if(iMaxPrinted > 0 && iMaxPrinted <= 100) {
+            break; // Valid input
         } else {
-            printf("Virheellinen syöte.");
-            iMaxPrinted = -1;
+            printf("Virheellinen syöte.\n");
         }
-    } while (iMaxPrinted > 0 || iMaxPrinted <= 100);
+
+    } while (iMaxPrinted < 1 && iMaxPrinted > 100);
+    
     
     printTreeHelper(root, 0, &iPrintedCount, iMaxPrinted);
     return;
