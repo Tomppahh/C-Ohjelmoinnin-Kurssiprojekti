@@ -118,6 +118,12 @@ int main (void) {
                     fgets(searchTerm, sizeof(searchTerm), stdin);
                     searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
                     depthFirstSearch(pStartTree, searchTerm);
+                } else if (iSubSelection == 4) {
+                    char searchTerm[LENGTH];
+                    printf("Anna etsittävä nimi tai numero: ");
+                    fgets(searchTerm, sizeof(searchTerm), stdin);
+                    searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+                    widthFirstSearch(pStartTree, searchTerm);
                 } else if (iSubSelection == 5) {
                     printTree(pStartTree);
                 } else if (iSubSelection == 0) {

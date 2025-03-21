@@ -136,27 +136,94 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     }
 
     // does the current node match the users search input
-    if (strcmp(root->aName, searchInput) == 0 || atoi(searchInput) == root->iCount)
-    {   
+    if (strcmp(root->aName, searchInput) == 0 || atoi(searchInput) == root->iCount){   
         printf("Syvyyshaun tulos, löytetty alkio: %s, %d\n", root->aName, root->iCount); // if the searchInput is found, print the result
         return root; // return back the node that matches
     }
 
     // Keep going left if possible
     NODE_BT *searchLeft = depthFirstSearch(root->left, searchInput);
-    if (searchLeft != NULL)
-    {
+    if (searchLeft != NULL){
         return searchLeft; // If found on the left side, retun 
         
     }
 
     // Recursively search in the right subtree
     NODE_BT *searchRight = depthFirstSearch(root->right, searchInput);
-    if (searchRight != NULL)
-    {
-        printf("depthFirstSearch function returned searchRight"); // if searchInput is found on the right side, return searchRight
+    if (searchRight != NULL){
         return searchRight;                                       // If found in the right subtree, return it
     }
 
+    return NULL;
+}
+
+NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
+{
+    if (root == NULL)
+    {
+        printf("Puu on tyhjä.\n");
+        return NULL; // Empty tree
+    }
+
+    // Initialize queue with dynamic memory allocation
+    int capacity = 10000; // Start with 5000 nodes (miehet_2025.txt has 10.6k nodes for example)
+    int front = 0;
+    int rear = 0;
+
+    NODE_BT **queue = (NODE_BT **)malloc(capacity * sizeof(NODE_BT *));
+    if (queue == NULL)
+    {
+        perror("Muistin varaus epäonnistui");
+        exit(0);
+    }
+
+    // Add root to the queue
+    queue[rear++] = root;
+
+    // lets go through the nodes until we have checked all of them
+    while (front < rear)
+    {
+        // Check if queue needs resizing, if so we will double its size
+        if (rear >= capacity)
+        {
+            int newCapacity = capacity * 2;
+            NODE_BT **newQueue = (NODE_BT **)realloc(queue, newCapacity * sizeof(NODE_BT *));
+
+            if (newQueue == NULL)
+            {
+                perror("Muistin uudelleen varaus epäonnistui");
+                free(queue);
+                return NULL;
+            }
+
+            queue = newQueue;
+            capacity = newCapacity;
+            printf("Queue capacity increased to %d\n", capacity);
+        }
+
+        // Get next node from queue
+        NODE_BT *current = queue[front++];
+
+        // Check if current node matches search criteria
+        if (strcmp(current->aName, searchInput) == 0 || atoi(searchInput) == current->iCount)
+        {
+            printf("Leveyshaun tulos, löytetty alkio: %s, %d\n", current->aName, current->iCount);
+            return current;
+        }
+
+        // add left and right nodes to the queue
+        if (current->left != NULL)
+        {
+            queue[rear++] = current->left;
+        }
+        if (current->right != NULL)
+        {
+            queue[rear++] = current->right;
+        }
+    }
+
+    // if no match found tell the user
+    printf("Hakutermiä ei löytynyt puusta (Leveyshaku).\n");
+    free(queue); // free memory!
     return NULL;
 }
