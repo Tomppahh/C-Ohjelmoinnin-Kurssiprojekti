@@ -74,3 +74,24 @@ void writeFileTree(const char* filename, NODE_BT* root) {
     writeTreeNodes(write,root);
     fclose(write);
 } 
+
+// Function that prints the tree as a tree like structure
+void printTree(NODE* root, int iSpace) {
+    if (root == NULL) {
+        return;
+    }
+    
+    iSpace += COUNT;
+
+    printTree(root->right, space);
+
+    printf("\n");
+    for (int i = COUNT; i < space; i++) {
+        printf(" ");
+    }
+    printf("%d\n", root->iCount);
+
+    printTree(root->left, iSpace);
+
+    return;
+}

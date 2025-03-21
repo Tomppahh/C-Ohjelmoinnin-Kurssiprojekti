@@ -112,6 +112,8 @@ int main (void) {
                 } else if (iSubSelection == 2) {
                     filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
                     writeFileTree(aWriteName,pStartTree);
+                }else if (iSubSelection == 5) {
+                    printTree(pStartTree, 0)
                 } else if (iSubSelection == 0) {
                     printf("Palataan päävalikkoon.\n");
                 } else {
