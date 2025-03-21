@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 #include "binarytree.h"
-
+#include <locale.h>
 
 //Function displaying the mainmenu
 int mainMenu (void) {
@@ -61,6 +61,7 @@ void filename(char *pFileName, char *pSentence) {
 }
 
 int main (void) {
+    setlocale(LC_ALL, "en_US.UTF-8"); // Set locale to UTF-8
     NODE_LL *pStartList = NULL;
     NODE_BT *pStartTree = NULL;
     
