@@ -20,7 +20,7 @@ NODE_BT* createTreeNode(const char* name, int number);
 NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile(const char* filename);
 void writeFileTree(const char* filename, NODE_BT* root);
-void printTree(NODE_BT root);
+void printTree(NODE_BT* root);
 void printTreeHelper(NODE_BT* root, int iSpace, int iPrinted);
 
 #endif

@@ -76,7 +76,7 @@ void writeFileTree(const char* filename, NODE_BT* root) {
 } 
 
 // Calls the print function.
-void printTree(NODE_BT root) {
+void printTree(NODE_BT* root) {
     int iPrintedCount = 0;
     printTreeHelper(root, 0, &iPrintedCount);
 }
