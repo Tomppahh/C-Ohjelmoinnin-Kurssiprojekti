@@ -79,9 +79,11 @@ void writeFileTree(const char* filename, NODE_BT* root) {
 void printTree(NODE_BT* root) {
     int iPrintedCount = 0;
     int iMaxPrinted = 0;
-
-    printf("Anna kuinka monta alkiota tulostetaan: ");
+    do {
+    printf("Anna kuinka monta alkiota tulostetaan(0 - 100): ");
     scanf("%d", &iMaxPrinted);
+    } while (iMaxPrinted > 0 || iMaxPrinted =< 100);
+    
     printTreeHelper(root, 0, &iPrintedCount, iMaxPrinted);
     return;
 }
