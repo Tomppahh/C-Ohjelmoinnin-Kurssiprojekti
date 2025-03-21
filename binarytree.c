@@ -87,7 +87,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
         return;
     }
 
-    iSpace += COUNT;
+    iSpace += SPACING;
 
     printTreeHelper(root->right, iSpace, iPrinted);
 
@@ -96,7 +96,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted) {
         for (int i = SPACING; i < iSpace; i++)
             printf(" ");
         printf("%6d\n", root->iCount);  // Allocate 6 spaces for alignment
-        (*printedCount)++;
+        (*iPrinted)++;
     }
 
     printTreeHelper(root->left, iSpace, iPrinted);
