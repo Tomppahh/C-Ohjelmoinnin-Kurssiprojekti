@@ -99,7 +99,7 @@ void printTree(NODE_BT* root) {
             printf("Virheellinen syöte.\n");
         }
 
-    } while (iMaxPrinted < 1 && iMaxPrinted > 100);
+    } while (iMaxPrinted < 1 || iMaxPrinted > 100);
     
     
     printTreeHelper(root, 0, &iPrintedCount, iMaxPrinted);
