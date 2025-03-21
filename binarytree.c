@@ -81,7 +81,7 @@ void printTree(NODE_BT* root) {
     int iMaxPrinted = 0;
 
     printf("Anna kuinka monta alkiota tulostetaan: ");
-    scanf("%d", iMaxPrinted);
+    scanf("%d", &iMaxPrinted);
     printTreeHelper(root, 0, &iPrintedCount, iMaxPrinted);
     return;
 }
