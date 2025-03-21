@@ -166,7 +166,7 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
     }
 
     // Initialize queue with dynamic memory allocation
-    int capacity = 10000; // Start with 5000 nodes (miehet_2025.txt has 10.6k nodes for example)
+    int capacity = 5000; // Start with 5000 nodes (miehet_2025.txt has 10.6k nodes for example)
     int front = 0;
     int rear = 0;
 
