@@ -4,7 +4,7 @@
 #define BINARYTREE_H
 
 #define LENGTH 30
-#define COUNT 3
+#define COUNT 1
 
 //defining a binary tree node
 typedef struct nodeTree {
