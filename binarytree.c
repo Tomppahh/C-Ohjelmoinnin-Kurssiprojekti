@@ -128,3 +128,35 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
 
     return;
 }
+
+// Depth first search function for a name or count
+NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
+    if (root == NULL) {
+        return NULL; // If the tree is empty or the search input is not found in the tree return NULL
+    }
+
+    // does the current node match the users search input
+    if (strcmp(root->aName, searchInput) == 0 || atoi(searchInput) == root->iCount)
+    {   
+        printf("Syvyyshaun tulos, löytetty alkio: %s, %d\n", root->aName, root->iCount); // if the searchInput is found, print the result
+        return root; // return back the node that matches
+    }
+
+    // Keep going left if possible
+    NODE_BT *searchLeft = depthFirstSearch(root->left, searchInput);
+    if (searchLeft != NULL)
+    {
+        return searchLeft; // If found on the left side, retun 
+        
+    }
+
+    // Recursively search in the right subtree
+    NODE_BT *searchRight = depthFirstSearch(root->right, searchInput);
+    if (searchRight != NULL)
+    {
+        printf("depthFirstSearch function returned searchRight"); // if searchInput is found on the right side, return searchRight
+        return searchRight;                                       // If found in the right subtree, return it
+    }
+
+    return NULL;
+}

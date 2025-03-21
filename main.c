@@ -112,7 +112,13 @@ int main (void) {
                 } else if (iSubSelection == 2) {
                     filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
                     writeFileTree(aWriteName,pStartTree);
-                }else if (iSubSelection == 5) {
+                } else if (iSubSelection == 3){
+                    char searchTerm[LENGTH];
+                    printf("Anna etsittävä nimi tai numero: ");
+                    fgets(searchTerm, sizeof(searchTerm), stdin);
+                    searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+                    depthFirstSearch(pStartTree, searchTerm);
+                } else if (iSubSelection == 5) {
                     printTree(pStartTree);
                 } else if (iSubSelection == 0) {
                     printf("Palataan päävalikkoon.\n");
@@ -135,3 +141,4 @@ int main (void) {
     printf("Kiitos ohjelman käytöstä.\n");
     return (0);
 }
+
