@@ -1,29 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "linkedlist.h"
-// going to make a main function where the tests are done. in this function we create an empty list and add to that and titles.
-// then we give these lists and the titles to the print function. 
+#include "binarytree.h"
 
 
-// function to print the linked list, takes in the created list and the title for printing.
-void printList(NODE *head, const char *title)
-{
-    printf("\n%s\n", title);
-    if (head == NULL)
-    {
-        printf("list is empty\n\n");
-        return;
-    }
-
-    NODE *current = head;
-    while (current != NULL)
-    {
-        printf("%s: %d\n", current->aName, current->iCount);
-        current = current->pNext;
-    }
-    printf("\n");
-}
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
 void runTest(int *passed, int *failed, int condition, const char *message) {
@@ -36,43 +16,78 @@ void runTest(int *passed, int *failed, int condition, const char *message) {
     }
 }
 
+// Create a test input file for buildFromFile()
+void createTestInputFile(const char* pFileName) {
+    FILE* Write = NULL;
+    if ((Wead = fopen(pFileName, "w")) == NULL) {
+        perror("Tiedoston avaaminen epäonnistui, lopetetaan");
+        exit(0);
+    }
+    fprintf(file, "Etunimi;Lukumäärä\n");
+    fprintf(file, "Tuomas;10\n");
+    fprintf(file, "Tommi;15\n");
+    fprintf(file, "Eelis;20\n");
+    fclose(file);
+    return;
+}
+
 // main function where the tests are done.
 
 int main() {
     int passed = 0;
     int failed = 0;
-
-    NODE *list = NULL; // initialize the list to NULL
     
-    // More tests can be added here
+    // Tests can be added here
 
-    // ****************************
-
-    // Free the single node for the next test
-    list = empty(list);
-
-
-
-    // Test 3: Add multiple nodes to the list EXAMPLE FOR THIS WEEKS TESTS
-    // list = createNode(list, "Banana", 5);
-    // list = createNode(list, "Aatami", 3);
-    // list = createNode(list, "Chevrolet", 8);
-    // list = createNode(list, "Daavid", 2);
-    // updatePreviousPointers(list); // update struct pointers
-
-    // list = sortAscending(list);
-    // updatePreviousPointers(list); // update struct pointers again
-    // printList(list, "Test 3a: sortAscending function with multiple nodes");
-    // runTest(&passed, &failed, list != NULL && strcmp(list->aName, "Daavid") == 0 && list->iCount == 2, "sortAscending with multiple nodes");
-
-    // list = mergeSort(list);
-    // updatePreviousPointers(list); // update struct pointers again
-    // printList(list, "Test 3b: mergeSort(Sort Descending) function with multiple nodes");
-    // runTest(&passed, &failed, list != NULL && strcmp(list->aName, "Chevrolet") == 0 && list->iCount == 8, "mergeSort with multiple nodes");
+    // Test 1: createTreeNode
+    NODE_BT* Node = NULL;
+    Node = createTreeNode("TestNode", 12345);
+    runTest(&passed, &failed, Node != NULL && strcmp(Node->aName, "TestNode") == 0 && Node->iCount == 12345, "createTreeNode creates node correctly");
 
 
-    // Lets free all memory at the end
-    list = empty(list);
+    // Test 2: instertNode
+    NODE_BT* root = NULL;
+    root = insertNode(root, "Tuomas", 15); // Root
+    root = insertNode(root, "Tommi", 10); // Should be left child
+    root = insertNode(root, "Eelis", 20); // Should be right child
+
+    runTest(&passed, &failed, root != NULL && root->iCount == 15, "insertNode sets root correctly");
+    runTest(&passed, &failed, root->left != NULL && root->left->iCount == 10, "insertNode inserts left child correctly");
+    runTest(&passed, &failed, root->right != NULL && root->right->iCount == 20, "insertNode inserts right child correctly");
+
+
+    // Test 3: depthFirstSearch
+    // Search by name
+    NODE_BT* result = NULL;
+    result = depthFirstSearch(root, "Tommi");
+    runTest(&passed, &failed, result != NULL && strcmp(result->aName, "Tommi") == 0, "depthFirstSearch finds node by name");
+
+    // Search by number
+    result = depthFirstSearch(root, "20");
+    runTest(&passed, &failed, result != NULL && result->iCount == 20, "depthFirstSearch finds node by number");
+
+    // Test 4: widthFirstSearch
+    result = widthFirstSearch(root, "20");
+    runTest(&passed, &failed, result != NULL && strcmp(result->aName, "Eelis") == 0, "widthFirstSearch finds node by number");
+
+    // Search for a non-existent term
+    result = widthFirstSearch(root, "Nonexistent");
+    runTest(&passed, &failed, result == NULL, "widthFirstSearch returns NULL for non-existent node");
+
+
+    // Test 5: buildFromFile
+    const char* testInputFilename = "test_input.txt";
+    createTestInputFile(testInputFilename);
+    NODE_BT* fileTree = buildFromFile(testInputFilename);
+    // ("Tuomas", 10) becomes the root.
+    // ("Tommi", 15) is inserted → goes to right) and then ("Eelis", 20) → goes to Tommi's right).
+    runTest(&passed, &failed, fileTree != NULL && strcmp(fileTree->aName, "Tuomas") == 0, "buildFromFile builds tree with correct root");
+    runTest(&passed, &failed,
+        fileTree->right != NULL && strcmp(fileTree->right->aName, "Tommi") == 0, "buildFromFile inserts second node correctly");
+    runTest(&passed, &failed, fileTree->right->right != NULL && strcmp(fileTree->right->right->aName, "Eelis") == 0, "buildFromFile inserts third node correctly");
+
+    // Free the memory
+    
 
     // Print summary of passed and failed tests
     printf("\nSummary: %d tests passed, %d tests failed\n", passed, failed);
