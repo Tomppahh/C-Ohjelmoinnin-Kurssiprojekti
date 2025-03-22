@@ -21,3 +21,4 @@
 # 1,5h Korjailua ja testausta, sekä raporttien kirjoittelua.
 # 1,5h 9.00-10.30 Luotu aliohjelma, mikä järjestää listan nousevaan järjestykseen. Koodattuja rivejä: 31
 # 20.3.2025 10.00-14.50 Luotu mahdollisuus lukea tiedot binääripuuhun ja kirjoittaa siitä tiedosto, tehty valikosta kaksitasoinen. Luotu siis binarytree.c ja binarytree.h filet. Muokattu main.c funktiota kaksitasoisen valikon tarpeiden mukaan. Muokattu myös linkedlist.c ja linkedlist.h filejä tarpeiden mukaan. Koodattuja rivejä 155.
+# 22.3.2025 19.30-22.15 Luotu tiedostoon kirjoitukset molemmille algoritmeille.

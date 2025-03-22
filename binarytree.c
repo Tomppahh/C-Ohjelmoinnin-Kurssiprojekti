@@ -65,7 +65,7 @@ void writeTreeNodes(FILE* write, NODE_BT* root) {
     if (root != NULL) {
         NAME_LIST *origin = root->pNameList; // Save the original pointer to the namelist, to prevent losing the pointer, when iterating through the list
         while (root->pNameList != NULL) {
-            fprintf(write, "%s;%d\n", root->pNameList->aName, root->iCount);
+            fprintf(write, "%s,%d\n", root->pNameList->aName, root->iCount);
             root->pNameList = root->pNameList->pNext;
         }
         root->pNameList = origin; // Restore the original pointer
@@ -245,4 +245,90 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
     
     free(queue); // free memory!
     return NULL;
+}
+
+void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename) {
+    FILE *write = NULL;
+    if ((write = fopen(filename, "w")) == NULL) {
+        perror("Tiedoston avaaminen epäonnistui, lopetetaan");
+        exit(0);
+    }
+    writeFileDFHelper(root, searchInput, write);
+    fclose(write);
+}
+
+NODE_BT *writeFileDFHelper(NODE_BT* root, const char* searchInput, FILE* write) {
+    if (root == NULL) {
+        return NULL; //If root is null, exit function
+    }
+    // Check if current node matches search criteria and write it to the file if it matches.
+    if (nameExists(root->pNameList, searchInput) || atoi(searchInput) == root->iCount) {
+        fprintf(write, "%s,%d\n", root->pNameList->aName, root->iCount);
+        return root; 
+    }
+    //Write node to file
+    fprintf(write, "%s,%d\n", root->pNameList->aName, root->iCount);
+    NODE_BT *searchLeft = writeFileDFHelper(root->left,searchInput,write);
+    if (searchLeft != NULL) {
+        return searchLeft;
+    }
+    NODE_BT *searchRight = writeFileDFHelper(root->right,searchInput,write);
+    if (searchRight != NULL) {
+        return searchRight;
+    }
+    return NULL;
+}
+
+void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
+    if (root == NULL) {
+        return; // If the root is null, exit function
+    }
+    FILE *write = NULL;
+    if ((write = fopen(filename, "w")) == NULL) {
+        perror("Tiedoston avaaminen epäonnistui, lopetetaan");
+        exit(0);
+    }
+    // Initialize queue with dynamic memory allocation
+    int capacity = 5000;
+    int front = 0, rear = 0;
+    NODE_BT **queue = (NODE_BT **)malloc(capacity* sizeof(NODE_BT*));
+    if (queue==NULL) {
+        perror("Muistin varaus epäonnistui, lopetetaan");
+        fclose(write);
+        exit (0);
+    }
+     // Add root to the queue
+    queue[rear++] = root;
+    while (front<rear) {
+        if (rear>=capacity) {
+            int newCapacity = capacity * 2;
+            NODE_BT **newQueue = (NODE_BT**)realloc(queue,newCapacity*sizeof(NODE_BT*));
+            if (newQueue == NULL) {
+                perror("Muistin uudelleen varaus epäonnistui");
+                free(queue);
+                fclose(write);
+                exit(0);
+            }
+            queue = newQueue;
+            capacity = newCapacity;
+        }
+        // Get next node from queue
+        NODE_BT *current = queue[front++];
+        // Check if current node matches search criteria
+        if (nameExists(current->pNameList, searchInput) || atoi(searchInput) == current->iCount) {
+            fprintf(write, "%s,%d\n", current->pNameList->aName, current->iCount);
+            break;
+        }
+        fprintf(write, "%s,%d\n", current->pNameList->aName, current->iCount);
+        // add left and right nodes to the queue
+        if (current->left != NULL) {
+            queue[rear++] = current->left;
+        }
+        if (current->right != NULL) {
+            queue[rear++] = current->right;
+        }
+    }
+    // free memory!
+    free(queue);
+    fclose(write);
 }

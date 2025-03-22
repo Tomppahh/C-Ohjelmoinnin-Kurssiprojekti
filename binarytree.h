@@ -24,5 +24,8 @@ void writeFileTree(const char* filename, NODE_BT* root);
 int askValue(void);
 void printTree(NODE_BT* root);
 void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted);
+void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename);
+NODE_BT *writeFileDFHelper(NODE_BT* root, const char* searchInput, FILE* write);
+void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename);
 
 #endif
