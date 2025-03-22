@@ -1,6 +1,6 @@
 # Main project files
-projekti: main.o linkedlist.o binarytree.o
-	gcc -o projekti main.o linkedlist.o binarytree.o 
+projekti: main.o linkedlist.o binarytree.o namelist.o
+	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o
 
 main.o: main.c linkedlist.h
 	gcc -c main.c -std=c99 -pedantic -Wall
@@ -10,6 +10,9 @@ linkedlist.o: linkedlist.c linkedlist.h
 
 binarytree.o: binarytree.c binarytree.h
 	gcc -c binarytree.c -std=c99 -pedantic -Wall
+
+namelist.o: namelist.c namelist.h
+	gcc -c namelist.c -std=c99 -pedantic -Wall
 
 # Test files
 test_sorting: test_sorting.o linkedlist.o

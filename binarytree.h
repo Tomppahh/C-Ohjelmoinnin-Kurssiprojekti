@@ -8,7 +8,7 @@
 
 //defining a binary tree node
 typedef struct nodeTree {
-    char aName[LENGTH];
+    struct nameList *pNameList;
     int iCount;
     struct nodeTree *left;
     struct nodeTree *right;

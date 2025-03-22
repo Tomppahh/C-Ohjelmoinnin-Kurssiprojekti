@@ -87,6 +87,21 @@ int main() {
         fileTree->right != NULL && strcmp(fileTree->right->aName, "Tommi") == 0, "buildFromFile inserts second node correctly");
     runTest(&passed, &failed, fileTree->right->right != NULL && strcmp(fileTree->right->right->aName, "Eelis") == 0, "buildFromFile inserts third node correctly");
 
+
+    // Test 6: Names with same numbers in the test input file for the width and depth search
+    NODE_BT *root = NULL;
+    root = insertNode(root, "Tuomas", 15); // Root
+    root = insertNode(root, "Tommi", 10);  // Should be left child
+    root = insertNode(root, "Eelis", 20);  // Should be right child
+    root = insertNode(root, "Justus", 20); // Should be right child of Eelis
+    root = insertNode(root, "Kalle", 20); // Should be right child of Justus
+    root = insertNode(root, "Kaijakoo", 15);  // Should be left child of Tuomas
+    root = insertNode(root, "Kaija", 15);  // Should be right child of Kaijakoo
+
+    // search with number 20 should return all the names with number 20, does nameList contain all names with number 20
+    result = depthFirstSearch(root, "20");
+    
+
     // Free the memory
     
 

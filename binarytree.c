@@ -2,16 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "binarytree.h"
+#include "namelist.h"
 
 //Creates a new node in the binary tree
 NODE_BT* createTreeNode(const char* name, int number) {
     NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
-    strcpy(newNode->aName, name);
+    NAME_LIST* nameList = createNameList(name, NULL);
     newNode->iCount = number;
     newNode->left = NULL;
     newNode->right = NULL;
+    newNode->pNameList = nameList;
     return newNode;
-}
+} 
 
 //Functionality to insert a node into the binary tree
 NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
@@ -22,6 +24,9 @@ NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
         root->left = insertNode(root->left, name, number);
     } else if (number > root->iCount) {
         root->right = insertNode(root->right, name, number);
+    }
+    else { 
+        append(root->pNameList, name); // If the number is the same, add the name to the namelist
     }
     return root;
 }
@@ -58,7 +63,13 @@ NODE_BT* buildFromFile(const char* filename) {
 //Recursive function that helps with the writing process.
 void writeTreeNodes(FILE* write, NODE_BT* root) {
     if (root != NULL) {
-        fprintf(write, "%s,%d\n", root->aName, root->iCount);
+        NAME_LIST *origin = root->pNameList; // Save the original pointer to the namelist, to prevent losing the pointer, when iterating through the list
+        while (root->pNameList != NULL) {
+            fprintf(write, "%s;%d\n", root->pNameList->aName, root->iCount);
+            root->pNameList = root->pNameList->pNext;
+        }
+        root->pNameList = origin; // Restore the original pointer
+
         writeTreeNodes(write, root->left);
         writeTreeNodes(write, root->right);
     }
@@ -137,8 +148,8 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     }
 
     // does the current node match the users search input
-    if (strcmp(root->aName, searchInput) == 0 || atoi(searchInput) == root->iCount){   
-        printf("Syvyyshaun tulos, löytetty alkio: %s, %d\n", root->aName, root->iCount); // if the searchInput is found, print the result
+    if (nameExists(root->pNameList, searchInput) || atoi(searchInput) == root->iCount){   
+        printf("Syvyyshaun tulos, löytetty alkio: %s, %d\n", getNames(root->pNameList), root->iCount); // if the searchInput is found, print the result
         return root; // return back the node that matches
     }
 
@@ -156,7 +167,7 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     }
 
     // If no match is found, print searchinput not found to user
-    if (root->left == NULL && root->right == NULL) {
+    if (root->left == NULL && root->right == NULL){
         printf("Puussa ei ole arvoa '%s'.\n", searchInput);
     }
 
@@ -210,9 +221,9 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
         NODE_BT *current = queue[front++];
 
         // Check if current node matches search criteria
-        if (strcmp(current->aName, searchInput) == 0 || atoi(searchInput) == current->iCount)
+        if (nameExists(current->pNameList, searchInput) || atoi(searchInput) == current->iCount)
         {
-            printf("Leveyshaun tulos, löytetty alkio: %s, %d\n", current->aName, current->iCount);
+            printf("Leveyshaun tulos, löytetty alkio: %s, %d\n", getNames(current->pNameList), current->iCount);
             return current;
         }
 
