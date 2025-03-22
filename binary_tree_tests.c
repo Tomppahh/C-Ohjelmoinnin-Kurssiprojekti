@@ -19,15 +19,15 @@ void runTest(int *passed, int *failed, int condition, const char *message) {
 // Create a test input file for buildFromFile()
 void createTestInputFile(const char* pFileName) {
     FILE* Write = NULL;
-    if ((Wead = fopen(pFileName, "w")) == NULL) {
+    if ((Write = fopen(pFileName, "w")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan");
         exit(0);
     }
-    fprintf(file, "Etunimi;Lukumäärä\n");
-    fprintf(file, "Tuomas;10\n");
-    fprintf(file, "Tommi;15\n");
-    fprintf(file, "Eelis;20\n");
-    fclose(file);
+    fprintf(Write, "Etunimi;Lukumäärä\n");
+    fprintf(Write, "Tuomas;10\n");
+    fprintf(Write, "Tommi;15\n");
+    fprintf(Write, "Eelis;20\n");
+    fclose(Write);
     return;
 }
 
