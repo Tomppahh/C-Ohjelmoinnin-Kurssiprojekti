@@ -24,5 +24,6 @@ void writeFileTree(const char* filename, NODE_BT* root);
 int askValue(void);
 void printTree(NODE_BT* root);
 void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted);
+void freeTree(NODE_BT* root);
 
 #endif

@@ -140,6 +140,37 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
     return;
 }
 
+// Function to free the memory of the binary tree
+void freeTree(NODE_BT* root) {
+    if (root == NULL) {
+       return;
+    }
+
+    // using the function to traverse the binary tree recursively
+    freeTree(root->left);
+    freeTree(root->right);
+
+    // lets free the namelist
+    NAME_LIST* current = root->pNameList;
+    NAME_LIST* next;
+
+    // free size pointer
+    if (current && current->size){
+        free(current->size);
+    }
+
+    // then we free all name nodes
+    while(current) {
+        next = current->pNext;
+        free(current);
+        current = next;
+    }
+
+    // lastly we free the root node
+    free(root);
+    
+}
+
 // Depth first search function for a name or count
 NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     if (root == NULL) {
@@ -170,7 +201,6 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     if (root->left == NULL && root->right == NULL){
         printf("Puussa ei ole arvoa '%s'.\n", searchInput);
     }
-    free(root); // Free the memory
     return NULL;
 }
 

@@ -145,6 +145,7 @@ int main (void) {
 
     } while (iMainSelection != 0);
     pStartList = empty(pStartList);
+    freeTree(pStartTree); // calling freeTree function to clear nameList and the whole binarytree
     printf("Kiitos ohjelman käytöstä.\n");
     return (0);
 }
