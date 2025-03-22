@@ -14,7 +14,7 @@ void runTest(int *passed, int *failed, int condition, const char *message) {
         printf("FAIL: %s\n", message);
         (*failed)++;
     }
-    print("\n");
+    printf("\n");
 }
 
 // Create a test input file for buildFromFile()
