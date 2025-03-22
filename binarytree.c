@@ -254,6 +254,7 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
         if (nameExists(current->pNameList, searchInput) || atoi(searchInput) == current->iCount)
         {
             printf("Leveyshaun tulos, löytetty alkio: %s, %d\n", getNames(current->pNameList), current->iCount);
+            free(queue); // free memory
             return current;
         }
 
