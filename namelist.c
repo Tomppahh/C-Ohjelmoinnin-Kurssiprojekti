@@ -77,5 +77,4 @@ char* getNames(NAME_LIST* head) {
 
         return buffer;
     }
-
 } 

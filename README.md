@@ -13,7 +13,10 @@
 
 # /////Tommi/////
 # 1h Miitti
-
+# 5h test_sorting.c tiedoston ja sen funktioiden tekeminen
+# 3h namelist.c, namelist.h tiedostojen tekeminen
+# binarytree.c syvyys/leveysfunktiot, freeTree funktio binääripuun muistin vapautukseen memoryleakin korjaamiseksi
+# koodattuja rivejä 349
 
 # /////Eelis/////
 # 1h Miitti
