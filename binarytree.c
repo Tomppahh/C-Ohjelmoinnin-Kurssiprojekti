@@ -170,7 +170,7 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     if (root->left == NULL && root->right == NULL){
         printf("Puussa ei ole arvoa '%s'.\n", searchInput);
     }
-
+    free(root); // Free the memory
     return NULL;
 }
 
