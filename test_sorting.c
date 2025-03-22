@@ -7,8 +7,7 @@
 
 
 // function to print the linked list, takes in the created list and the title for printing.
-void printList(NODE *head, const char *title)
-{
+void printList(NODE_LL *head, const char *title) {
     printf("\n%s\n", title);
     if (head == NULL)
     {
@@ -16,7 +15,7 @@ void printList(NODE *head, const char *title)
         return;
     }
 
-    NODE *current = head;
+    NODE_LL *current = head;
     while (current != NULL)
     {
         printf("%s: %d\n", current->aName, current->iCount);
@@ -42,7 +41,7 @@ int main() {
     int passed = 0;
     int failed = 0;
 
-    NODE *list = NULL; // initialize the list to NULL
+    NODE_LL *list = NULL; // initialize the list to NULL
 
     // Test 1: Empty list
     printList(list, "Test 1: Empty list");
