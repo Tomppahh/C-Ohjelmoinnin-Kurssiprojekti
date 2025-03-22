@@ -132,6 +132,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
 // Depth first search function for a name or count
 NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     if (root == NULL) {
+        printf("Puu on tyhjä");
         return NULL; // If the tree is empty or the search input is not found in the tree return NULL
     }
 
@@ -151,7 +152,12 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
     // Recursively search in the right subtree
     NODE_BT *searchRight = depthFirstSearch(root->right, searchInput);
     if (searchRight != NULL){
-        return searchRight;                                       // If found in the right subtree, return it
+        return searchRight; // If found in the right subtree, return it
+    }
+
+    // If no match is found, print searchinput not found to user
+    if (root->left == NULL && root->right == NULL) {
+        printf("Puussa ei ole arvoa '%s'.\n", searchInput);
     }
 
     return NULL;
@@ -159,9 +165,8 @@ NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput){
 
 NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
 {
-    if (root == NULL)
-    {
-        printf("Puu on tyhjä.\n");
+    if (root == NULL){
+        printf("Puu on tyhjä");
         return NULL; // Empty tree
     }
 
@@ -223,7 +228,10 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
     }
 
     // if no match found tell the user
-    printf("Hakutermiä ei löytynyt puusta (Leveyshaku).\n");
+    if (front > rear){
+        printf("Puussa ei ole arvoa %s.\n", searchInput);
+    }
+    
     free(queue); // free memory!
     return NULL;
 }
