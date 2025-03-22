@@ -85,7 +85,7 @@ int askValue(void) {
     return(iValue);
 }
 
-// Calls the print function.
+// Calls the print function and asks user how many nodes to print.
 void printTree(NODE_BT* root) {
     int iPrintedCount = 0;
     int iMaxPrinted = 0;
