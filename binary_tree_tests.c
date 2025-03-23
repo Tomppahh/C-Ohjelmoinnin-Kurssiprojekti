@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "binarytree.h"
-
+#include "namelist.h"
 
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
@@ -43,7 +43,7 @@ int main() {
     // Test 1: createTreeNode
     NODE_BT* Node = NULL;
     Node = createTreeNode("TestNode", 12345);
-    runTest(&passed, &failed, Node != NULL && strcmp(Node->aName, "TestNode") == 0 && Node->iCount == 12345, "createTreeNode creates node correctly");
+    runTest(&passed, &failed, Node != NULL && strcmp(Node->pNameList->aName, "TestNode") == 0 && Node->iCount == 12345, "createTreeNode creates node correctly");
 
 
     // Test 2: instertNode
@@ -61,7 +61,7 @@ int main() {
     // Search by name
     NODE_BT* result = NULL;
     result = depthFirstSearch(root, "Tommi");
-    runTest(&passed, &failed, result != NULL && strcmp(result->aName, "Tommi") == 0, "depthFirstSearch finds node by name");
+    runTest(&passed, &failed, result != NULL && strcmp(result->pNameList->aName, "Tommi") == 0, "depthFirstSearch finds node by name");
 
     // Search by number
     result = depthFirstSearch(root, "20");
@@ -69,7 +69,7 @@ int main() {
 
     // Test 4: widthFirstSearch
     result = widthFirstSearch(root, "20");
-    runTest(&passed, &failed, result != NULL && strcmp(result->aName, "Eelis") == 0, "widthFirstSearch finds node by number");
+    runTest(&passed, &failed, result != NULL && strcmp(result->pNameList->aName, "Eelis") == 0, "widthFirstSearch finds node by number");
 
     // Search for a non-existent term
     result = widthFirstSearch(root, "Nonexistent");
@@ -82,14 +82,13 @@ int main() {
     NODE_BT* fileTree = buildFromFile(testInputFilename);
     // ("Tuomas", 10) becomes the root.
     // ("Tommi", 15) is inserted → goes to right) and then ("Eelis", 20) → goes to Tommi's right).
-    runTest(&passed, &failed, fileTree != NULL && strcmp(fileTree->aName, "Tuomas") == 0, "buildFromFile builds tree with correct root");
+    runTest(&passed, &failed, fileTree != NULL && strcmp(fileTree->pNameList->aName, "Tuomas") == 0, "buildFromFile builds tree with correct root");
     runTest(&passed, &failed,
-        fileTree->right != NULL && strcmp(fileTree->right->aName, "Tommi") == 0, "buildFromFile inserts second node correctly");
-    runTest(&passed, &failed, fileTree->right->right != NULL && strcmp(fileTree->right->right->aName, "Eelis") == 0, "buildFromFile inserts third node correctly");
-
+            fileTree->right != NULL && strcmp(fileTree->right->pNameList->aName, "Tommi") == 0, "buildFromFile inserts second node correctly");
+    runTest(&passed, &failed, fileTree->right->right != NULL && strcmp(fileTree->right->right->pNameList->aName, "Eelis") == 0, "buildFromFile inserts third node correctly");
 
     // Test 6: Names with same numbers in the test input file for the width and depth search
-    NODE_BT *root = NULL;
+    root = NULL;
     root = insertNode(root, "Tuomas", 15); // Root
     root = insertNode(root, "Tommi", 10);  // Should be left child
     root = insertNode(root, "Eelis", 20);  // Should be right child
@@ -101,10 +100,9 @@ int main() {
     // search with number 20 should return all the names with number 20, does nameList contain all names with number 20
     result = depthFirstSearch(root, "20");
     
-
-    // Free the memory
+    // free memory
+    freeTree(root);
     
-
     // Print summary of passed and failed tests
     printf("\nSummary: %d tests passed, %d tests failed\n", passed, failed);
 

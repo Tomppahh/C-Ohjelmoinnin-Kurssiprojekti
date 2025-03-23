@@ -22,7 +22,7 @@ test_sorting.o: test_sorting.c linkedlist.h
 	gcc -c test_sorting.c -std=c99 -pedantic -Wall
 
 binary_tree_tests: binary_tree_tests.o binarytree.o linkedlist.o
-	gcc -o binary_tree_tests binary_tree_tests.o binarytree.o linkedlist.o
+	gcc -o binary_tree_tests binary_tree_tests.o binarytree.o linkedlist.o namelist.o
 
 binary_tree_tests.o: binary_tree_tests.c binarytree.h linkedlist.h
 	gcc -c binary_tree_tests.c -std=c99 -pedantic -Wall
