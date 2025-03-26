@@ -9,10 +9,10 @@ NODE_BT* createTreeNode(const char* name, int number) {
     NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
     NAME_LIST* nameList = createNameList(name, NULL);
     newNode->iCount = number;
-    newNode->color = RED; // New nodes are red
+    // newNode->color = RED; // New nodes are red
     newNode->left = NULL;
     newNode->right = NULL;
-    newNode->parent = NULL;
+    // newNode->parent = NULL;
     newNode->pNameList = nameList;
     return newNode;
 } 
@@ -22,13 +22,10 @@ NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
     if (root==NULL) {
         return createTreeNode(name,number);
     }
-    if (number < root->iCount) {
+    if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
         root->left = insertNode(root->left, name, number);
-    } else if (number > root->iCount) {
+    } else {
         root->right = insertNode(root->right, name, number);
-    }
-    else { 
-        append(root->pNameList, name); // If the number is the same, add the name to the namelist
     }
     return root;
 }
@@ -136,7 +133,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
         printf("\n");
         for (int i = SPACING; i < iSpace; i++)
             printf(" ");
-        printf("%6d\n", root->iCount);  // Allocate 6 spaces for alignment
+        printf("%s %d\n",root->aName, root->iCount);
         (*iPrinted)++;
     }
 

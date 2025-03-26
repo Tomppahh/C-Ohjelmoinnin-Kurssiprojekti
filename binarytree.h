@@ -6,16 +6,16 @@
 #define LENGTH 30
 #define SPACING 4 // Can change the space between printed nodes
 
-typedef enum { RED, BLACK } COLOR;
+// typedef enum { RED, BLACK } COLOR;
 
 //defining a binary tree node
 typedef struct nodeTree {
     struct nameList *pNameList;
     int iCount;
-    COLOR color;
+    // COLOR color;
     struct nodeTree *left;
     struct nodeTree *right;
-    struct nodeTree *parent;
+    // struct nodeTree *parent;
 } NODE_BT;
 
 
