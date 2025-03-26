@@ -359,71 +359,67 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
         if (current->right != NULL) {
             queue[rear++] = current->right;
         }
-    }
-
-    // The main function that is called to balance a tree. Uses Static balancing.
-    NODE_BT* balanceTree(NODE_BT *root) {
-        int iIndex = 0;
-        int iNodeCount = countNodes(root);
-        if (iNodeCount == 0) {
-            return (NULL);
-        }
-
-        NODE_BT **NodeList = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
-        if (NodeList == NULL) {
-            perror("Muistin varaus epäonnistui, lopetetaan");
-            exit(0);
-        }
-
-        makeList(root, NodeList, &iIndex);
-
-        NODE_BT *newRoot = buildBalancedTree(NodeList, 0, iNodeCount - 1);
-        free(NodeList);
-        return (newRoot);
-    }
-
-    // Counts the number of nodes
-    int countNodes(NODE_BT *root) {
-        if(root == NULL) {
-            return 0;
-        }
-        // Use recursion to count all nodes from left and to right.
-        return (1 + countNodes(root->left) + countNodes(root->right));
-    } 
-
-    // Use recursion to make an in-order traversal and collect all nodes into a list.
-    void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
-        if (root == NULL) {
-            return;
-        }
-        makeList(root->left, NodeList, iIndex); // Goes all the way to the left of the tree
-        NodeList[*iIndex] = root; // Adds the node to the list
-        (*iIndex)++;
-        makeList(root->right, NodeList, iIndex); // Goes to the right node
-        return;
-    }
-
-    // Use recursion to balance the tree based on the created list
-    NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
-        int iMiddle;
-        
-        if (iStart > iEnd) {
-            return NULL;
-        }
-
-        iMiddle = (iStart + iEnd) / 2; // Gets the lists middle point
-        NODE_BT *root = NodeList[iMiddle]; // Sets the node to be the node in the middle of the list.
-
-        // Recursive calls
-        root->left = buildBalancedTree(NodeList, iStart, iMiddle -1);
-        root->right = buildBalancedTree(NodeList, iMiddle + 1, iEnd);
-
-        return root;
-    }
-
-
-
     // free memory!
     free(queue);
     fclose(write);
+    }
+
+// The main function that is called to balance a tree. Uses Static balancing.
+NODE_BT* balanceTree(NODE_BT *root) {
+    int iIndex = 0;
+    int iNodeCount = countNodes(root);
+    if (iNodeCount == 0) {
+        return (NULL);
+    }
+
+    NODE_BT **NodeList = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
+    if (NodeList == NULL) {
+        perror("Muistin varaus epäonnistui, lopetetaan");
+        exit(0);
+    }
+
+    makeList(root, NodeList, &iIndex);
+
+    NODE_BT *newRoot = buildBalancedTree(NodeList, 0, iNodeCount - 1);
+    free(NodeList);
+    return (newRoot);
+}
+
+// Counts the number of nodes
+int countNodes(NODE_BT *root) {
+    if(root == NULL) {
+        return 0;
+    }
+    // Use recursion to count all nodes from left and to right.
+    return (1 + countNodes(root->left) + countNodes(root->right));
+} 
+
+// Use recursion to make an in-order traversal and collect all nodes into a list.
+void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
+    if (root == NULL) {
+        return;
+    }
+    makeList(root->left, NodeList, iIndex); // Goes all the way to the left of the tree
+    NodeList[*iIndex] = root; // Adds the node to the list
+    (*iIndex)++;
+    makeList(root->right, NodeList, iIndex); // Goes to the right node
+    return;
+}
+
+// Use recursion to balance the tree based on the created list
+NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
+    int iMiddle;
+    
+    if (iStart > iEnd) {
+        return NULL;
+    }
+
+    iMiddle = (iStart + iEnd) / 2; // Gets the lists middle point
+    NODE_BT *root = NodeList[iMiddle]; // Sets the node to be the node in the middle of the list.
+
+    // Recursive calls
+    root->left = buildBalancedTree(NodeList, iStart, iMiddle -1);
+    root->right = buildBalancedTree(NodeList, iMiddle + 1, iEnd);
+
+    return root;
 }
