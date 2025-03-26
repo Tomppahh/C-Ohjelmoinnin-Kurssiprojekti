@@ -359,6 +359,36 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
             queue[rear++] = current->right;
         }
     }
+
+    NODE_BT* balanceTree(NODE_BT *root) {
+        int iIndex = 0;
+        int iNodeCount = countNodes(root);
+        if (iNodeCount == 0) {
+            return (NULL);
+        }
+
+        NODE_BT **array = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
+        if (array == NULL) {
+            perror("Muistin varaus epäonnistui, lopetetaan");
+            exit(0);
+        }
+
+        makeList(root, array, &iIndex);
+
+        
+    }
+
+    // Counts the number of nodes
+    int countNodes(NODE_BT *root) {
+        if(root == NULL) {
+            return 0;
+        }
+        // Use recursion to count all nodes from left and to right.
+        return (1 + countNodes(root->left) + countNodes(root->right));
+    } 
+
+
+
     // free memory!
     free(queue);
     fclose(write);
