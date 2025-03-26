@@ -65,6 +65,8 @@ NODE_BT* buildFromFile(const char* filename) {
 //Recursive function that helps with the writing process.
 void writeTreeNodes(FILE* write, NODE_BT* root) {
     if (root != NULL) {
+        writeTreeNodes(write, root->left); // Go left
+        
         NAME_LIST *origin = root->pNameList; // Save the original pointer to the namelist, to prevent losing the pointer, when iterating through the list
         while (root->pNameList != NULL) {
             fprintf(write, "%s,%d\n", root->pNameList->aName, root->iCount);
@@ -72,7 +74,7 @@ void writeTreeNodes(FILE* write, NODE_BT* root) {
         }
         root->pNameList = origin; // Restore the original pointer
 
-        writeTreeNodes(write, root->left);
+        
         writeTreeNodes(write, root->right);
     }
 }
