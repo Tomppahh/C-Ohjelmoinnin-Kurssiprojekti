@@ -559,7 +559,7 @@ int compareNodes(const void* a, const void* b) {
     NODE_BT* Node2 = *(NODE_BT**)b;
 
     if (Node1->iCount != Node2->iCount) {
-        return n1->iCount - n2->iCount;
+        return Node1->iCount - Node2->iCount;
     }
-    return strcmp(n1->pNameList->aName, n2->pNameList->aName);
+    return strcmp(Node1->pNameList->aName, Node2->pNameList->aName);
 }
