@@ -40,7 +40,7 @@ void rotateRight(NODE_BT** root, NODE_BT* y);
 void rotateLeft(NODE_BT** root, NODE_BT* x);
 */
 
-
+int compareNodes(const void* a, const void* b);
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
 void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
 int countNodes(NODE_BT *root);

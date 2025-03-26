@@ -133,7 +133,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
         printf("\n");
         for (int i = SPACING; i < iSpace; i++)
             printf(" ");
-        printf("%s %d\n",root->pNameList[0], root->iCount);
+        printf("%s %d\n",root->pNameList->aName, root->iCount);
         (*iPrinted)++;
     }
 
@@ -490,7 +490,16 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
 }
 */
 
+// Function used in quicksort
+int compareNodes(const void* a, const void* b) {
+    NODE_BT* Node1 = *(NODE_BT**)a;
+    NODE_BT* Node2 = *(NODE_BT**)b;
 
+    if (Node1->iCount != Node2->iCount) {
+        return Node1->iCount - Node2->iCount;
+    }
+    return strcmp(Node1->pNameList->aName, Node2->pNameList->aName);
+}
 
 // The main function that is called to balance a tree.
 NODE_BT* balanceTree(NODE_BT *root) {
@@ -552,14 +561,4 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
     root->right = buildBalancedTree(NodeList, iMiddle + 1, iEnd);
 
     return root;
-}
-
-int compareNodes(const void* a, const void* b) {
-    NODE_BT* Node1 = *(NODE_BT**)a;
-    NODE_BT* Node2 = *(NODE_BT**)b;
-
-    if (Node1->iCount != Node2->iCount) {
-        return Node1->iCount - Node2->iCount;
-    }
-    return strcmp(Node1->pNameList->aName, Node2->pNameList->aName);
 }
