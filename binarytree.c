@@ -490,17 +490,6 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
 }
 */
 
-// Function used in quicksort
-int compareNodes(const void* a, const void* b) {
-    NODE_BT* Node1 = *(NODE_BT**)a;
-    NODE_BT* Node2 = *(NODE_BT**)b;
-
-    if (Node1->iCount != Node2->iCount) {
-        return Node1->iCount - Node2->iCount;
-    }
-    return strcmp(Node1->pNameList->aName, Node2->pNameList->aName);
-}
-
 // The main function that is called to balance a tree.
 NODE_BT* balanceTree(NODE_BT *root) {
     int iIndex = 0;
@@ -517,8 +506,7 @@ NODE_BT* balanceTree(NODE_BT *root) {
 
     makeList(root, NodeList, &iIndex);
 
-    qsort(NodeList, iNodeCount, sizeof(NODE_BT*), compareNodes);
-
+    
     NODE_BT *newRoot = buildBalancedTree(NodeList, 0, iNodeCount - 1);
     free(NodeList);
     return (newRoot);
@@ -538,10 +526,11 @@ void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
     if (root == NULL) {
         return;
     }
-    makeList(root->left, NodeList, iIndex); // Goes all the way to the left of the tree
+     
     NodeList[*iIndex] = root; // Adds the node to the list
     (*iIndex)++;
-    makeList(root->right, NodeList, iIndex); // Goes to the right node
+    makeList(root->left, NodeList, iIndex);
+    makeList(root->right, NodeList, iIndex);
     return;
 }
 
