@@ -368,6 +368,7 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
     }
 }
 
+
 void rotateLeft(NODE_BT** root, NODE_BT* x) {
     NODE_BT* y = x->right;
     x->right = y->left;
