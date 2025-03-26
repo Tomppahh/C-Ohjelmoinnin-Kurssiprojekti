@@ -373,7 +373,7 @@ void rotateLeft(NODE_BT** root, NODE_BT* x) {
         y->left->parent = x;
     }
     y->parent = x->parent;
-    if(!x->parent == NULL) {
+    if(x->parent == NULL) {
         *root = y;
     } else if (x == x->parent->left) {
         x->parent->left = y;
@@ -392,7 +392,7 @@ void rotateRight(NODE_BT** root, NODE_BT* y) {
         x->right->parent = y;
     }
     x->parent = y->parent;
-    if (!y->parent == NULL) {
+    if (y->parent == NULL) {
         *root = x;
     } else if (y == y->parent->left) {
         y->parent->left = x;
@@ -472,10 +472,10 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
     }
 
     // Create new node and link it
-    NODE_BT* newNode = createNode(name, number);
+    NODE_BT* newNode = createTreeNode(name, number);
     newNode->parent = parent;
 
-    if (!parent == NULL) {
+    if (parent == NULL) {
         root = newNode; // Tree was empty
     } else if (number < parent->iCount) {
         parent->left = newNode;
