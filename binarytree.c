@@ -53,12 +53,13 @@ NODE_BT* buildFromFile(const char* filename) {
         char name[30];
         int number;
         if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode_RBT(root, name, number);
+            root = insertNode(root, name, number);
         } else {
             printf("Error: Invalid formatting in row\n");
         }
     }
     fclose(read);
+    balanceTree(root);
     return root;
 }
 
@@ -368,7 +369,7 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
     }
 }
 
-
+/* Red-Black Tree. Didn't work with codegrade.
 void rotateLeft(NODE_BT** root, NODE_BT* x) {
     NODE_BT* y = x->right;
     x->right = y->left;
@@ -490,11 +491,11 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
     fixInsert(&root, newNode);
     return root;
 }
+*/
 
-/* 
-Static balancing. Didn't work with Codegrade.
 
-The main function that is called to balance a tree.
+
+// The main function that is called to balance a tree.
 NODE_BT* balanceTree(NODE_BT *root) {
     int iIndex = 0;
     int iNodeCount = countNodes(root);
@@ -553,6 +554,6 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
 
     return root;
 }
-    */
+
 
     
