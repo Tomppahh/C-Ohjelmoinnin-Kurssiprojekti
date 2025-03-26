@@ -59,7 +59,7 @@ NODE_BT* buildFromFile(const char* filename) {
         }
     }
     fclose(read);
-    balanceTree(root);
+    root = balanceTree(root);
     return root;
 }
 
