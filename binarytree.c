@@ -508,6 +508,8 @@ NODE_BT* balanceTree(NODE_BT *root) {
 
     makeList(root, NodeList, &iIndex);
 
+    qsort(NodeList, iNodeCount, sizeof(NODE_BT*), compareNodes);
+
     NODE_BT *newRoot = buildBalancedTree(NodeList, 0, iNodeCount - 1);
     free(NodeList);
     return (newRoot);
@@ -552,5 +554,12 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
     return root;
 }
 
+int compareNodes(const void* a, const void* b) {
+    NODE_BT* Node1 = *(NODE_BT**)a;
+    NODE_BT* Node2 = *(NODE_BT**)b;
 
-    
+    if (Node1->iCount != Node2->iCount) {
+        return n1->iCount - n2->iCount;
+    }
+    return strcmp(n1->pNameList->aName, n2->pNameList->aName);
+}
