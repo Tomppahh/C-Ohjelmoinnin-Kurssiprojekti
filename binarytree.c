@@ -133,7 +133,7 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
         printf("\n");
         for (int i = SPACING; i < iSpace; i++)
             printf(" ");
-        printf("%s %d\n",root->aName, root->iCount);
+        printf("%s %d\n",root->pNameList[0], root->iCount);
         (*iPrinted)++;
     }
 
