@@ -363,6 +363,7 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
     free(queue);
     fclose(write);
     }
+}
 
 // The main function that is called to balance a tree. Uses Static balancing.
 NODE_BT* balanceTree(NODE_BT *root) {
