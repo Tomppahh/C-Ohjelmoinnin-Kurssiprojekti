@@ -28,5 +28,9 @@ void freeTree(NODE_BT* root);
 void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename);
 NODE_BT *writeFileDFHelper(NODE_BT* root, const char* searchInput, FILE* write);
 void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename);
+NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
+void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
+int countNodes(NODE_BT *root);
+NODE_BT* balanceTree(NODE_BT *root);
 
 #endif
