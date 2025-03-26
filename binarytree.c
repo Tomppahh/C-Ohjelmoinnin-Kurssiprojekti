@@ -50,13 +50,13 @@ NODE_BT* buildFromFile(const char* filename) {
         char name[30];
         int number;
         if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode(root, name, number);
+            root = insertNode(root, name, number); // Change insertNode to insertNode_RBT
         } else {
             printf("Error: Invalid formatting in row\n");
         }
     }
     fclose(read);
-    root = balanceTree(root);
+    root = balanceTree(root); // Balances the tree
     return root;
 }
 
