@@ -39,7 +39,7 @@ void fixInsert(NODE_BT** root, NODE_BT* z);
 void rotateRight(NODE_BT** root, NODE_BT* y);
 void rotateLeft(NODE_BT** root, NODE_BT* x);
 */
-
+NODE_BT *removeNode(NODE_BT *root, const char *searchInput);
 int compareNodes(const void* a, const void* b);
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
 void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);

@@ -46,6 +46,7 @@ int binaryTreeMenu (void) {
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
     printf("5) Tulosta puumaisessa muodossa\n");
+    printf("6) Poista arvo\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
@@ -129,6 +130,12 @@ int main (void) {
                     writeFileWF(pStartTree,searchTerm,aWriteName);
                 } else if (iSubSelection == 5) {
                     printTree(pStartTree);
+                } else if (iSubSelection == 6) {
+                    char searchTerm[LENGTH];
+                    printf("Anna poistettava arvo: ");
+                    fgets(searchTerm, sizeof(searchTerm),stdin);
+                    searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+                    pStartTree = removeNode(pStartTree, searchTerm);
                 } else if (iSubSelection == 0) {
                     printf("Palataan päävalikkoon.\n");
                 } else {

@@ -549,3 +549,58 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
 
     return root;
 }
+//DOESNT WORK FULLY !! STILL NEEDS CHANGES TO PROPERLY WORK!!
+NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
+    if (root == NULL) {
+        return NULL;
+    }
+
+    char* endPtr;
+    int number = strtol(searchInput, &endPtr, 10);
+    int isNumeric = (*endPtr == '\0');
+
+    if ((isNumeric && root->iCount == number) || (!isNumeric && nameExists(root->pNameList, searchInput))) {
+        if (root->left == NULL && root->right == NULL) {
+            free(root->pNameList);
+            free(root);
+            return NULL;
+        } else if (root->left == NULL) {
+            NODE_BT* temp = root->right;
+            free(root->pNameList);
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            NODE_BT* temp = root->left;
+            free(root->pNameList);
+            free(root);
+            return temp;
+        } else {
+            NODE_BT* successor = root->right;
+            NODE_BT* parentOfSuccessor = root;
+
+            while (successor->left != NULL) {
+                parentOfSuccessor = successor;
+                successor = successor->left;
+            }
+
+            strcpy(root->pNameList->aName, successor->pNameList->aName);
+            root->iCount = successor->iCount;
+
+            if (parentOfSuccessor->left == successor) {
+                parentOfSuccessor->left = removeNode(parentOfSuccessor->left, successor->pNameList->aName);
+            } else {
+                parentOfSuccessor->right = removeNode(parentOfSuccessor->right, successor->pNameList->aName);
+            }
+        }
+    } else {
+        int comparison = strcmp(searchInput, root->pNameList->aName);
+        if (comparison < 0) {
+            root->left = removeNode(root->left, searchInput);
+        } else {
+            root->right = removeNode(root->right, searchInput);
+        }
+    }
+
+    return root;
+}
+
