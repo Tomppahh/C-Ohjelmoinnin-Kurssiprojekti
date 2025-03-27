@@ -136,7 +136,6 @@ int main (void) {
                     fgets(searchTerm, sizeof(searchTerm),stdin);
                     searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
                     pStartTree = removeNode(pStartTree, searchTerm);
-                    pStartTree = balanceTree(pStartTree);
                 } else if (iSubSelection == 0) {
                     printf("Palataan päävalikkoon.\n");
                 } else {
