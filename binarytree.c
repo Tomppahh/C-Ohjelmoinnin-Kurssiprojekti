@@ -549,13 +549,11 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
 
     return root;
 }
-//DOESNT WORK FULLY !! STILL NEEDS CHANGES TO PROPERLY WORK!!
+//Function to remove nodes from the tree
 NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
     if (root == NULL) {
         return NULL;
     }
-    //printf("Debug: Traversing Node with iCount=%d, Name=%s\n", root->iCount, root->pNameList->aName); , tällä rivillä voit kokeilla että kun yrität esimerkiksi poistaa tiedostosta miehet_15_satunnainen.txt arvon Zaman niin tämä alkaa printtaamaan
-    //pelkästään puussa olevia arvoja kokoajan siirtymällä oikeaan nodeen kunnes se tulee viimeiseen absoluuttisesti eniten oikealla olevaan nodeen. 
     char* endPtr;
     int number = strtol(searchInput, &endPtr, 10);
     int isNumeric = (*endPtr == '\0');
@@ -594,14 +592,9 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
             }
         }
     } else {
-        int comparison = strcmp(searchInput, root->pNameList->aName);
-        if (comparison < 0) {
-            root->left = removeNode(root->left, searchInput);
-        } else {
-            root->right = removeNode(root->right, searchInput);
+        root->right = removeNode(root->right, searchInput);
+        root->left = removeNode(root->left, searchInput);
         }
-    }
-
     return root;
 }
 
