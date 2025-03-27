@@ -554,7 +554,8 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
     if (root == NULL) {
         return NULL;
     }
-
+    //printf("Debug: Traversing Node with iCount=%d, Name=%s\n", root->iCount, root->pNameList->aName); , tällä rivillä voit kokeilla että kun yrität esimerkiksi poistaa tiedostosta miehet_15_satunnainen.txt arvon Zaman niin tämä alkaa printtaamaan
+    //pelkästään puussa olevia arvoja kokoajan siirtymällä oikeaan nodeen kunnes se tulee viimeiseen absoluuttisesti eniten oikealla olevaan nodeen. 
     char* endPtr;
     int number = strtol(searchInput, &endPtr, 10);
     int isNumeric = (*endPtr == '\0');
