@@ -554,26 +554,31 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
     if (root == NULL) {
         return NULL;
     }
+    //determines whether or not the input is numeric or string
     char* endPtr;
     int number = strtol(searchInput, &endPtr, 10);
     int isNumeric = (*endPtr == '\0');
-
+    //check if current node matches the input
     if ((isNumeric && root->iCount == number) || (!isNumeric && nameExists(root->pNameList, searchInput))) {
         if (root->left == NULL && root->right == NULL) {
+            //The removed node is leaf node meaning no children nodes
             free(root->pNameList);
             free(root);
             return NULL;
         } else if (root->left == NULL) {
+            //If the removed node has only a right child
             NODE_BT* temp = root->right;
             free(root->pNameList);
             free(root);
             return temp;
         } else if (root->right == NULL) {
+            //If the removed node has only a left child
             NODE_BT* temp = root->left;
             free(root->pNameList);
             free(root);
             return temp;
         } else {
+            //If the removed node has two children
             NODE_BT* successor = root->right;
             NODE_BT* parentOfSuccessor = root;
 
@@ -592,6 +597,7 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
             }
         }
     } else {
+        //traverse left or right subtree based on the input comparison
         root->right = removeNode(root->right, searchInput);
         root->left = removeNode(root->left, searchInput);
         }
