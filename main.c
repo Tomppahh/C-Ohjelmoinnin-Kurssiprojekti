@@ -45,8 +45,9 @@ int binaryTreeMenu (void) {
     printf("2) Kirjoita puun arvot tiedostoon\n");
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
-    printf("5) Tulosta puumaisessa muodossa\n");
-    printf("6) Poista arvo\n");
+    printf("5) Binääripuuhaku\n");
+    printf("6) Tulosta puumaisessa muodossa\n");
+    printf("7) Poista arvo\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
@@ -129,8 +130,15 @@ int main (void) {
                     filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
                     writeFileWF(pStartTree,searchTerm,aWriteName);
                 } else if (iSubSelection == 5) {
-                    printTree(pStartTree);
+                    char searchTerm[LENGTH];
+                    printf("Anna etsittävä nimi tai numero: ");
+                    fgets(searchTerm, sizeof(searchTerm), stdin);
+                    searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+                    // filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");  (uncomment if want write to file, also uncomment fastestSearchToFile write stuff!)
+                    fastestSearchToFile(pStartTree, searchTerm, aWriteName);
                 } else if (iSubSelection == 6) {
+                    printTree(pStartTree);
+                } else if (iSubSelection == 7) {
                     char searchTerm[LENGTH];
                     printf("Anna poistettava arvo: ");
                     fgets(searchTerm, sizeof(searchTerm),stdin);

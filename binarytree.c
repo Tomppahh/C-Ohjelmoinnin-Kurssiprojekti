@@ -280,6 +280,50 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
     return NULL;
 }
 
+void fastestSearchToFile(NODE_BT *root, const char *searchInput, const char *filename){
+    if (root == NULL){
+        printf("Puu on tyhjä\n");
+        return;
+    }
+
+    // Open the file for writing
+    // FILE *write = fopen(filename, "w");
+    // if (write == NULL){
+    //     perror("Tiedoston avaaminen epäonnistui");
+    //     return;
+    // }
+
+    // Check if the input is numeric
+    char *endPtr;
+    int number = strtol(searchInput, &endPtr, 10);
+    // int isNumeric = (*endPtr == '\0');
+
+    if (*endPtr != '\0'){ // if endPtr is anything else than null terminator, the input is not numeric.
+        printf("Virhe: Binääripuuhaku tukee vain numeroita.\n");
+        // fclose(write);
+        return;
+    }
+
+    // Perform binary search
+    while (root != NULL){
+        if (number == root->iCount){
+            // Write the result to the file
+            // fprintf(write, "Nopein haun tulos, löytetty alkio: %s, %d\n", getNames(root->pNameList), root->iCount);
+            printf("Nopein haun tulos, löytetty alkio: %s, %d\n", getNames(root->pNameList), root->iCount);
+            // fclose(write);
+            return;
+        }
+
+        // Traverse left or right based on the comparison
+        // if number is smaller than root->iCount, root->left, else root->right.
+        root = (number < root->iCount) ? root->left : root->right;
+    }
+
+    // If not found tell the user about it. 
+    printf("Puussa ei ole arvoa '%d'.\n", number);
+    // fclose(write);
+}
+
 void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename) {
     FILE *write = NULL;
     if ((write = fopen(filename, "w")) == NULL) {
