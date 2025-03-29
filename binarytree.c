@@ -168,7 +168,6 @@ void freeNameList(NODE_BT* root) {
     // then we free all name nodes
     while(current) {
         next = current->pNext;
-        free(current->aName);
         free(current);
         current = next;
     }
