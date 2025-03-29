@@ -12,6 +12,7 @@
 typedef struct nodeTree {
     struct nameList *pNameList;
     int iCount;
+    int iInsert
     // COLOR color;
     struct nodeTree *left;
     struct nodeTree *right;
