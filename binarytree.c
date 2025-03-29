@@ -150,8 +150,13 @@ void freeTree(NODE_BT* root) {
     // using the function to traverse the binary tree recursively
     freeTree(root->left);
     freeTree(root->right);
+    freeNameList(root);
+    // lastly we free the root node
+    free(root);
+    
+}
 
-    // lets free the namelist
+void freeNameList(NODE_BT* root) {
     NAME_LIST* current = root->pNameList;
     NAME_LIST* next;
 
@@ -166,10 +171,6 @@ void freeTree(NODE_BT* root) {
         free(current);
         current = next;
     }
-
-    // lastly we free the root node
-    free(root);
-    
 }
 
 // Depth first search function for a name or count
@@ -562,19 +563,19 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
     if ((isNumeric && root->iCount == number) || (!isNumeric && nameExists(root->pNameList, searchInput))) {
         if (root->left == NULL && root->right == NULL) {
             //The removed node is leaf node meaning no children nodes
-            free(root->pNameList);
+            freeNameList(root);
             free(root);
             return NULL;
         } else if (root->left == NULL) {
             //If the removed node has only a right child
             NODE_BT* temp = root->right;
-            free(root->pNameList);
+            freeNameList(root);
             free(root);
             return temp;
         } else if (root->right == NULL) {
             //If the removed node has only a left child
             NODE_BT* temp = root->left;
-            free(root->pNameList);
+            freeNameList(root);
             free(root);
             return temp;
         } else {
