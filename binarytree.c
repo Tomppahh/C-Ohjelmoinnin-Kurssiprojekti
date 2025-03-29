@@ -574,7 +574,7 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
         return NULL;
     }
 
-    iMiddle = (iStart + iEnd) / 2; // Gets the lists middle point
+    iMiddle = (iStart + iEnd)>>1; // Gets the lists middle point
     NODE_BT *root = NodeList[iMiddle]; // Sets the node to be the node in the middle of the list.
 
     // Recursive calls
