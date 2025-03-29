@@ -628,10 +628,17 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
             }
         }
     } else {
-        //traverse left or right subtree based on the input comparison
-        root->right = removeNode(root->right, searchInput);
-        root->left = removeNode(root->left, searchInput);
+        // If the value is less than current node, search in left subtree
+        if ((isNumeric && number < root->iCount) ||
+            (!isNumeric && strcmp(searchInput, root->pNameList->aName) < 0)){
+            root->left = removeNode(root->left, searchInput);
         }
+        // If the value is greater than current node, search in right subtree
+        else if ((isNumeric && number > root->iCount) ||
+                 (!isNumeric && strcmp(searchInput, root->pNameList->aName) > 0)){
+            root->right = removeNode(root->right, searchInput);
+        }
+    }
     return root;
 }
 
