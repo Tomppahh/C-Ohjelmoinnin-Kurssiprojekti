@@ -129,13 +129,13 @@ int main (void) {
                     searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
                     filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
                     writeFileWF(pStartTree,searchTerm,aWriteName);
-                } else if (iSubSelection == 5) {
+                } else if (iSubSelection == 6) {
                     char searchTerm[LENGTH];
                     printf("Anna etsittävä nimi tai numero: ");
                     fgets(searchTerm, sizeof(searchTerm), stdin);
                     searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
-                    // BinaryTreeSearch(pStartTree, searchTerm);
-                } else if (iSubSelection == 6) {
+                    BinaryTreeSearch(pStartTree, searchTerm);
+                } else if (iSubSelection == 5) {
                     printTree(pStartTree);
                 } else if (iSubSelection == 7) {
                     char searchTerm[LENGTH];
