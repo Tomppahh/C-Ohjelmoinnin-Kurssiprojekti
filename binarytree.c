@@ -5,11 +5,10 @@
 #include "namelist.h"
 
 //Creates a new node in the binary tree
-NODE_BT* createTreeNode(const char* name, int number, int insert) {
+NODE_BT* createTreeNode(const char* name, int number) {
     NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
     NAME_LIST* nameList = createNameList(name, NULL);
     newNode->iCount = number;
-    newNode->iInsert = insert;
     // newNode->color = RED; // New nodes are red
     newNode->left = NULL;
     newNode->right = NULL;
@@ -19,14 +18,14 @@ NODE_BT* createTreeNode(const char* name, int number, int insert) {
 } 
 
 //Functionality to insert a node into the binary tree
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number, int insert) {
+NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
     if (root==NULL) {
-        return createTreeNode(name,number, insert);
+        return createTreeNode(name,number);
     }
     if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
-        root->left = insertNode(root->left, name, number, insert);
+        root->left = insertNode(root->left, name, number);
     } else {
-        root->right = insertNode(root->right, name, number,  insert);
+        root->right = insertNode(root->right, name, number);
     }
     return root;
 }
@@ -34,7 +33,6 @@ NODE_BT* insertNode(NODE_BT* root, const char* name, int number, int insert) {
 //Functionality to build a binary tree from a text file, reads the file and builds a tree from it
 NODE_BT* buildFromFile(const char* filename) {
     FILE* read = NULL;
-    int insert = 0;
     if ((read = fopen(filename, "r")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan");
         exit(0);
@@ -52,11 +50,10 @@ NODE_BT* buildFromFile(const char* filename) {
         char name[30];
         int number;
         if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode(root, name, number, insert); // Change insertNode to insertNode_RBT
+            root = insertNode(root, name, number); // Change insertNode to insertNode_RBT
         } else {
             printf("Error: Invalid formatting in row\n");
         }
-        insert++;
     }
     fclose(read);
     root = balanceTree(root); // Balances the tree
@@ -492,14 +489,6 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
 }
 */
 
-// Funtion used to sort list in the order that they were originally inserted.
-int compareNodes(const void* a, const void* b) {
-    NODE_BT* n1 = *(NODE_BT**)a;
-    NODE_BT* n2 = *(NODE_BT**)b;
-
-    return n1->iInsert - n2->iInsert;
-}
-
 // The main function that is called to balance a tree.
 NODE_BT* balanceTree(NODE_BT *root) {
     int iIndex = 0;
@@ -516,7 +505,6 @@ NODE_BT* balanceTree(NODE_BT *root) {
 
     makeList(root, NodeList, &iIndex);
 
-    qsort(NodeList, iNodeCount, sizeof(NODE_BT*), compareNodes);
     
     NODE_BT *newRoot = buildBalancedTree(NodeList, 0, iNodeCount - 1);
     free(NodeList);
