@@ -19,8 +19,8 @@ typedef struct nodeTree {
 } NODE_BT;
 
 
-NODE_BT* createTreeNode(const char* name, int number, int insert);
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number, int insert);
+NODE_BT* createTreeNode(const char* name, int number);
+NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile(const char* filename);
 NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput);
 NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput);
