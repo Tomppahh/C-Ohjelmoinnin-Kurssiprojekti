@@ -280,7 +280,7 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
     return NULL;
 }
 
-void fastestSearchToFile(NODE_BT *root, const char *searchInput, const char *filename){
+void BinaryTreeSearch(NODE_BT *root, const char *searchInput, const char *filename){
     if (root == NULL){
         printf("Puu on tyhjä\n");
         return;
