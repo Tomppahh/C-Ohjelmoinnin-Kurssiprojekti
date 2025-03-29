@@ -134,7 +134,7 @@ int main (void) {
                     printf("Anna etsittävä nimi tai numero: ");
                     fgets(searchTerm, sizeof(searchTerm), stdin);
                     searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
-                    BinaryTreeSearch(pStartTree, searchTerm);
+                    // BinaryTreeSearch(pStartTree, searchTerm);
                 } else if (iSubSelection == 6) {
                     printTree(pStartTree);
                 } else if (iSubSelection == 7) {

@@ -280,38 +280,38 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
     return NULL;
 }
 
-NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput){
-    NODE_BT *original = root;
-    if (root == NULL){
-        printf("Puu on tyhjä\n");
-        return NULL;
-    }
+// NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput){
+//     NODE_BT *original = root;
+//     if (root == NULL){
+//         printf("Puu on tyhjä\n");
+//         return NULL;
+//     }
 
-    // Check if the input is numeric
-    char *endPtr;
-    int number = strtol(searchInput, &endPtr, 10);
+//     // Check if the input is numeric
+//     char *endPtr;
+//     int number = strtol(searchInput, &endPtr, 10);
 
-    if (*endPtr != '\0'){ // if endPtr is anything else than null terminator, the input is not numeric.
-        printf("Virhe: Binääripuuhaku tukee vain numeroita.\n");
-        return NULL;
-    }
+//     if (*endPtr != '\0'){ // if endPtr is anything else than null terminator, the input is not numeric.
+//         printf("Virhe: Binääripuuhaku tukee vain numeroita.\n");
+//         return NULL;
+//     }
 
-    // Perform binary search
-    while (root != NULL){
-        if (number == root->iCount){
-            printf("Nopein haun tulos, löytetty alkio: %s, %d\n", getNames(root->pNameList), root->iCount);
-            root = original;
-            return NULL;
-        }
-        // Traverse left or right based on the comparison
-        // if number is smaller than root->iCount, root->left, else root->right.
-        root = (number < root->iCount) ? root->left : root->right;
-    }
-    // If not found tell the user about it. 
-    printf("Puussa ei ole arvoa '%d'.\n", number);
-    root = original;
-    return NULL;
-}
+//     // Perform binary search
+//     while (root != NULL){
+//         if (number == root->iCount){
+//             printf("Nopein haun tulos, löytetty alkio: %s, %d\n", getNames(root->pNameList), root->iCount);
+//             root = original;
+//             return NULL;
+//         }
+//         // Traverse left or right based on the comparison
+//         // if number is smaller than root->iCount, root->left, else root->right.
+//         root = (number < root->iCount) ? root->left : root->right;
+//     }
+//     // If not found tell the user about it. 
+//     printf("Puussa ei ole arvoa '%d'.\n", number);
+//     root = original;
+//     return NULL;
+// }
 
 void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename) {
     FILE *write = NULL;
