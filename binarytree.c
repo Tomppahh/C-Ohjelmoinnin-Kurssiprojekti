@@ -85,7 +85,6 @@ void writeFileTree(const char* filename, NODE_BT* root) {
     }
     writeTreeNodes(write,root);
     fclose(write);
-    free(write);
 } 
 
 // Asks the amount of nodes to be printed
