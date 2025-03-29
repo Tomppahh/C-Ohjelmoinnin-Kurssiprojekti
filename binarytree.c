@@ -497,7 +497,7 @@ int compareNodes(const void* a, const void* b) {
     NODE_BT* n1 = *(NODE_BT**)a;
     NODE_BT* n2 = *(NODE_BT**)b;
 
-    return n1->Insert - n2->iInsert;
+    return n1->iInsert - n2->iInsert;
 }
 
 // The main function that is called to balance a tree.
