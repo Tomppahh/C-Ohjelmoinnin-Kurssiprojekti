@@ -281,6 +281,7 @@ NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput)
 }
 
 NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput){
+    NODE_BT *original = root;
     if (root == NULL){
         printf("Puu on tyhjä\n");
         return NULL;
@@ -299,6 +300,7 @@ NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput){
     while (root != NULL){
         if (number == root->iCount){
             printf("Nopein haun tulos, löytetty alkio: %s, %d\n", getNames(root->pNameList), root->iCount);
+            root = original;
             return NULL;
         }
         // Traverse left or right based on the comparison
@@ -307,6 +309,7 @@ NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput){
     }
     // If not found tell the user about it. 
     printf("Puussa ei ole arvoa '%d'.\n", number);
+    root = original;
     return NULL;
 }
 
