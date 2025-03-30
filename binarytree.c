@@ -51,13 +51,13 @@ NODE_BT* buildFromFile(const char* filename) {
         char name[30];
         int number;
         if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode(root, name, number); // Change insertNode to insertNode_RBT or insertNode_AVL
+            root = insertNode_AVL(root, name, number); // Change insertNode to insertNode_RBT or insertNode_AVL
         } else {
             printf("Error: Invalid formatting in row\n");
         }
     }
     fclose(read);
-
+    /*
     int iNodeCount = countNodes(root);
     int iIndex = 0;
     NODE_BT* newRoot = NULL;
@@ -73,9 +73,9 @@ NODE_BT* buildFromFile(const char* filename) {
     for (int i = 0; i < iNodeCount; i++) {
         newRoot = insertNode_AVL(newRoot, NodeList[i]->pNameList->aName, NodeList[i]->iCount);
     }
-
+    */
     //root = balanceTree(root); // Balances the tree
-    return newRoot;
+    return root;
 }
 
 //Recursive function that helps with the writing process.
