@@ -4,10 +4,14 @@
 #include "binarytree.h"
 #include "namelist.h"
 
-// Lisää solmu AVL-puuhun
-NODE_BT* avlInsert(NODE_BT* node, const char* name, int number);
-
-// Poistaa solmun AVL-puusta
+int height(NODE_BT *node);
+int max(int a, int b);
+NODE_BT *rotateRight(NODE_BT *y);
+NODE_BT *rotateLeft(NODE_BT *x)
+int getBalance(NODE_BT *node);
+NODE_BT* createNode_AVL(const char* name, int number);
+NODE_BT* insertNode_AVL(NODE_BT* node, const char* name, int number);
+NODE_BT *minValueNode(NODE_BT* node);
 NODE_BT* avlRemove(NODE_BT* root, const char* searchInput);
 
 #endif

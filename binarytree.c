@@ -3,6 +3,7 @@
 #include <string.h>
 #include "binarytree.h"
 #include "namelist.h"
+#include "avl_tree.h"
 
 //Creates a new node in the binary tree
 NODE_BT* createTreeNode(const char* name, int number) {

@@ -12,7 +12,11 @@ int height(NODE_BT *node) {
 
 // palauttaa kahden kokonaisluvun maksimin
 int max(int a, int b) {
-    return (a > b) ? a : b;
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }    
 }
 
 NODE_BT *rotateRight(NODE_BT *y) {
