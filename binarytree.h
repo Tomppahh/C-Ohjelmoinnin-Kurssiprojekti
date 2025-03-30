@@ -4,7 +4,7 @@
 #define BINARYTREE_H
 
 #define LENGTH 30
-#define SPACING 4 // Can change the space between printed nodes
+#define SPACING 6 // Can change the space between printed nodes
 
 // typedef enum { RED, BLACK } COLOR;
 
