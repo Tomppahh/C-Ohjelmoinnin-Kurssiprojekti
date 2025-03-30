@@ -94,12 +94,106 @@ int main() {
     root = insertNode(root, "Eelis", 20);  // Should be right child
     root = insertNode(root, "Justus", 20); // Should be right child of Eelis
     root = insertNode(root, "Kalle", 20); // Should be right child of Justus
-    root = insertNode(root, "Kaijakoo", 15);  // Should be left child of Tuomas
+    root = insertNode(root, "Kaijakoo", 15);  // Should be left child of Kalle
     root = insertNode(root, "Kaija", 15);  // Should be right child of Kaijakoo
 
     // search with number 20 should return all the names with number 20, does nameList contain all names with number 20
     result = depthFirstSearch(root, "20");
-    
+    // WEEK 11 TESTS
+
+    // Test 1: BinaryTreeSearch function finds the first name with a value, there can be same values.
+    root = NULL;
+    root = insertNode(root, "Tuomas", 15);   // Root
+    root = insertNode(root, "Tommi", 10);    // Should be left child
+    root = insertNode(root, "Eelis", 20);    // Should be right child
+    root = insertNode(root, "Justus", 20);   // Should be right child of Eelis
+    root = insertNode(root, "Kalle", 20);    // Should be right child of Justus
+    root = insertNode(root, "Kaijakoo", 15); // Should be left child of Kalle
+    root = insertNode(root, "Kaija", 15);    // Should be right child of Kaijakoo
+    result =  BinaryTreeSearch(root, "20"); //  should return Eelis
+
+    // Test 2: BinaryTreeSearch search with a name, not a number, should tell user that isnt possible to search with name
+    root = NULL;
+    root = insertNode(root, "Tuomas", 15);   // Root
+    root = insertNode(root, "Tommi", 10);    // Should be left child
+    root = insertNode(root, "Eelis", 20);    // Should be right child
+    root = insertNode(root, "Justus", 20);   // Should be right child of Eelis
+    root = insertNode(root, "Kalle", 20);    // Should be right child of Justus
+    root = insertNode(root, "Kaijakoo", 15); // Should be left child of Kalle
+    root = insertNode(root, "Kaija", 15);    // Should be right child of Kaijakoo
+    result = BinaryTreeSearch(root, "Kalle"); // should tell user that cant find with name
+
+    // Test 3: RemoveNode function removes nodes from tree correctly.
+    root = NULL;
+    root = insertNode(root, "Tuomas", 15);    // Root
+    root = insertNode(root, "Tommi", 10);     // Should be left child
+    root = insertNode(root, "Eelis", 20);     // Should be right child
+    root = insertNode(root, "Justus", 20);    // Should be right child of Eelis
+    root = insertNode(root, "Kalle", 20);     // Should be right child of Justus
+    root = insertNode(root, "Kaijakoo", 15);  // Should be left child of Kalle
+    root = insertNode(root, "Kaija", 15);     // Should be right child of Kaijakoo
+    result = removeNode(root, "Kalle"); // delete Kalle node
+    result = depthFirstSearch(root, "Kalle");  // search for Kalle
+    runTest(&passed, &failed, result == NULL, "removeNode successfully removed 'Kalle' node");
+
+    // Test 4: BalanceTree function
+    printf("Testing balanceTree function...\n");
+
+    // First create a deliberately unbalanced tree (right-skewed)
+    root = NULL;
+    root = insertNode(root, "A", 10);
+    root = insertNode(root, "B", 20);
+    root = insertNode(root, "C", 30);
+    root = insertNode(root, "D", 40);
+    root = insertNode(root, "E", 50);
+    root = insertNode(root, "F", 60);
+
+    // Verify the tree is unbalanced (right-skewed) before balancing
+    int depthRight = 0;
+    NODE_BT *temp = root;
+    while (temp != NULL){
+        depthRight++;
+        temp = temp->right;
+    }
+    runTest(&passed, &failed, depthRight >= 5, "Created a right-skewed unbalanced tree for testing");
+
+    // Count nodes before balancing
+    int nodeCountBefore = countNodes(root);
+    // Apply balanceTree
+    NODE_BT *balancedRoot = balanceTree(root);
+    // Count nodes after balancing
+    int nodeCountAfter = countNodes(balancedRoot);
+    runTest(&passed, &failed, nodeCountBefore == nodeCountAfter,
+            "balanceTree preserves all nodes from original tree");
+
+    // Check if the balanced tree is more balanced by comparing depths
+    int leftDepth = 0;
+    int rightDepth = 0;
+    temp = balancedRoot;
+    while (temp != NULL){
+        leftDepth++;
+        temp = temp->left;
+    }
+    temp = balancedRoot;
+    while (temp != NULL){
+        rightDepth++;
+        temp = temp->right;
+    }
+    runTest(&passed, &failed, abs(leftDepth - rightDepth) <= 1,
+            "balanceTree creates a more balanced tree with similar left and right depths");
+
+    // Verify all values can still be found in the balanced tree
+    runTest(&passed, &failed, depthFirstSearch(balancedRoot, "10") != NULL,
+            "balanceTree preserves node with value 10");
+    runTest(&passed, &failed, depthFirstSearch(balancedRoot, "30") != NULL,
+            "balanceTree preserves node with value 30");
+    runTest(&passed, &failed, depthFirstSearch(balancedRoot, "60") != NULL,
+            "balanceTree preserves node with value 60");
+
+    // For a balanced tree with 6 nodes, the root should be near the median value
+    runTest(&passed, &failed,balancedRoot != NULL &&(balancedRoot->iCount == 30 || balancedRoot->iCount == 40),
+            "balanceTree places median value near root");
+
     // free memory
     freeTree(root);
     
