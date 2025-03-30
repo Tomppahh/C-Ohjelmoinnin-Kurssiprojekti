@@ -9,10 +9,10 @@ NODE_BT* createTreeNode(const char* name, int number) {
     NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
     NAME_LIST* nameList = createNameList(name, NULL);
     newNode->iCount = number;
-    newNode->color = RED; // New nodes are red
+    //newNode->color = RED; // New nodes are red
     newNode->left = NULL;
     newNode->right = NULL;
-    newNode->parent = NULL;
+    //newNode->parent = NULL;
     newNode->pNameList = nameList;
     return newNode;
 } 
@@ -50,7 +50,7 @@ NODE_BT* buildFromFile(const char* filename) {
         char name[30];
         int number;
         if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode_RBT(root, name, number); // Change insertNode to insertNode_RBT
+            root = insertNode_AVL(root, name, number); // Change insertNode to insertNode_RBT or insertNode_AVL
         } else {
             printf("Error: Invalid formatting in row\n");
         }
@@ -399,7 +399,7 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
     }
 }
 
-// Red-Black Tree. Didn't work with codegrade.
+/* Red-Black Tree. Didn't work with codegrade.
 void rotateLeft(NODE_BT** root, NODE_BT* x) {
     NODE_BT* y = x->right;
     x->right = y->left;
@@ -521,8 +521,9 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
     fixInsert(&root, newNode);
     return root;
 }
+*/
 
-
+/* Static rebuild. Didn't work entirely with Codegrade.
 // The main function that is called to balance a tree.
 NODE_BT* balanceTree(NODE_BT *root) {
     int iIndex = 0;
@@ -583,6 +584,10 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
 
     return root;
 }
+*/
+
+
+
 //Function to remove nodes from the tree
 NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
     if (root == NULL) {
