@@ -74,8 +74,8 @@ NODE_BT* createNode_AVL(const char* name, int number) {
 }
 
 // Adds node to tree
-NODE_BT* insertNode_AVL(NODE_BT* node, const char* name, int number) {
-    if (root==NULL) {
+NODE_BT* insertNode_AVL(NODE_BT* root, const char* name, int number) {
+    if (root == NULL) {
         return createNode_AVL(name,number);
     }
     if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
