@@ -61,7 +61,7 @@ NODE_BT* createNode_AVL(const char* name, int number) {
     NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
     if (newNode == NULL) {
         perror("Muistin varaus epäonnistui");
-        exit(EXIT_FAILURE);
+        exit(0);
     }
     newNode->pNameList = createNameList(name, NULL);
     newNode->iCount = number;
@@ -117,84 +117,4 @@ NODE_BT *minValueNode(NODE_BT* node) {
     while (current->left != NULL)
         current = current->left;
     return current;
-}
-
-// Can be used to delete nodes
-NODE_BT* avlRemove(NODE_BT* root, const char* searchInput) {
-    if (root == NULL)
-        return root;
-    
-    // Check if numeric
-    char* endPtr;
-    int number = strtol(searchInput, &endPtr, 10);
-    int isNumeric = (*endPtr == '\0');
-    
-    if (!isNumeric) {
-        printf("Virhe: AVL-puu tukee poistamista vain numeroilla.\n");
-        return root;
-    }
-    
-    // Standard deletion
-    if (number < root->iCount)
-        root->left = avlRemove(root->left, searchInput);
-    else if (number > root->iCount)
-        root->right = avlRemove(root->right, searchInput);
-    else {
-        // if node found
-        if ((root->left == NULL) || (root->right == NULL)) {
-            NODE_BT* temp = root->left ? root->left : root->right;
-            
-            // No child
-            if (temp == NULL) {
-                temp = root;
-                root = NULL;
-            } else {
-                // one child
-                *root = *temp;
-            }
-            freeNameList(temp);
-            free(temp);
-        } else {
-            // two child
-            NODE_BT* temp = minValueNode(root->right);
-            strcpy(root->pNameList->aName, temp->pNameList->aName);
-            root->iCount = temp->iCount;
-            char buffer[20];
-            sprintf(buffer, "%d", temp->iCount);
-            root->right = avlRemove(root->right, buffer);
-        }
-    }
-    
-    if (root == NULL)
-        return root;
-    
-    // Update height
-    root->height = 1 + max(height(root->left), height(root->right));
-    
-    // Calculate balance
-    int balance = getBalance(root);
-    
-    // Tasapainotus tapaukset:
-    
-    // Vasen vasen
-    if (balance > 1 && getBalance(root->left) >= 0)
-        return rotateRight(root);
-    
-    // Vasen oikea
-    if (balance > 1 && getBalance(root->left) < 0) {
-        root->left = rotateLeft(root->left);
-        return rotateRight(root);
-    }
-    
-    // Oikea oikea
-    if (balance < -1 && getBalance(root->right) <= 0)
-        return rotateLeft(root);
-    
-    // Oikea vasen
-    if (balance < -1 && getBalance(root->right) > 0) {
-        root->right = rotateRight(root->right);
-        return rotateLeft(root);
-    }
-    
-    return root;
 }
