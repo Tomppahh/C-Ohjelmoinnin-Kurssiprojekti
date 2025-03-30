@@ -46,8 +46,8 @@ int binaryTreeMenu (void) {
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
     printf("5) Binääripuuhaku\n");
-    printf("6) Tulosta puumaisessa muodossa\n");
-    printf("7) Poista arvo\n");
+    printf("6) Poista arvo\n");
+    printf("7) Tulosta puumaisessa muodossa\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
