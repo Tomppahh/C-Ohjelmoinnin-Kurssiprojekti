@@ -565,7 +565,7 @@ NODE_BT* balanceTree(NODE_BT *root) {
     free(NodeList);
     return (newRoot);
 }
-*/
+
 // Counts the number of nodes
 int countNodes(NODE_BT *root) {
     if(root == NULL) {
