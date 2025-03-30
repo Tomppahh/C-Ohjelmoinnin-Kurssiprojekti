@@ -60,6 +60,7 @@ NODE_BT* buildFromFile(const char* filename) {
 
     int iNodeCount = countNodes(root);
     int iIndex = 0;
+    NODE_BT* newRoot = NULL;
 
     NODE_BT **NodeList = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
     if (NodeList == NULL) {
