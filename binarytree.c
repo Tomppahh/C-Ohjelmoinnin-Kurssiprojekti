@@ -51,13 +51,13 @@ NODE_BT* buildFromFile(const char* filename) {
         char name[30];
         int number;
         if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode_AVL(root, name, number); // Change insertNode to insertNode_RBT or insertNode_AVL
+            root = insertNode(root, name, number); // Change insertNode to insertNode_RBT or insertNode_AVL
         } else {
             printf("Error: Invalid formatting in row\n");
         }
     }
     fclose(read);
-    /*
+    
     int iNodeCount = countNodes(root);
     int iIndex = 0;
     NODE_BT* newRoot = NULL;
@@ -73,7 +73,7 @@ NODE_BT* buildFromFile(const char* filename) {
     for (int i = 0; i < iNodeCount; i++) {
         newRoot = insertNode_AVL(newRoot, NodeList[i]->pNameList->aName, NodeList[i]->iCount);
     }
-    */
+    
     //root = balanceTree(root); // Balances the tree
     return root;
 }
@@ -578,10 +578,10 @@ void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
     if (root == NULL) {
         return;
     }
-    makeList(root->left, NodeList, iIndex); // Goes all the way to the right of the tree
+    makeList(root->right, NodeList, iIndex); // Goes all the way to the right of the tree
     NodeList[*iIndex] = root; // Adds the node to the list
     (*iIndex)++;
-    makeList(root->right, NodeList, iIndex); // Goes to the left node
+    makeList(root->left, NodeList, iIndex); // Goes to the left node
     return;
 }
 /*
