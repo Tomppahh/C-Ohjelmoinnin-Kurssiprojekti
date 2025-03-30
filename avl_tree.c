@@ -74,14 +74,14 @@ NODE_BT* createNode_AVL(const char* name, int number) {
 }
 
 // Adds node to tree
-NODE_BT* insertNode_AVL(NODE_BT* root, const char* name, int number) {
-    if (root == NULL) {
+NODE_BT* insertNode_AVL(NODE_BT* node, const char* name, int number) {
+    if (node == NULL) {
         return createNode_AVL(name,number);
     }
-    if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
-        root->left = insertNode_AVL(root->left, name, number);
+    if (number < node->iCount || (number == node->iCount && strcmp(name, node->pNameList->aName) < 0)) {
+        node->left = insertNode_AVL(node->left, name, number);
     } else {
-        root->right = insertNode_AVL(root->right, name, number);
+        node->right = insertNode_AVL(node->right, name, number);
     }
     
     // Updates height
