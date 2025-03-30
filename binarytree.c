@@ -75,6 +75,7 @@ NODE_BT* buildFromFile(const char* filename) {
     }
     
     //root = balanceTree(root); // Balances the tree
+    free(root);
     return newRoot;
 }
 
