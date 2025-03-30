@@ -77,7 +77,7 @@ NODE_BT* buildFromFile(const char* filename) {
 
     root = balanceTree(root); // Balances the tree
     // free(root);
-    return newRoot;
+    return root;
 }
 
 //Recursive function that helps with the writing process.
