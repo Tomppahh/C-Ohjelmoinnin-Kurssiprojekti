@@ -578,10 +578,10 @@ void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
     if (root == NULL) {
         return;
     }
-    makeList(root->right, NodeList, iIndex); // Goes all the way to the right of the tree
+    makeList(root->left, NodeList, iIndex); // Goes all the way to the right of the tree
     NodeList[*iIndex] = root; // Adds the node to the list
     (*iIndex)++;
-    makeList(root->left, NodeList, iIndex); // Goes to the left node
+    makeList(root->right, NodeList, iIndex); // Goes to the left node
     return;
 }
 /*
