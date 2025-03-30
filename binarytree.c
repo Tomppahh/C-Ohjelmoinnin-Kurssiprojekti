@@ -630,11 +630,26 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
                 parentOfSuccessor->right = removeNode(parentOfSuccessor->right, successor->pNameList->aName);
             }
         }
-    } else {
-        //traverse left or right subtree based on the input comparison
-        root->right = removeNode(root->right, searchInput);
-        root->left = removeNode(root->left, searchInput);
+    }
+    else {
+        // Traverse only one subtree based on comparison
+        if (isNumeric){
+            if (number < root->iCount){
+                root->left = removeNode(root->left, searchInput);
+            }
+            else {
+                root->right = removeNode(root->right, searchInput);
+            }
         }
+        else {
+            if (strcmp(searchInput, root->pNameList->aName) < 0) {
+                root->left = removeNode(root->left, searchInput);
+            }
+            else {
+                root->right = removeNode(root->right, searchInput);
+            }
+        }
+    }
     return root;
 }
 
