@@ -6,16 +6,16 @@
 #define LENGTH 30
 #define SPACING 15 // Can change the space between printed nodes
 
-// typedef enum { RED, BLACK } COLOR;
+typedef enum { RED, BLACK } COLOR;
 
 //defining a binary tree node
 typedef struct nodeTree {
     struct nameList *pNameList;
     int iCount;
-    // COLOR color;
+    COLOR color;
     struct nodeTree *left;
     struct nodeTree *right;
-    // struct nodeTree *parent;
+    struct nodeTree *parent;
 } NODE_BT;
 
 
@@ -35,12 +35,12 @@ NODE_BT *writeFileDFHelper(NODE_BT* root, const char* searchInput, FILE* write);
 void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename);
 NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput);
 
-/* Red-Black Tree. Didn't work with codegrade.
+// Red-Black Tree. Didn't work with codegrade.
 NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number);
 void fixInsert(NODE_BT** root, NODE_BT* z);
 void rotateRight(NODE_BT** root, NODE_BT* y);
 void rotateLeft(NODE_BT** root, NODE_BT* x);
-*/
+
 NODE_BT *removeNode(NODE_BT *root, const char *searchInput);
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
 void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
