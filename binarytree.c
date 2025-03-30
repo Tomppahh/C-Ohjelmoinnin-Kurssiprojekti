@@ -625,10 +625,14 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
             root->iCount = successor->iCount;
 
             if (parentOfSuccessor->left == successor) {
-                parentOfSuccessor->left = removeNode(parentOfSuccessor->left, successor->pNameList->aName);
-            } else {
-                parentOfSuccessor->right = removeNode(parentOfSuccessor->right, successor->pNameList->aName);
+                parentOfSuccessor->left = successor->right;
             }
+            else {
+                parentOfSuccessor->right = successor->right;
+            }
+
+            freeNameList(successor);
+            free(successor);
         }
     }
     else {
