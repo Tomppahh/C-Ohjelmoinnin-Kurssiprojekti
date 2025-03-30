@@ -10,7 +10,5 @@ NODE_BT *rotateLeft(NODE_BT *x);
 int getBalance(NODE_BT *node);
 NODE_BT* createNode_AVL(const char* name, int number);
 NODE_BT* insertNode_AVL(NODE_BT* node, const char* name, int number);
-NODE_BT *minValueNode(NODE_BT* node);
-NODE_BT* avlRemove(NODE_BT* root, const char* searchInput);
 
 #endif

@@ -112,11 +112,3 @@ NODE_BT* insertNode_AVL(NODE_BT* node, const char* name, int number) {
     
     return node;
 }
-
-// finds smallest node
-NODE_BT *minValueNode(NODE_BT* node) {
-    NODE_BT* current = node;
-    while (current->left != NULL)
-        current = current->left;
-    return current;
-}
