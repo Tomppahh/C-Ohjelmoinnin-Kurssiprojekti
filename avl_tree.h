@@ -1,8 +1,7 @@
 #ifndef AVL_TREE_H
 #define AVL_TREE_H
 
-#include "binarytree.h"
-#include "namelist.h"
+
 
 int height(NODE_BT *node);
 int max(int a, int b);

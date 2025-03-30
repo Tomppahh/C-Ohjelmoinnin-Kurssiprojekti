@@ -1,7 +1,9 @@
-#include "avl_tree.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "binarytree.h"
+#include "namelist.h"
+#include "avl_tree.h"
 
 // palauttaa solmun korkeuden
 int height(NODE_BT *node) {
