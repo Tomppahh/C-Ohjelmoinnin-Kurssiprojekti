@@ -57,7 +57,7 @@ NODE_BT* buildFromFile(const char* filename) {
         }
     }
     fclose(read);
-    
+    /*
     int iNodeCount = countNodes(root);
     int iIndex = 0;
     NODE_BT* newRoot = NULL;
@@ -73,9 +73,10 @@ NODE_BT* buildFromFile(const char* filename) {
     for (int i = 0; i < iNodeCount; i++) {
         newRoot = insertNode_AVL(newRoot, NodeList[i]->pNameList->aName, NodeList[i]->iCount);
     }
-    
-    //root = balanceTree(root); // Balances the tree
-    free(root);
+    */
+
+    root = balanceTree(root); // Balances the tree
+    // free(root);
     return newRoot;
 }
 
@@ -542,7 +543,7 @@ NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
 }
 */
 
-/* Static rebuild. Didn't work entirely with Codegrade.
+// Static rebuild. Didn't work entirely with Codegrade.
 // The main function that is called to balance a tree.
 NODE_BT* balanceTree(NODE_BT *root) {
     int iIndex = 0;
@@ -585,7 +586,7 @@ void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
     makeList(root->left, NodeList, iIndex); // Goes to the left node
     return;
 }
-/*
+
 // Use recursion to balance the tree based on the created list
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
     int iMiddle;
@@ -603,7 +604,7 @@ NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
 
     return root;
 }
-*/
+
 
 
 
