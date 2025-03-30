@@ -44,10 +44,12 @@ void rotateLeft(NODE_BT** root, NODE_BT* x);
 */
 
 NODE_BT *removeNode(NODE_BT *root, const char *searchInput);
+void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
+int countNodes(NODE_BT *root);
 
 /* Static rebuild. Didn't work entirely with CodeGrade.
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
-void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
+
 NODE_BT* balanceTree(NODE_BT *root);
 */
 
