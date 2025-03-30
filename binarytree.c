@@ -636,9 +636,9 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
         }
     }
     else {
-        // Traverse only one subtree based on comparison
+        // For numeric searches, traverse based on count comparison
         if (isNumeric){
-            if (number < root->iCount){
+            if (number < root->iCount) {
                 root->left = removeNode(root->left, searchInput);
             }
             else {
@@ -646,12 +646,9 @@ NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
             }
         }
         else {
-            if (strcmp(searchInput, root->pNameList->aName) < 0) {
-                root->left = removeNode(root->left, searchInput);
-            }
-            else {
-                root->right = removeNode(root->right, searchInput);
-            }
+            // For name searches, we must check both subtrees
+            root->left = removeNode(root->left, searchInput);
+            root->right = removeNode(root->right, searchInput);
         }
     }
     return root;
