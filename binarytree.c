@@ -58,6 +58,8 @@ NODE_BT* buildFromFile(const char* filename) {
     }
     fclose(read);
 
+    int iNodeCount = countNodes(root);
+
     NODE_BT **NodeList = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
     if (NodeList == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
@@ -559,7 +561,7 @@ NODE_BT* balanceTree(NODE_BT *root) {
     free(NodeList);
     return (newRoot);
 }
-
+*/
 // Counts the number of nodes
 int countNodes(NODE_BT *root) {
     if(root == NULL) {
@@ -568,7 +570,7 @@ int countNodes(NODE_BT *root) {
     // Use recursion to count all nodes from left and to right.
     return (1 + countNodes(root->left) + countNodes(root->right));
 } 
-*/
+
 // Use recursion to make a largest to smallest list
 void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
     if (root == NULL) {
