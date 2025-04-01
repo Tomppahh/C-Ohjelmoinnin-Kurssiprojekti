@@ -22,6 +22,7 @@ int GraphMenu(void){
 }
 
 void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
+                            // try except virheenkäsittelyn voisi lisätä vielä
     int iSelection;
 
     do {
