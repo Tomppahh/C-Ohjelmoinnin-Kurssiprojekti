@@ -8,6 +8,6 @@
 
 
 int GraphMenu(void);
-
+void graphMenuLogic(void);
 
 #endif

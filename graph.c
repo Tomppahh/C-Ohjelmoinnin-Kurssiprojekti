@@ -20,3 +20,37 @@ int GraphMenu(void){
     getchar();
     return iSelection;
 }
+
+void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
+    int iSelection;
+
+    do {
+        iSelection = GraphMenu();
+
+        if (iSelection == 0){
+            printf("Palataan päävalikkoon.\n");
+        }
+        else if (iSelection == 1){
+            // funktio 1
+        }
+        else if (iSelection == 2){
+            // funktio 2
+        }
+        else if (iSelection == 3){
+            // funktio 3
+        }
+        else if (iSelection == 4){
+            // funktio 4
+        }
+        else if (iSelection == 5){
+            // funktio 5
+        }
+        else if (iSelection == 6){
+            // funktio 6
+        }
+        else{
+            printf("Virheellinen valinta, yritä uudelleen.\n");
+        }
+
+    } while (iSelection != 0);
+}

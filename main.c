@@ -80,16 +80,13 @@ int main (void) {
                 if(iSubSelection == 1) {
                     filename(aReadName, "Anna luettavan tiedoston nimi: ");
                     pStartList = readFile(pStartList, aReadName);
-                    updatePreviousPointers(pStartList); // Update previous pointers
-        
+                    updatePreviousPointers(pStartList); // Update previous pointer
                 } else if (iSubSelection == 2) {
                     filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
                     writeFile(pStartList, aWriteName);
-        
                 } else if (iSubSelection == 3) {
                     filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
                     writeFileReverse(pStartList, aWriteName);
-        
                 } else if (iSubSelection == 4) {
                     pStartList = empty(pStartList);
                 } else if (iSubSelection == 5) {
