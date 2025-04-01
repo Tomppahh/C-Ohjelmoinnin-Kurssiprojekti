@@ -1,6 +1,6 @@
 # Main project files
-projekti: main.o linkedlist.o binarytree.o namelist.o avl_tree.o
-	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o avl_tree.o
+projekti: main.o linkedlist.o binarytree.o namelist.o avl_tree.o graph.o
+	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o avl_tree.o graph.o
 
 main.o: main.c linkedlist.h
 	gcc -c main.c -std=c99 -pedantic -Wall
@@ -17,6 +17,9 @@ namelist.o: namelist.c namelist.h
 avl_tree.o: avl_tree.c avl_tree.h
 	gcc -c avl_tree.c -std=c99 -pedantic -Wall
 
+graph.o: graph.c graph.h
+	gcc -c graph.c -std=c99 -pedantic -Wall
+
 # Test files
 test_sorting: test_sorting.o linkedlist.o
 	gcc -o test_sorting test_sorting.o linkedlist.o
@@ -30,8 +33,16 @@ binary_tree_tests: binary_tree_tests.o binarytree.o linkedlist.o
 binary_tree_tests.o: binary_tree_tests.c binarytree.h linkedlist.h
 	gcc -c binary_tree_tests.c -std=c99 -pedantic -Wall
 
-test: test_sorting binary_tree_tests
+graph_tests: graph_tests.o graph.o linkedlist.o
+	gcc -o graph_tests graph_tests.o graph.o linkedlist.o
+
+graph_tests.o: graph_tests.c graph.h linkedlist.h
+	gcc -c graph_tests.c -std=c99 -pedantic -Wall
+
+test: test_sorting binary_tree_tests graph_tests
 	@echo "Running test_sorting:"
 	./test_sorting
 	@echo "Running binary_tree_tests:"
 	./binary_tree_tests
+	@echo "Running graph_tests:"
+	./graph_tests

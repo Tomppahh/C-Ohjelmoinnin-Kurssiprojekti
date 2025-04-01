@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 #include "binarytree.h"
+#include "graph.h"
 #include <locale.h>
 
 //Function displaying the mainmenu
@@ -11,6 +12,7 @@ int mainMenu (void) {
     printf("Valitse käsiteltävä tietorakenne:\n");
     printf("1) Linkitetty lista\n");
     printf("2) Binääripuu\n");
+    printf("3) Graafiverkko\n");
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
@@ -150,7 +152,9 @@ int main (void) {
                 }
 
             } while (iSubSelection != 0);
-
+        }
+        else if (iMainSelection == 3){
+            GraphMenu();
         } else if (iMainSelection == 0) {
             printf("Lopetetaan.\n");
         } else {

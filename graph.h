@@ -1,1 +1,13 @@
-// New file for week 12 header
+// graph.h
+
+#ifndef GRAPH_H
+#define GRAPH_H
+
+#define LENGTH 30
+#define SPACING 15
+
+
+int GraphMenu(void);
+
+
+#endif
