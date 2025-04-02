@@ -115,7 +115,7 @@ NODE_G* createGraphNode(NODE_G **nodeList, const char *aName) {
         exit(0);
     }
 
-    strcpy(newNode->aSource, name);
+    strcpy(newNode->aSource, aName);
     newNode->edges = NULL;
     newNode->next = *nodeList;
     *nodeList = newNode;
