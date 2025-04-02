@@ -8,13 +8,12 @@
 int GraphMenu(void){
     int iSelection = 0;
     printf("\n");
-    printf("Valitse haluamasi toiminto (binääripuu):\n");
+    printf("Valitse haluamasi toiminto (graafi):\n");
     printf("1) Lue tiedosto\n");
-    printf("2) X\n");
-    printf("3) X\n");
-    printf("4) X\n");
-    printf("5) X\n");
-    printf("6) X\n");
+    printf("2) Lisää/päivitä kaari\n");
+    printf("3) Poista solmu\n");
+    printf("4) Etsi lyhin reitti\n");
+    printf("5) Joku muu hieno toiminto\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iSelection);
@@ -36,25 +35,16 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
         else if (iSelection == 1){
             fileName(aReadName, "Anna luettavan tiedoston nimi: ");
             nodeList = buildGraphFromFile(nodeList, aReadName);
-        }
-        else if (iSelection == 2){
-            
+        } else if (iSelection == 2){
             // funktio 2
-        }
-        else if (iSelection == 3){
+        } else if (iSelection == 3){
             // funktio 3
-        }
-        else if (iSelection == 4){
+        } else if (iSelection == 4){
             // funktio 4
-        }
-        else if (iSelection == 5){
+        } else if (iSelection == 5){
             printGraph(nodeList);
             // funktio 5
-        }
-        else if (iSelection == 6){
-            // funktio 6
-        }
-        else{
+        } else{
             printf("Virheellinen valinta, yritä uudelleen.\n");
         }
 
