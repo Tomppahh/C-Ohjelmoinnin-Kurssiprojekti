@@ -22,7 +22,7 @@ int GraphMenu(void);
 void graphMenuLogic(void);
 void fileName(char *pFileName, char *pSentence);
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile);
-NODE_G* createNode(NODE_G *nodeList, const char *name);
+NODE_G* createGraphNode(NODE_G *nodeList, const char *name);
 void addEdge(NODE_G *node, const char *aDest, int iDist);
 void printGraph(nodeList);
 
