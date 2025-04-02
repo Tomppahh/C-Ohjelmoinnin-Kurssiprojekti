@@ -24,20 +24,18 @@ int main() {
     NODE_G *nodeList = NULL; // Make a list
 
     // Test 1: Create node "A"
-    NODE_G *nodeA = createGraphNode(nodeList, "A");
-    nodeList = nodeA; // Päivitetään listan osoitin
+    NODE_G *nodeA = createGraphNode(&nodeList, "A");
     runTest(&passed, &failed, nodeA != NULL, "Solmun 'A' luonti palauttaa ei-NULL osoittimen");
     runTest(&passed, &failed, strcmp(nodeA->aSource, "A") == 0, "Solmun 'A' aSource on 'A'");
     runTest(&passed, &failed, nodeA->edges == NULL, "Solmulla 'A':lla ei ole reunoja aluksi");
 
     // Test 2: Create second node "B"
-    NODE_G *nodeB = createGraphNode(nodeList, "B");
-    nodeList = nodeB; // Update pointer
+    NODE_G *nodeB = createGraphNode(&nodeList, "B");
     runTest(&passed, &failed, nodeB != NULL, "Solmun 'B' luonti palauttaa ei-NULL osoittimen");
     runTest(&passed, &failed, strcmp(nodeB->aSource, "B") == 0, "Solmun 'B' aSource on 'B'");
 
     // Test 3: Try to recreate A. Expect it to find the already existing one.
-    NODE_G *nodeA2 = createGraphNode(nodeList, "A");
+    NODE_G *nodeA2 = createGraphNode(&nodeList, "A");
     runTest(&passed, &failed, nodeA2 == nodeA, "Duplikaattisolmua 'A' ei luoda, vaan palautetaan olemassa oleva");
 
     // Test 4: Add edge to node A
