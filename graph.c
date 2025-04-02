@@ -62,6 +62,7 @@ void fileName(char *pFileName, char *pSentence) {
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     FILE *Read = NULL;
     NODE_G *sourceNode = NULL;
+    char *sourceName, *destName;
     char aRow[ROW], *p1=NULL,*p2=NULL, *p3=NULL;
     if ((Read = fopen(aFile, "r")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
@@ -81,6 +82,16 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
         }
         if ((p3 = strtok(NULL, "\n")) == NULL) {
             printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan", aRow);
+            exit(0);
+        }
+
+        if ((sourceName = (char*)malloc(sizeof(p1))) == NULL) {
+            perror("Muistin varaus epäonnistui, lopetetaan");
+            exit(0);
+        }
+
+        if ((newNode = (char*)malloc(sizeof(p2))) == NULL) {
+            perror("Muistin varaus epäonnistui, lopetetaan");
             exit(0);
         }
 
@@ -108,7 +119,7 @@ NODE_G* createGraphNode(NODE_G **nodeList, const char *aName) {
         exit(0);
     }
 
-    newNode->aSource = strdup(aName);
+    newNode->aSource = strcpy(aName);
     newNode->edges = NULL;
     newNode->next = *nodeList;
     *nodeList = newNode;
@@ -121,7 +132,7 @@ void addEdge(NODE_G *node, const char *aDest, int iDist) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
-    newEdge->aDestination = strdup(aDest);
+    newEdge->aDestination = strcpy(aDest);
     newEdge->iDistance = iDist;
     newEdge->next = node->edges;
     node->edges = newEdge;
