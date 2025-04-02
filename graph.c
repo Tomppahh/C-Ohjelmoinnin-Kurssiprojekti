@@ -92,11 +92,11 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     return (nodeList);
 }
 
-NODE_G* createGraphNode(NODE_G **nodeList, const char *name) {
+NODE_G* createGraphNode(NODE_G **nodeList, const char *aName) {
     NODE_G *current = *nodeList;
     // Goes through the graph and finds if node with the same name exists
     while (current != NULL) {
-        if (strcmp(current->aSource, name) == 0)
+        if (strcmp(current->aSource, aName) == 0)
             return current;
         current = current->next;
     }
@@ -108,7 +108,7 @@ NODE_G* createGraphNode(NODE_G **nodeList, const char *name) {
         exit(0);
     }
 
-    newNode->aSource = name;
+    newNode->aSource = strdup(aName);
     newNode->edges = NULL;
     newNode->next = *nodeList;
     *nodeList = newNode;
@@ -121,7 +121,7 @@ void addEdge(NODE_G *node, const char *aDest, int iDist) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
-    newEdge->aDestination = aDest;
+    newEdge->aDestination = strdup(aDest);
     newEdge->iDistance = iDist;
     newEdge->next = node->edges;
     node->edges = newEdge;
