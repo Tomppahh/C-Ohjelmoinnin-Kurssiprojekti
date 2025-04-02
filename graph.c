@@ -38,7 +38,6 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
             nodeList = buildGraphFromFile(nodeList, aReadName);
         }
         else if (iSelection == 2){
-            printGraph(nodeList);
             // funktio 2
         }
         else if (iSelection == 3){
@@ -92,7 +91,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
             exit(0);
         }
 
-        sourceNode = createGraphNode(p1);
+        sourceNode = createGraphNode(nodeList, p1);
         addEdge(sourceNode, p2, atoi(p3));
 
     }
@@ -101,7 +100,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
 }
 
 NODE_G* createGraphNode(NODE_G *nodeList, const char *name) {
-    Node *current = nodeList;
+    NODE_G *current = nodeList;
     // Goes through the graph and finds if node with the same name exists
     while (current) {
         if (strcmp(current->aSource, name) == 0)
@@ -110,13 +109,13 @@ NODE_G* createGraphNode(NODE_G *nodeList, const char *name) {
     }
 
     // Node was not found so create new one.
-    NODE_G newNode = NULL;
+    NODE_G *newNode = NULL;
     if ((newNode = (NODE_G*)malloc(sizeof(NODE_G))) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
 
-    newNode->aSource = strdup(name);
+    newNode->aSource = strcpy(name);
     newNode->edges = NULL;
     newNode->next = nodeList;
     nodeList = newNode;
@@ -129,23 +128,9 @@ void addEdge(NODE_G *node, const char *aDest, int iDist) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
-    newEdge->aDestination = strdup(aDest);
+    newEdge->aDestination = strcpy(aDest);
     newEdge->iDistance = iDist;
     newEdge->next = node->edges;
     node->edges = newEdge;
-    return;
-}
-
-void printGraph(nodeList) {
-    NODE_G *node = nodeList;
-    while (node) {
-        printf("Node %s:\n", node->aSource);
-        EDGE *edge = node->edges;
-        while (edge) {
-            printf("  -> %s (distance: %d)\n", edge->aDestination, edge->iDistance);
-            edge = edge->next;
-        }
-        node = node->next;
-    }
     return;
 }
