@@ -61,7 +61,8 @@ void fileName(char *pFileName, char *pSentence) {
 
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     FILE *Read = NULL;
-    NODE_G *sourceNode = NULL;
+    NODE_G *sourceNode = NULL, destNode = NULL;
+    int iDist;
     char aRow[ROW], *p1=NULL,*p2=NULL, *p3=NULL;
     if ((Read = fopen(aFile, "r")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
@@ -84,11 +85,13 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
             exit(0);
         }
 
-        
+        iDist = atoi(p3);
 
         sourceNode = createGraphNode(&nodeList, p1);
-        addEdge(sourceNode, p2, atoi(p3));
-
+        destNode = createGraphNode(&nodeList, p2);
+        // Make the edge go both ways.
+        addEdge(sourceNode, p2, iDist); // A -> B
+        addEdge(sourceNode, p2, iDist); // B -> A
     }
     fclose(Read);
     return (nodeList);
