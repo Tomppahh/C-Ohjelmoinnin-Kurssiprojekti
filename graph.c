@@ -1,8 +1,8 @@
+// graph.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "graph.h"
-// New file for week 12
 
 // Function displaying the binarytree menu
 int GraphMenu(void){

@@ -7,15 +7,15 @@
 
 
 typedef struct edge {
-    char *aDestination;
+    const char *aDestination;
     int iDistance;
-    struct EDGE *next;
+    struct edge *next;
 } EDGE;
 
 typedef struct nodeGraph {
-    char *aSource;
+    const char *aSource;
     EDGE *edges;
-    struct NODE_G *next;
+    struct nodeGraph *next;
 } NODE_G;
 
 
