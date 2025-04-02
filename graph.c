@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "graph.h"
 // New file for week 12
 
 // Function displaying the binarytree menu
@@ -66,7 +67,7 @@ void fileName(char *pFileName, char *pSentence) {
     return;
 }
 
-NODE_G* buildGraphFromFile (NODE *nodeList, const char *aFile) {
+NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     FILE *Read = NULL;
     NODE_G *sourceNode = NULL;
     char aRow[LENGTH], *p1=NULL,*p2=NULL, *p3=NULL;
@@ -99,7 +100,7 @@ NODE_G* buildGraphFromFile (NODE *nodeList, const char *aFile) {
     return (nodeList);
 }
 
-NODE* createNode(NODE *nodeList, const char *name) {
+NODE* createNode(NODE_G *nodeList, const char *name) {
     Node *current = nodeList;
     // Goes through the graph and finds if node with the same name exists
     while (current) {
@@ -122,7 +123,7 @@ NODE* createNode(NODE *nodeList, const char *name) {
     return newNode;
 }
 
-void addEdge(NODE_g *node, const char *aDest, int iDist) {
+void addEdge(NODE_G *node, const char *aDest, int iDist) {
     EDGE *newEdge = NULL;
     if ((newEdge = (EDGE*)malloc(sizeof(EDGE))) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
