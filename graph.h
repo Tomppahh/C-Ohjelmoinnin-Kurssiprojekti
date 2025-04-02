@@ -8,13 +8,13 @@
 
 
 typedef struct edge {
-    const char *aDestination;
+    char *aDestination;
     int iDistance;
     struct edge *next;
 } EDGE;
 
 typedef struct nodeGraph {
-    const char *aSource;
+    char *aSource;
     EDGE *edges;
     struct nodeGraph *next;
 } NODE_G;

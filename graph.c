@@ -110,7 +110,7 @@ NODE_G* createGraphNode(NODE_G **nodeList, const char *aName) {
         exit(0);
     }
 
-    if ((newNode->aSource = (char*)malloc(strlen(name)+1)) == NULL) {
+    if ((newNode->aSource = (char*)malloc(strlen(aName)+1)) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
