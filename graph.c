@@ -84,7 +84,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
             exit(0);
         }
 
-        sourceNode = createGraphNode(nodeList, p1);
+        sourceNode = createGraphNode(&nodeList, p1);
         addEdge(sourceNode, p2, atoi(p3));
 
     }
