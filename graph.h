@@ -15,6 +15,7 @@ typedef struct edge {
 typedef struct nodeGraph {
     char *aSource;
     EDGE *edges;
+    struct NODE_G *next;
 } NODE_G;
 
 

@@ -115,7 +115,7 @@ NODE_G* createGraphNode(NODE_G *nodeList, const char *name) {
         exit(0);
     }
 
-    newNode->aSource = strcpy(name);
+    newNode->aSource = name;
     newNode->edges = NULL;
     newNode->next = nodeList;
     nodeList = newNode;
@@ -128,7 +128,7 @@ void addEdge(NODE_G *node, const char *aDest, int iDist) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
-    newEdge->aDestination = strcpy(aDest);
+    newEdge->aDestination = aDest;
     newEdge->iDistance = iDist;
     newEdge->next = node->edges;
     node->edges = newEdge;
