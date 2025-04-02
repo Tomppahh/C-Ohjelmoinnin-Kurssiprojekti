@@ -1,0 +1,6 @@
+Solmu1;Solmu2;Solmujen välinen etäisyys
+A;B;10
+A;D;2
+B;C;5
+B;E;3
+D;E;4

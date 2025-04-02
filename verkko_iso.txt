@@ -1,0 +1,19 @@
+Yliopisto1;Yliopisto2;Etäisyys
+LUT-yliopisto;Itä-Suomen yliopisto;245
+LUT-yliopisto;Jyväskylän yliopisto;224
+LUT-yliopisto;Helsingin yliopisto;223
+Aalto-yliopisto;Helsingin yliopisto;10
+Aalto-yliopisto;Turun yliopisto;159
+Aalto-yliopisto;Svenska handelshögskolan;8
+Helsingin yliopisto;Maanpuolustuskorkeakoulu;11
+Helsingin yliopisto;Svenska handelshögskolan;2
+Helsingin yliopisto;Taideyliopisto;2
+Itä-Suomen yliopisto;Jyväskylän yliopisto;247
+Itä-Suomen yliopisto;Oulun yliopisto;400
+Jyväskylän yliopisto;Tampereen yliopisto;150
+Lapin yliopisto;Oulun yliopisto;216
+Oulun yliopisto;Vaasan yliopisto;327
+Svenska handelshögskolan;Åbo Akademi;167
+Tampereen yliopisto;Turun yliopisto;166
+Turun yliopisto;Åbo Akademi;1
+Vaasan yliopisto;Tampereen yliopisto;243
