@@ -31,8 +31,7 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
 
         if (iSelection == 0){
             printf("Palataan päävalikkoon.\n");
-        }
-        else if (iSelection == 1){
+        } else if (iSelection == 1){
             fileName(aReadName, "Anna luettavan tiedoston nimi: ");
             nodeList = buildGraphFromFile(nodeList, aReadName);
         } else if (iSelection == 2){
@@ -49,6 +48,8 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
         }
 
     } while (iSelection != 0);
+
+    return;
 }
 
 void fileName(char *pFileName, char *pSentence) {
