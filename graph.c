@@ -26,7 +26,7 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
                             // try except virheenkäsittelyn voisi lisätä vielä
     NODE_G *nodeList = NULL;
     int iSelection;
-    char aReadName[LENGTH], aWriteName[LENGTH];
+    char aReadName[LENGTH];
     do {
         iSelection = GraphMenu();
 
@@ -71,14 +71,14 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     FILE *Read = NULL;
     NODE_G *sourceNode = NULL;
     char aRow[LENGTH], *p1=NULL,*p2=NULL, *p3=NULL;
-    if (fopen(Read, "r") == NULL) {
+    if ((Read = fopen(aFile, "r")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
         exit(0);
     }
 
     fgets(aRow,LENGTH,Read); // Delete header
 
-    while ((fgets(aRow,LENTH,Read)) != NULL) {
+    while ((fgets(aRow,LENGTH,Read)) != NULL) {
         if ((p1 = strtok(aRow, ";")) == NULL) {
             printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan", aRow);
             exit(0);
@@ -92,7 +92,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
             exit(0);
         }
 
-        sourceNode = CreateGraphNode(p1);
+        sourceNode = createGraphNode(p1);
         addEdge(sourceNode, p2, atoi(p3));
 
     }
@@ -100,7 +100,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     return (nodeList);
 }
 
-NODE* createGraphNode(NODE *nodeList, const char *name) {
+NODE_G* createGraphNode(NODE_G *nodeList, const char *name) {
     Node *current = nodeList;
     // Goes through the graph and finds if node with the same name exists
     while (current) {
@@ -137,12 +137,12 @@ void addEdge(NODE_G *node, const char *aDest, int iDist) {
 }
 
 void printGraph(nodeList) {
-    Node *node = nodeList;
+    NODE_G *node = nodeList;
     while (node) {
-        printf("Node %s:\n", node->name);
-        Edge *edge = node->edges;
+        printf("Node %s:\n", node->aSource);
+        EDGE *edge = node->edges;
         while (edge) {
-            printf("  -> %s (distance: %d)\n", edge->destName, edge->distance);
+            printf("  -> %s (distance: %d)\n", edge->aDestination, edge->iDistance);
             edge = edge->next;
         }
         node = node->next;
