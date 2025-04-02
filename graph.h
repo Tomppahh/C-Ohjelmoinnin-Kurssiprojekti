@@ -20,5 +20,10 @@ typedef struct nodeGraph {
 
 int GraphMenu(void);
 void graphMenuLogic(void);
+void fileName(char *pFileName, char *pSentence);
+NODE_G* buildGraphFromFile (NODE *nodeList, const char *aFile);
+NODE* createNode(NODE *nodeList, const char *name);
+void addEdge(NODE_g *node, const char *aDest, int iDist);
+void printGraph(nodeList);
 
 #endif
