@@ -21,6 +21,11 @@ typedef struct nodeGraph {
 int GraphMenu(void);
 void graphMenuLogic(void);
 void fileName(char *pFileName, char *pSentence);
+<<<<<<< HEAD
+NODE_G* buildGraphFromFile (NODE *nodeList, const char *aFile);
+NODE* createGraphNode(NODE *nodeList, const char *name);
+void addEdge(NODE_g *node, const char *aDest, int iDist);
+=======
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile);
 NODE_G* createNode(NODE_G *nodeList, const char *name);
 void addEdge(NODE_G *node, const char *aDest, int iDist);

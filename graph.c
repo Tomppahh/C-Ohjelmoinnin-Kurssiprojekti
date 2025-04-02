@@ -92,7 +92,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
             exit(0);
         }
 
-        sourceNode = findOrCreateNode(p1);
+        sourceNode = CreateGraphNode(p1);
         addEdge(sourceNode, p2, atoi(p3));
 
     }
@@ -100,7 +100,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     return (nodeList);
 }
 
-NODE* createNode(NODE_G *nodeList, const char *name) {
+NODE* createGraphNode(NODE *nodeList, const char *name) {
     Node *current = nodeList;
     // Goes through the graph and finds if node with the same name exists
     while (current) {
