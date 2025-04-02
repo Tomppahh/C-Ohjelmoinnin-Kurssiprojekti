@@ -38,6 +38,7 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
             nodeList = buildGraphFromFile(nodeList, aReadName);
         }
         else if (iSelection == 2){
+            
             // funktio 2
         }
         else if (iSelection == 3){
@@ -47,6 +48,7 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
             // funktio 4
         }
         else if (iSelection == 5){
+            printGraph(nodeList);
             // funktio 5
         }
         else if (iSelection == 6){
@@ -133,4 +135,24 @@ void addEdge(NODE_G *node, const char *aDest, int iDist) {
     newEdge->next = node->edges;
     node->edges = newEdge;
     return;
+}
+
+void printGraph(const NODE_G *nodeList) {
+    const NODE_G *currentNode = nodeList;
+    while (currentNode != NULL) {
+        printf("Solmu: %s\n", currentNode->aSource);
+        
+        // Tulostetaan solmun reunat, jos niitä on
+        EDGE *currentEdge = currentNode->edges;
+        if (currentEdge == NULL) {
+            printf("  (Ei reunoja)\n");
+        } else {
+            while (currentEdge != NULL) {
+                printf("   -> %s (Etäisyys: %d)\n", currentEdge->aDestination, currentEdge->iDistance);
+                currentEdge = currentEdge->next;
+            }
+        }
+        printf("\n");
+        currentNode = currentNode->next;
+    }
 }
