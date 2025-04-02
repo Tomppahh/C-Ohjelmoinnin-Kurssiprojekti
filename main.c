@@ -151,7 +151,7 @@ int main (void) {
             } while (iSubSelection != 0);
         }
         else if (iMainSelection == 3){
-            GraphMenu();
+            graphMenuLogic();
         } else if (iMainSelection == 0) {
             printf("Lopetetaan.\n");
         } else {

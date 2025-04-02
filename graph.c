@@ -4,7 +4,7 @@
 #include <string.h>
 #include "graph.h"
 
-// Function displaying the binarytree menu
+// Function displaying the graph menu
 int GraphMenu(void){
     int iSelection = 0;
     printf("\n");
@@ -43,7 +43,7 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
         } else if (iSelection == 5){
             printGraph(nodeList);
             // funktio 5
-        } else{
+        } else {
             printf("Virheellinen valinta, yritä uudelleen.\n");
         }
 
