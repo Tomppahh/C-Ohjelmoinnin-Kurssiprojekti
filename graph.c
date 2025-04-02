@@ -92,7 +92,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
         destNode = createGraphNode(&nodeList, p2);
         // Make the edge go both ways.
         addEdge(sourceNode, p2, iDist); // A -> B
-        addEdge(sourceNode, p2, iDist); // B -> A
+        addEdge(destNode, p1, iDist); // B -> A
     }
     fclose(Read);
     return (nodeList);
