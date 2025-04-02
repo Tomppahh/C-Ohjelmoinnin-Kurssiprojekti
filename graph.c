@@ -62,7 +62,7 @@ void fileName(char *pFileName, char *pSentence) {
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     FILE *Read = NULL;
     NODE_G *sourceNode = NULL;
-    NODE_G *destNode = NULL
+    NODE_G *destNode = NULL;
     int iDist;
     char aRow[ROW], *p1=NULL,*p2=NULL, *p3=NULL;
     if ((Read = fopen(aFile, "r")) == NULL) {
