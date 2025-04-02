@@ -4,6 +4,7 @@
 #define GRAPH_H
 
 #define LENGTH 30
+#define ROW 60
 
 
 typedef struct edge {

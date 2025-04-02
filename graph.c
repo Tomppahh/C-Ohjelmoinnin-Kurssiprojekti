@@ -62,15 +62,15 @@ void fileName(char *pFileName, char *pSentence) {
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     FILE *Read = NULL;
     NODE_G *sourceNode = NULL;
-    char aRow[LENGTH], *p1=NULL,*p2=NULL, *p3=NULL;
+    char aRow[ROW], *p1=NULL,*p2=NULL, *p3=NULL;
     if ((Read = fopen(aFile, "r")) == NULL) {
         perror("Tiedoston avaaminen epäonnistui, lopetetaan.");
         exit(0);
     }
 
-    fgets(aRow,LENGTH,Read); // Delete header
+    fgets(aRow,ROW,Read); // Delete header
 
-    while ((fgets(aRow,LENGTH,Read)) != NULL) {
+    while ((fgets(aRow,ROW,Read)) != NULL) {
         if ((p1 = strtok(aRow, ";")) == NULL) {
             printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan", aRow);
             exit(0);
