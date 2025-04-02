@@ -92,7 +92,7 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     return (nodeList);
 }
 
-NODE_G* createGraphNode(NODE_G *nodeList, const char *name) {
+NODE_G* createGraphNode(NODE_G **nodeList, const char *name) {
     NODE_G *current = nodeList;
     // Goes through the graph and finds if node with the same name exists
     while (current) {
@@ -146,4 +146,5 @@ void printGraph(const NODE_G *nodeList) {
         printf("\n");
         currentNode = currentNode->next;
     }
+    return;
 }
