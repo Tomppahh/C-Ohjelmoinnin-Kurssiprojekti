@@ -53,6 +53,14 @@ int main() {
     runTest(&passed, &failed, nodeA->edges->next != NULL, "Solmulla 'A' on nyt vähintään kaksi reunaa");
     runTest(&passed, &failed, strcmp(nodeA->edges->next->aDestination, "B") == 0, "Toisena reunana solmussa 'A' tulee olla 'B'");
 
+    // Test 6: Remove node B
+    removeGraphNode(&nodeList, "B");
+    runTest(&passed, &failed, nodeList->next == NULL, "Solmu 'B' pitäisi olla poistunut graafista");
+    
+    // Test 7: Attempt to remove non-existing node
+    removeGraphNode(&nodeList, "D");
+    runTest(&passed, &failed, 1, "Yritettiin poistaa solmua 'D' jota ei ole olemassa, eikä virhettä tapahtunut");
+
     printf("\nSummary: %d tests passed, %d tests failed\n", passed, failed);
     return 0;
 }

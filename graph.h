@@ -27,5 +27,6 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile);
 NODE_G* createGraphNode(NODE_G **nodeList, const char *name);
 void addEdge(NODE_G *node, const char *aDest, int iDist);
 void printGraph(const NODE_G *nodeList);
+void removeGraphNode(NODE_G **nodeList, const char *aName);
 
 #endif
