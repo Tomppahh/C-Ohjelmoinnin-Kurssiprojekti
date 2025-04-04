@@ -104,7 +104,15 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
         }
 
         // copy the current nodes name to the newEntry
-        newEntry->aCurrent = strdup(current->aSource);
+        newEntry->aCurrent = malloc(strlen(current->aSource) + 1);
+        if (newEntry->aCurrent){
+            strcpy(newEntry->aCurrent, current->aSource);
+        }
+        else{
+            perror("Memory allocation failed");
+            free(newEntry);
+            exit(1);
+        }
         if (!newEntry->aCurrent){
             perror("Memory allocation failed");
             free(newEntry);
@@ -118,8 +126,9 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
             exit(1);
         }
 
-        
+
     }
+    return *graph;
 }
 
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
