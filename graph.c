@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "graph.h"
-
+#define MAX_FILENAME 256
 // Function displaying the graph menu
 int GraphMenu(void){
     int iSelection = 0;
@@ -40,6 +40,13 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
             fileName(aReadName, "Anna poistettava solmu: ");
             removeGraphNode(&nodeList, aReadName);
         } else if (iSelection == 4){
+            char startNode[2], goalNode[2];
+            char *pathFile = firstTimeAskName(NULL);
+            printf("Anna lähtösolmu: ");
+            scanf("%2s", startNode);
+            getchar();
+            printf("Anna kohdesolmu: ");
+            scanf("%2s", goalNode);
             // funktio 4
         } else if (iSelection == 5){
             printGraph(nodeList);
@@ -58,6 +65,28 @@ void fileName(char *pFileName, char *pSentence) {
     scanf("%s", pFileName);
     getchar();
     return;
+}
+
+char *firstTimeAskName(const char *aFileName){
+    static int file_asked = 0;
+    static char filename[MAX_FILENAME] = {0};
+
+    if (!file_asked){ // if filename hasn't been asked, use fileName function
+        if (aFileName != NULL){
+            // Just use the provided filename directly
+            strncpy(filename, aFileName, MAX_FILENAME - 1);
+            filename[MAX_FILENAME - 1] = '\0'; // Ensure null termination
+        }
+        else{
+            // Ask user for filename directly
+            char temp[MAX_FILENAME];
+            fileName(temp, "Anna reittitiedoston nimi: ");
+            strncpy(filename, temp, MAX_FILENAME - 1);
+            filename[MAX_FILENAME - 1] = '\0';
+        }
+        file_asked = 1;
+    }
+    return filename;
 }
 
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
@@ -98,6 +127,8 @@ NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {
     fclose(Read);
     return (nodeList);
 }
+
+
 
 NODE_G* createGraphNode(NODE_G **nodeList, const char *aName) {
     NODE_G *current = *nodeList;

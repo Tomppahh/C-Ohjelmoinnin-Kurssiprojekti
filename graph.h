@@ -7,6 +7,13 @@
 #define ROW 60
 
 
+typedef struct DjikstraList  {
+    char *aCurrent;
+    int *iDistanceBetween;
+    char *aEarlierNode;
+    struct node * next;
+} DLIST;
+
 typedef struct edge {
     char *aDestination;
     int iDistance;
@@ -28,5 +35,6 @@ NODE_G* createGraphNode(NODE_G **nodeList, const char *name);
 void addEdge(NODE_G *node, const char *aDest, int iDist);
 void printGraph(const NODE_G *nodeList);
 void removeGraphNode(NODE_G **nodeList, const char *aName);
+char *firstTimeAskName(const char *aFileName);
 
 #endif

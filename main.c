@@ -6,6 +6,7 @@
 #include "graph.h"
 #include <locale.h>
 
+
 //Function displaying the mainmenu
 int mainMenu (void) {
     int iSelection = 0;
