@@ -47,6 +47,9 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
             getchar();
             printf("Anna kohdesolmu: ");
             scanf("%2s", goalNode);
+            getchar();
+            shortestPath(nodeList, startNode, goalNode, pathFile);
+            printf("Reitti tallennettu tiedostoon %s\n", pathFile);
             // funktio 4
         } else if (iSelection == 5){
             printGraph(nodeList);
@@ -87,6 +90,36 @@ char *firstTimeAskName(const char *aFileName){
         file_asked = 1;
     }
     return filename;
+}
+NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, const char *outputFile){
+    DLIST *unvisited = NULL;
+    DLIST *visited = NULL;
+
+    NODE_G *current = graph;
+    while (current != NULL){
+        DLIST *newEntry = malloc(sizeof(DLIST));
+        if (!newEntry){
+            perror("Muistin varaus epäonnistui, lopetetaan");
+            exit(0);
+        }
+
+        // copy the current nodes name to the newEntry
+        newEntry->aCurrent = strdup(current->aSource);
+        if (!newEntry->aCurrent){
+            perror("Memory allocation failed");
+            free(newEntry);
+            exit(1);
+        } // copy the current nodes distance to the newEntry
+        newEntry->iDistanceBetween = malloc(sizeof(int));
+        if (newEntry->iDistanceBetween == NULL){
+            perror("Memory allocation failed");
+            free(newEntry->aCurrent);
+            free(newEntry);
+            exit(1);
+        }
+
+        
+    }
 }
 
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile) {

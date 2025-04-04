@@ -6,12 +6,12 @@
 #define LENGTH 30
 #define ROW 60
 
-
+// nopein matka algoritmille
 typedef struct DjikstraList  {
     char *aCurrent;
     int *iDistanceBetween;
     char *aEarlierNode;
-    struct node * next;
+    struct DjikstraList *next;
 } DLIST;
 
 typedef struct edge {
@@ -32,6 +32,7 @@ void graphMenuLogic(void);
 void fileName(char *pFileName, char *pSentence);
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile);
 NODE_G* createGraphNode(NODE_G **nodeList, const char *name);
+NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, const char *outputFile); 
 void addEdge(NODE_G *node, const char *aDest, int iDist);
 void printGraph(const NODE_G *nodeList);
 void removeGraphNode(NODE_G **nodeList, const char *aName);
