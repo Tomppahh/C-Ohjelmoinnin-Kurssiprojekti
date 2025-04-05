@@ -38,5 +38,6 @@ void addEdge(NODE_G *node, const char *aDest, int iDist);
 void printGraph(const NODE_G *nodeList);
 void removeGraphNode(NODE_G **nodeList, const char *aName);
 char *firstTimeAskName(const char *aFileName);
+void addOrUpdateArc(NODE_G **nodeList);
 
 #endif

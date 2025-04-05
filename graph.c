@@ -36,7 +36,9 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
             nodeList = buildGraphFromFile(nodeList, aReadName);
         } else if (iSelection == 2){
             // funktio 2
+            addOrUpdateArc(&nodeList);
         } else if (iSelection == 3){
+            // funktio 3
             fileName(aReadName, "Anna poistettava solmu: ");
             removeGraphNode(&nodeList, aReadName);
         } else if (iSelection == 4){
@@ -420,6 +422,17 @@ NODE_G* createGraphNode(NODE_G **nodeList, const char *aName) {
 }
 
 void addEdge(NODE_G *node, const char *aDest, int iDist) {
+    //check the edges to find if the edge already exists
+    EDGE *currentEdge = node->edges;
+    while (currentEdge != NULL) {
+        if (strcmp(currentEdge->aDestination, aDest) == 0) {
+            //If the edge exists, updates the distance
+            currentEdge->iDistance = iDist;
+            return;
+        }
+        currentEdge = currentEdge->next;
+    }
+    //If edge doesn't exist, creates new one
     EDGE *newEdge = NULL;
     if ((newEdge = (EDGE*)malloc(sizeof(EDGE))) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
@@ -471,14 +484,6 @@ void removeGraphNode(NODE_G **nodeList, const char *aName) {
         return;
     }
 
-    // Print edges before removal
-    printf("Edges before removal of node %s:\n", aName);
-    EDGE *edgePrint = current->edges;
-    while (edgePrint != NULL) {
-        printf("   -> %s (Distance: %d)\n", edgePrint->aDestination, edgePrint->iDistance);
-        edgePrint = edgePrint->next;
-    }
-
     // Remove edges from other nodes that point to the current node
     EDGE *edge = current->edges;
     while (edge != NULL) {
@@ -525,14 +530,6 @@ void removeGraphNode(NODE_G **nodeList, const char *aName) {
     } 
     current->edges = NULL;
 
-    // Print edges after removal
-    printf("Edges after removal of node %s:\n", aName);
-    edgePrint = current->edges;
-    while (edgePrint != NULL) {
-        printf("   -> %s (Distance: %d)\n", edgePrint->aDestination, edgePrint->iDistance);
-        edgePrint = edgePrint->next;
-    }
-
     // Remove the node from the list
     if (previous == NULL) {
         // If the node is the first node
@@ -544,4 +541,38 @@ void removeGraphNode(NODE_G **nodeList, const char *aName) {
     free(current->aSource); 
     free(current); 
     printf("Poistetaan solmua %s... Poisto suoritettu.\n", aName);
+}
+
+void addOrUpdateArc(NODE_G **nodeList) {
+    char input[MAX_FILENAME];
+    char sourceNode[MAX_FILENAME] = "";
+    char destinationNode[MAX_FILENAME] = "";
+    int distance = -1;
+    //get user input
+    printf("Anna päivitettävä kaari (lähtösolmu;kohdesolmu;etäisyys): ");
+    fgets(input,sizeof(input),stdin);
+    input[strcspn(input, "\n")] = '\0'; //get rid of newline
+    //parse input
+    int fields = sscanf(input, "%[^;];%[^;];%d", sourceNode, destinationNode, &distance);
+
+    //Check if parsing was done correctly
+    if (fields < 3) {
+        if (strlen(sourceNode) == 0) {
+            fprintf(stderr, "Virheellinen syöte: lähtösolmu puuttuu.\n");
+        } else if (strlen(destinationNode) == 0) {
+            fprintf(stderr, "Virheellinen syöte: kohdesolmu puuttuu.\n");
+        } else {
+            fprintf(stderr, "Virheellinen syöte: etäisyys puuttuu.\n");
+        }
+        return;
+    }
+    if (distance < 0) {
+        fprintf(stderr, "Virheellinen syöte: etäisyys ei voi olla negatiivinen.\n");
+        return;
+    }
+    //creating the nodes and adding edges
+    NODE_G *source = createGraphNode(nodeList,sourceNode);
+    NODE_G *destination = createGraphNode(nodeList,destinationNode);
+    addEdge(source,destinationNode,distance);
+    addEdge(destination,sourceNode,distance);
 }
