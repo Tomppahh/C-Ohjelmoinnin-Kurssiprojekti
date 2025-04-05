@@ -247,7 +247,13 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
                             // check if this distance is more accurate than the old one, is so update
                             if (newDist < *neighbor->iDistanceBetween){
                                 *neighbor->iDistanceBetween = newDist;
-                                neighbor->aPreviousNode = rootNode->aCurrent;
+                                if (neighbor->aPreviousNode != NULL){
+                                    free(neighbor->aPreviousNode);
+                                }
+                                neighbor->aPreviousNode = malloc(strlen(rootNode->aCurrent) + 1);
+                                if (neighbor->aPreviousNode != NULL){
+                                    strcpy(neighbor->aPreviousNode, rootNode->aCurrent);
+                                }
                             }
                             break;
                         } // update neighbor, graphNode and edge pointers for next round
@@ -515,7 +521,8 @@ void removeGraphNode(NODE_G **nodeList, const char *aName) {
 
         // Move to the next edge
         edge = nextEdge;
-    }
+    } 
+    current->edges = NULL;
 
     // Print edges after removal
     printf("Edges after removal of node %s:\n", aName);
