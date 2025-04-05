@@ -58,7 +58,7 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
         }
 
     } while (iSelection != 0);
-
+    freeGraph(nodeList);
     return;
 }
 
@@ -90,6 +90,26 @@ char *firstTimeAskName(const char *aFileName){
     }
     return filename;
 }
+void freeGraph(NODE_G *graph){
+    NODE_G *current = graph;
+    NODE_G *next;
+
+    while (current != NULL){
+        // Free all edges
+        EDGE *edge = current->edges;
+        while (edge != NULL){
+            EDGE *nextEdge = edge->next;
+            free(edge->aDestination);
+            free(edge);
+            edge = nextEdge;
+        }
+
+        next = current->next;
+        free(current->aSource);
+        free(current);
+        current = next;
+    }
+}
 NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, const char *outputFile){
     DLIST *unvisited = NULL;
     DLIST *visited = NULL;
@@ -102,6 +122,16 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
         DLIST *newEntry = malloc(sizeof(DLIST));
         if (!newEntry){
             perror("Muistin varaus epäonnistui, lopetetaan");
+            while (unvisited != NULL){
+                DLIST *temp = unvisited;
+                unvisited = unvisited->next;
+                free(temp->aCurrent);
+                free(temp->iDistanceBetween);
+                if (temp->aPreviousNode !=NULL){
+                    free(temp->aPreviousNode);
+                }
+                free(temp);
+            }
             exit(0);
         }
 
@@ -155,6 +185,9 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
             unvisited = unvisited->next;
             free(temp->aCurrent);
             free(temp->iDistanceBetween);
+            if (temp->aPreviousNode != NULL){
+                free(temp->aPreviousNode);
+            }
             free(temp);
         }
         return *graph;
@@ -288,6 +321,9 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
                 visited = visited->next;
                 free(temp->aCurrent);
                 free(temp->iDistanceBetween);
+                if (temp->aPreviousNode != NULL){
+                    free(temp->aPreviousNode);
+                }
                 free(temp);
             }
 
@@ -296,6 +332,9 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
             unvisited = unvisited->next;
             free(temp->aCurrent);
             free(temp->iDistanceBetween);
+            if (temp->aPreviousNode != NULL){
+                free(temp->aPreviousNode);
+            }
             free(temp);
         }
     }
