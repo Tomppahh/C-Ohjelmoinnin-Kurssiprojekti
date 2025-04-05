@@ -10,7 +10,7 @@
 typedef struct DjikstraList  {
     char *aCurrent;
     int *iDistanceBetween;
-    char *aEarlierNode;
+    char *aPreviousNode;
     struct DjikstraList *next;
 } DLIST;
 
