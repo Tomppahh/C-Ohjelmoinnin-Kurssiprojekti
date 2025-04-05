@@ -164,7 +164,7 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
         // now lets set previous node to NULL initially
         newEntry -> aPreviousNode = NULL;
         // connects new node to the unvisited list, sets next pointer of the new entry -> head of unvisited list.
-        // if invisited is NULL, newEntry->next is NULL.
+        // if unvisited is NULL, newEntry->next is NULL.
         newEntry->next = unvisited;
         unvisited = newEntry;
 
@@ -237,11 +237,12 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
             if (strcmp(graphNode->aSource, rootNode->aCurrent) == 0){
                 // found the matching rootNode from graph, lets look at edge nodes
                 EDGE *edge = graphNode->edges;
-                while(edge != NULL) {
+                while(edge != NULL) { // edge node = node connecting from one node to other
                     // look for edge destinatios in unvisited list
                     DLIST *neighbor = unvisited;
-                    while (neighbor != NULL){
-                        if (strcmp(neighbor->aCurrent, edge->aDestination) == 0){
+                    while (neighbor != NULL){ // neighbour node = unvisited node in unvisited list
+                        if (strcmp(neighbor->aCurrent, edge->aDestination) == 0){ 
+                            // ^copy from nodeGraph edge the name of edge to DLIST neighbor
                             // calculate the distances
                             int newDist = *rootNode->iDistanceBetween + edge->iDistance;
                             // check if this distance is more accurate than the old one, is so update
@@ -320,7 +321,7 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
             fprintf(file, " = %d\n", *goalList->iDistanceBetween); // in file
             fclose(file); // close file after
             printf("Reitti tallennettu tiedostoon %s\n", outputFile);
-            // free memory from all lists untill they are empty
+            // free memory from all lists and Djikstralist linked list pointers untill they are empty
             while (visited != NULL)
             {
                 DLIST *temp = visited;
@@ -333,16 +334,16 @@ NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, 
                 free(temp);
             }
 
-        while (unvisited != NULL){
-            DLIST *temp = unvisited;
-            unvisited = unvisited->next;
-            free(temp->aCurrent);
-            free(temp->iDistanceBetween);
-            if (temp->aPreviousNode != NULL){
-                free(temp->aPreviousNode);
+            while (unvisited != NULL){
+                DLIST *temp = unvisited;
+                unvisited = unvisited->next;
+                free(temp->aCurrent);
+                free(temp->iDistanceBetween);
+                if (temp->aPreviousNode != NULL){
+                    free(temp->aPreviousNode);
+                }
+                free(temp);
             }
-            free(temp);
-        }
     }
     return *graph;
 }
