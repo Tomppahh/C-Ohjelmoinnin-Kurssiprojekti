@@ -170,21 +170,20 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
         return;
     }
 
-    iSpace += SPACING;
-
-    printTreeHelper(root->right, iSpace, iPrinted, iMaxPrinted);
+    // Anna oikealle alipuulle tilaa:
+    printTreeHelper(root->right, iSpace + SPACING, iPrinted, iMaxPrinted);
 
     if (*iPrinted < iMaxPrinted) {
         printf("\n");
-        for (int i = SPACING; i < iSpace; i++)
+        // Tässä sisennetään "iSpace" verran eikä aloiteta "SPACING:sta"
+        for (int i = 0; i < iSpace; i++)
             printf(" ");
-        printf("%s %d\n",root->pNameList->aName, root->iCount);
+        printf("%s %d\n", root->pNameList->aName, root->iCount);
         (*iPrinted)++;
     }
 
-    printTreeHelper(root->left, iSpace, iPrinted, iMaxPrinted);
-
-    return;
+    // Anna vasemmalle alipuulle tilaa:
+    printTreeHelper(root->left, iSpace + SPACING, iPrinted, iMaxPrinted);
 }
 
 void freeNameList(NODE_BT* root) {
