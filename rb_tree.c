@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "namelist.h"
 #include "binarytree.h"
 #include "rb_tree.h"
 
