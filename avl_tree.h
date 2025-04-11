@@ -1,9 +1,6 @@
 #ifndef AVL_TREE_H
 #define AVL_TREE_H
 
-
-
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile_AVL(const char* filename);
 int height(NODE_BT *node);
 int max(int a, int b);

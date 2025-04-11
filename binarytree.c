@@ -187,21 +187,6 @@ void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted) 
     return;
 }
 
-// Function to free the memory of the binary tree
-void freeTree(NODE_BT* root) {
-    if (root == NULL) {
-       return;
-    }
-
-    // using the function to traverse the binary tree recursively
-    freeTree(root->left);
-    freeTree(root->right);
-    freeNameList(root);
-    // lastly we free the root node
-    free(root);
-    
-}
-
 void freeNameList(NODE_BT* root) {
     NAME_LIST* current = root->pNameList;
     NAME_LIST* next;

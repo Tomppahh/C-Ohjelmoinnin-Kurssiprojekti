@@ -6,19 +6,6 @@
 #include "avl_tree.h"
 #include "common.h"
 
-//Functionality to insert a node into the binary tree
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
-    if (root==NULL) {
-        return createTreeNode(name,number);
-    }
-    if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
-        root->left = insertNode(root->left, name, number);
-    } else {
-        root->right = insertNode(root->right, name, number);
-    }
-    return root;
-}
-
 //Functionality to build a binary tree from a text file, reads the file and builds a tree from it
 NODE_BT* buildFromFile_AVL(const char* filename) {
     FILE* read = NULL;
@@ -171,18 +158,4 @@ NODE_BT* insertNode_AVL(NODE_BT* node, const char* name, int number) {
     }
     
     return node;
-}
-
-void freeTree(NODE_BT* root) {
-    if (root == NULL) {
-       return;
-    }
-
-    // using the function to traverse the binary tree recursively
-    freeTree(root->left);
-    freeTree(root->right);
-    freeNameList(root);
-    // lastly we free the root node
-    free(root);
-    
 }

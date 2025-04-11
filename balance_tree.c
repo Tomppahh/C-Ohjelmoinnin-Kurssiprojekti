@@ -7,19 +7,6 @@
 #include "namelist.h"
 #include "common.h"
 
-//Functionality to insert a node into the binary tree
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
-    if (root==NULL) {
-        return createTreeNode(name,number);
-    }
-    if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
-        root->left = insertNode(root->left, name, number);
-    } else {
-        root->right = insertNode(root->right, name, number);
-    }
-    return root;
-}
-
 //Functionality to build a binary tree from a text file, reads the file and builds a tree from it
 NODE_BT* buildFromFile_SR(const char* filename) {
     FILE* read = NULL;
