@@ -24,8 +24,6 @@ int mainMenu (void) {
 int main (void) {
     setlocale(LC_ALL, "en_US.UTF-8"); // Set locale to UTF-8
     
-    
-    
     int iMainSelection;
 
     do {
@@ -45,8 +43,6 @@ int main (void) {
         printf("\n");
 
     } while (iMainSelection != 0);
-    pStartList = empty(pStartList);
-    freeTree(pStartTree); // calling freeTree function to clear nameList and the whole binarytree
     printf("Kiitos ohjelman käytöstä.\n");
     return (0);
 }
