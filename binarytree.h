@@ -6,20 +6,23 @@
 #define LENGTH 30
 #define SPACING 15 // Can change the space between printed nodes
 
-//typedef enum { RED, BLACK } COLOR;
+typedef enum { RED, BLACK } COLOR; // Red == 0 and Black == 1
 
 //defining a binary tree node
 typedef struct nodeTree {
     struct nameList *pNameList;
     int iCount;
     int height;
-    //COLOR color;
+    COLOR color;
     struct nodeTree *left;
     struct nodeTree *right;
-    //struct nodeTree *parent;
+    struct nodeTree *parent;
 } NODE_BT;
 
-
+int binaryTreeMenu (void);
+int balanceSelectionMenu (void);
+void treeMenuLogic(void);
+void filename(char *pFileName, char *pSentence);
 NODE_BT* createTreeNode(const char* name, int number);
 NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile(const char* filename);
@@ -35,21 +38,10 @@ void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename);
 NODE_BT *writeFileDFHelper(NODE_BT* root, const char* searchInput, FILE* write);
 void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename);
 NODE_BT *BinaryTreeSearch(NODE_BT *root, const char *searchInput);
-
-/* Red-Black Tree. Didn't work with codegrade.
-NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number);
-void fixInsert(NODE_BT** root, NODE_BT* z);
-void rotateRight(NODE_BT** root, NODE_BT* y);
-void rotateLeft(NODE_BT** root, NODE_BT* x);
-*/
-
 NODE_BT *removeNode(NODE_BT *root, const char *searchInput);
 void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
 int countNodes(NODE_BT *root);
-
-// Static rebuild. Didn't work entirely with CodeGrade.
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
-
 NODE_BT* balanceTree(NODE_BT *root);
 
 

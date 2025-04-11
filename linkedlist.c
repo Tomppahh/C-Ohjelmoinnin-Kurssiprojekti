@@ -7,6 +7,66 @@
 
 #define ROW 60
 
+//Function displaying linkedlist menu
+int linkedListMenu (void) {
+    int iSelection = 0;
+    printf("\n");
+    printf("Valitse haluamasi toiminto (linkitetty lista):\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Tallenna lista etuperin\n");
+    printf("3) Tallenna lista takaperin\n");
+    printf("4) Tyhjennä lista\n");
+    printf("5) Järjestä nousevaan järjestykseen\n");
+    printf("6) Järjestä laskevaan järjestykseen\n");
+    printf("0) Palaa\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &iSelection);
+    getchar();
+    return(iSelection);
+}
+
+void linkedListMenuLogic(void) {
+    do {
+        iSubSelection = linkedListMenu();
+        if(iSubSelection == 1) {
+            filename(aReadName, "Anna luettavan tiedoston nimi: ");
+            pStartList = readFile(pStartList, aReadName);
+            updatePreviousPointers(pStartList); // Update previous pointer
+        } else if (iSubSelection == 2) {
+            filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFile(pStartList, aWriteName);
+        } else if (iSubSelection == 3) {
+            filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFileReverse(pStartList, aWriteName);
+        } else if (iSubSelection == 4) {
+            pStartList = empty(pStartList);
+        } else if (iSubSelection == 5) {
+            pStartList = sortAscending(pStartList);
+            updatePreviousPointers(pStartList); //update previous pointers
+            printf("Lista lajiteltu nousevaan järjestykseen.\n");
+        } else if (iSubSelection == 6) {
+            pStartList = mergeSort(pStartList);
+            updatePreviousPointers(pStartList); //update previous pointers
+            printf("Lista lajiteltu laskevaan järjestykseen.\n");
+        } else if (iSubSelection == 0) {
+            printf("Palataan päävalikkoon.\n");
+        } else {
+            printf("Yritä uudestaan.\n");
+        }
+
+    } while(iSubSelection != 0);
+    empty(pStartList);
+    return;
+}
+
+void filename(char *pFileName, char *pSentence) {
+    printf("%s", pSentence);
+    scanf("%s", pFileName);
+    getchar();
+    return;
+}
+
+
 NODE_LL *createNode(NODE_LL *pA, char *pName, int iCount) {
     NODE_LL *pNew = NULL, *ptr = NULL;
 

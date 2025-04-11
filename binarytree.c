@@ -4,81 +4,113 @@
 #include "binarytree.h"
 #include "namelist.h"
 #include "avl_tree.h"
+#include "balance_tree.h"
+#include "rb_tree.h"
 
-//Creates a new node in the binary tree
-NODE_BT* createTreeNode(const char* name, int number) {
-    NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
-    NAME_LIST* nameList = createNameList(name, NULL);
-    newNode->iCount = number;
-    //newNode->color = RED; // New nodes are red
-    newNode->left = NULL;
-    newNode->right = NULL;
-    //newNode->parent = NULL;
-    newNode->pNameList = nameList;
-    return newNode;
-} 
-
-//Functionality to insert a node into the binary tree
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number) {
-    if (root==NULL) {
-        return createTreeNode(name,number);
-    }
-    if (number < root->iCount || (number == root->iCount && strcmp(name, root->pNameList->aName) < 0)) {
-        root->left = insertNode(root->left, name, number);
-    } else {
-        root->right = insertNode(root->right, name, number);
-    }
-    return root;
+//Function displaying the binarytree menu
+int binaryTreeMenu (void) {
+    int iSelection = 0;
+    printf("\n");
+    printf("Valitse haluamasi toiminto (binääripuu):\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Kirjoita puun arvot tiedostoon\n");
+    printf("3) Syvyyshaku\n");
+    printf("4) Leveyshaku\n");
+    printf("5) Binääripuuhaku\n");
+    printf("6) Poista arvo\n");
+    printf("7) Tulosta puumaisessa muodossa\n");
+    printf("8) Valitse tasapainotus algoritmi\n");
+    printf("0) Palaa\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &iSelection);
+    getchar();
+    return iSelection;
 }
 
-//Functionality to build a binary tree from a text file, reads the file and builds a tree from it
-NODE_BT* buildFromFile(const char* filename) {
-    FILE* read = NULL;
-    if ((read = fopen(filename, "r")) == NULL) {
-        perror("Tiedoston avaaminen epäonnistui, lopetetaan");
-        exit(0);
-    }
-    NODE_BT* root = NULL;
-    char row[100];
-    //skipping the header row of the file
-    if (fgets(row,sizeof(row),read)) {
-        row[strcspn(row, "\n")] = 0;
-        if (strcmp(row,"Etunimi;Lukumäärä") == 0) {
-        }
-    }
-    while (fgets(row, sizeof(row), read)) {
-        row[strcspn(row, "\n")] = 0;
-        char name[30];
-        int number;
-        if (sscanf(row, "%[^;];%d", name, &number) == 2) {
-            root = insertNode(root, name, number); // Change insertNode to insertNode_RBT or insertNode_AVL
+int balanceSelectionMenu (void) {
+    int iSelection = 0;
+    printf("\n");
+    printf("Valitse haluamasi tasapainoitus algoritmi:\n");
+    printf("1) Static rebuild\n");
+    printf("2) AVL-Tree\n");
+    printf("3) Red-Black-Tree\n");
+    scanf("%d", &iSelection);
+    getchar();
+    return iSelection;
+}
+
+
+
+void treeMenuLogic(void) {
+    int iSubSelection, iBalanceSelection;
+    do {
+        iSubSelection = binaryTreeMenu();
+        if (iSubSelection == 1) {
+            filename(aReadName, "Anna luettavan tiedoston nimi: ");
+            pStartTree = buildFromFile_SR(aReadName);
+        } else if (iSubSelection == 2) {
+            filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFileTree(aWriteName,pStartTree);
+        } else if (iSubSelection == 3){
+            char searchTerm[LENGTH];
+            printf("Anna etsittävä nimi tai numero: ");
+            fgets(searchTerm, sizeof(searchTerm), stdin);
+            searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+            filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFileDF(pStartTree, searchTerm,aWriteName);
+        } else if (iSubSelection == 4) {
+            char searchTerm[LENGTH];
+            printf("Anna etsittävä nimi tai numero: ");
+            fgets(searchTerm, sizeof(searchTerm), stdin);
+            searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+            filename(aWriteName, "Anna kirjoitettavan tiedoston nimi: ");
+            writeFileWF(pStartTree,searchTerm,aWriteName);
+        } else if (iSubSelection == 5) {
+            char searchTerm[LENGTH];
+            printf("Anna etsittävä nimi tai numero: ");
+            fgets(searchTerm, sizeof(searchTerm), stdin);
+            searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+            BinaryTreeSearch(pStartTree, searchTerm);
+        } else if (iSubSelection == 7) {
+            printTree(pStartTree);
+        } else if (iSubSelection == 6) {
+            char searchTerm[LENGTH];
+            printf("Anna poistettava arvo: ");
+            fgets(searchTerm, sizeof(searchTerm),stdin);
+            searchTerm[strcspn(searchTerm, "\n")] = 0; // get rid of newline
+            pStartTree = removeNode(pStartTree, searchTerm);
+        } else if (iSubSelection == 8) {
+            iBalanceSelection = balanceSelectionMenu();
+            if (iBalanceSelection == 1) {
+                filename(aReadName, "Anna luettavan tiedoston nimi: ");
+                pStartTree = buildFromFile_SR(aReadName);
+            } else if (iBalanceSelection == 2) {
+                filename(aReadName, "Anna luettavan tiedoston nimi: ");
+                pStartTree = buildFromFile_AVL(aReadName);
+            } else if (iBalanceSelection == 3) {
+                filename(aReadName, "Anna luettavan tiedoston nimi: ");
+                pStartTree = buildFromFile_RB(aReadName);
+            }
+
+        } else if (iSubSelection == 0) {
+            printf("Palataan päävalikkoon.\n");
         } else {
-            printf("Error: Invalid formatting in row\n");
+            printf("Yritä uudestaan.\n");
         }
-    }
-    fclose(read);
-    /*
-    int iNodeCount = countNodes(root);
-    int iIndex = 0;
-    NODE_BT* newRoot = NULL;
 
-    NODE_BT **NodeList = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
-    if (NodeList == NULL) {
-        perror("Muistin varaus epäonnistui, lopetetaan");
-        exit(0);
-    }
-
-    makeList(root, NodeList, &iIndex);
-
-    for (int i = 0; i < iNodeCount; i++) {
-        newRoot = insertNode_AVL(newRoot, NodeList[i]->pNameList->aName, NodeList[i]->iCount);
-    }
-    */
-
-    root = balanceTree(root); // Balances the tree
-    // free(root);
-    return root;
+    } while (iSubSelection != 0);
+    freeTree(pStartTree);
+    return;
 }
+
+void filename(char *pFileName, char *pSentence) {
+    printf("%s", pSentence);
+    scanf("%s", pFileName);
+    getchar();
+    return;
+}
+
+
 
 //Recursive function that helps with the writing process.
 void writeTreeNodes(FILE* write, NODE_BT* root) {
@@ -418,195 +450,6 @@ void writeFileWF(NODE_BT* root, const char* searchInput, const char* filename) {
     fclose(write);
     }
 }
-
-/* Red-Black Tree. Didn't work with codegrade.
-void rotateLeft(NODE_BT** root, NODE_BT* x) {
-    NODE_BT* y = x->right;
-    x->right = y->left;
-    if (y->left != NULL) {
-        y->left->parent = x;
-    }
-    y->parent = x->parent;
-    if(x->parent == NULL) {
-        *root = y;
-    } else if (x == x->parent->left) {
-        x->parent->left = y;
-    } else {
-        x->parent->right = y;
-    }
-    y->left = x;
-    x->parent = y;
-    return;
-}
-
-void rotateRight(NODE_BT** root, NODE_BT* y) {
-    NODE_BT* x = y->left;
-    y->left = x->right;
-    if (x->right != NULL) {
-        x->right->parent = y;
-    }
-    x->parent = y->parent;
-    if (y->parent == NULL) {
-        *root = x;
-    } else if (y == y->parent->left) {
-        y->parent->left = x;
-    } else {
-        y->parent->right = x;
-    }
-    x->right = y;
-    y->parent = x;
-}
-
-void fixInsert(NODE_BT** root, NODE_BT* z) {
-    while (z->parent && z->parent->color == RED) {
-        NODE_BT* gp = z->parent->parent; // gp is grandparent
-
-        if (z->parent == gp->left) {
-            NODE_BT* y = gp->right; // uncle
-            if (y && y->color == RED) {
-                // Case 1: uncle is red -> recolor
-                z->parent->color = BLACK;
-                y->color = BLACK;
-                gp->color = RED;
-                z = gp; // Move up the tree
-            } else {
-                // Case 2 & 3: uncle is black
-                if (z == z->parent->right) {
-                    // Case 2: left-right -> rotate left
-                    z = z->parent;
-                    rotateLeft(root, z);
-                }
-                // Case 3: left-left -> rotate right
-                z->parent->color = BLACK;
-                gp->color = RED;
-                rotateRight(root, gp);
-            }
-        } else {
-            // Mirror case (right side)
-            NODE_BT* y = gp->left; // uncle
-            if (y && y->color == RED) {
-                // Case 1: uncle is red -> recolor
-                z->parent->color = BLACK;
-                y->color = BLACK;
-                gp->color = RED;
-                z = gp;
-            } else {
-                // Case 2 & 3: uncle is black
-                if (z == z->parent->left) {
-                    // Case 2: right-left -> rotate right
-                    z = z->parent;
-                    rotateRight(root, z);
-                }
-                // Case 3: right-right -> rotate left
-                z->parent->color = BLACK;
-                gp->color = RED;
-                rotateLeft(root, gp);
-            }
-        }
-    }
-    (*root)->color = BLACK; // Always make root black
-}
-
-NODE_BT* insertNode_RBT(NODE_BT* root, const char* name, int number) {
-    NODE_BT* parent = NULL;
-    NODE_BT* current = root;
-
-    // Standard insertion. 
-    while (current) {
-        parent = current;
-        if (number == current->iCount) {
-            // Duplicate iCount
-            append(root->pNameList, name);
-            return root;
-        } else if (number < current->iCount) {
-            current = current->left;
-        } else {
-            current = current->right;
-        }
-    }
-
-    // Create new node and link it
-    NODE_BT* newNode = createTreeNode(name, number);
-    newNode->parent = parent;
-
-    if (parent == NULL) {
-        root = newNode; // Tree was empty
-    } else if (number < parent->iCount) {
-        parent->left = newNode;
-    } else {
-        parent->right = newNode;
-    }
-
-    // Restore Red-Black Tree balance
-    fixInsert(&root, newNode);
-    return root;
-}
-*/
-
-// Static rebuild. Didn't work entirely with Codegrade.
-// The main function that is called to balance a tree.
-NODE_BT* balanceTree(NODE_BT *root) {
-    int iIndex = 0;
-    int iNodeCount = countNodes(root);
-    if (iNodeCount == 0) {
-        return (NULL);
-    }
-
-    NODE_BT **NodeList = (NODE_BT **)malloc(iNodeCount * sizeof(NODE_BT));
-    if (NodeList == NULL) {
-        perror("Muistin varaus epäonnistui, lopetetaan");
-        exit(0);
-    }
-
-    makeList(root, NodeList, &iIndex);
-
-    
-    NODE_BT *newRoot = buildBalancedTree(NodeList, 0, iNodeCount - 1);
-    free(NodeList);
-    return (newRoot);
-}
-
-// Counts the number of nodes
-int countNodes(NODE_BT *root) {
-    if(root == NULL) {
-        return 0;
-    }
-    // Use recursion to count all nodes from left and to right.
-    return (1 + countNodes(root->left) + countNodes(root->right));
-} 
-
-// Use recursion to make a largest to smallest list
-void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex) {
-    if (root == NULL) {
-        return;
-    }
-    makeList(root->left, NodeList, iIndex); // Goes all the way to the left of the tree
-    NodeList[*iIndex] = root; // Adds the node to the list
-    (*iIndex)++;
-    makeList(root->right, NodeList, iIndex); // Goes to the right node
-    return;
-}
-
-// Use recursion to balance the tree based on the created list
-NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd) {
-    int iMiddle;
-    
-    if (iStart > iEnd) {
-        return NULL;
-    }
-
-    iMiddle = (iStart + iEnd)>>1; // Gets the lists middle point
-    NODE_BT *root = NodeList[iMiddle]; // Sets the node to be the node in the middle of the list.
-
-    // Recursive calls
-    root->left = buildBalancedTree(NodeList, iStart, iMiddle -1);
-    root->right = buildBalancedTree(NodeList, iMiddle + 1, iEnd);
-
-    return root;
-}
-
-
-
 
 //Function to remove nodes from the tree
 NODE_BT* removeNode(NODE_BT* root, const char* searchInput) {
