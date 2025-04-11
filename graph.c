@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "graph.h"
+#include "common.h"
 #define MAX_FILENAME 256
 // Function displaying the graph menu
 int GraphMenu(void){
@@ -32,14 +33,14 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
         if (iSelection == 0){
             printf("Palataan päävalikkoon.\n");
         } else if (iSelection == 1){
-            fileName(aReadName, "Anna luettavan tiedoston nimi: ");
+            filename(aReadName, "Anna luettavan tiedoston nimi: ");
             nodeList = buildGraphFromFile(nodeList, aReadName);
         } else if (iSelection == 2){
             // funktio 2
             addOrUpdateArc(&nodeList);
         } else if (iSelection == 3){
             // funktio 3
-            fileName(aReadName, "Anna poistettava solmu: ");
+            filename(aReadName, "Anna poistettava solmu: ");
             removeGraphNode(&nodeList, aReadName);
         } else if (iSelection == 4){
             char startNode[2], goalNode[2];
@@ -61,13 +62,6 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
 
     } while (iSelection != 0);
     freeGraph(nodeList);
-    return;
-}
-
-void fileName(char *pFileName, char *pSentence) {
-    printf("%s", pSentence);
-    scanf("%s", pFileName);
-    getchar();
     return;
 }
 

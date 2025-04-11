@@ -5,19 +5,8 @@
 #include "namelist.h"
 #include "binarytree.h"
 #include "rb_tree.h"
+#include "common.h"
 
-//Creates a new node in the binary tree
-NODE_BT* createTreeNode(const char* name, int number) {
-    NODE_BT* newNode = (NODE_BT*)malloc(sizeof(NODE_BT));
-    NAME_LIST* nameList = createNameList(name, NULL);
-    newNode->iCount = number;
-    newNode->color = RED; // New nodes are red
-    newNode->left = NULL;
-    newNode->right = NULL;
-    newNode->parent = NULL;
-    newNode->pNameList = nameList;
-    return newNode;
-} 
 
 //Functionality to build a binary tree from a text file, reads the file and builds a tree from it
 NODE_BT* buildFromFile_RB(const char* filename) {

@@ -15,7 +15,6 @@ typedef struct nodeList {
 // Functions
 int linkedListMenu (void);
 void linkedListMenuLogic(void);
-void filename(char *pFileName, char *pSentence);
 NODE_LL *createNode(NODE_LL *pA, char *pName, int iCount);
 NODE_LL *empty(NODE_LL *pA);
 void writeFile(NODE_LL *pA, char* pFileName);

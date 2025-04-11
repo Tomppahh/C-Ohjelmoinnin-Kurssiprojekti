@@ -6,6 +6,7 @@
 #include "avl_tree.h"
 #include "balance_tree.h"
 #include "rb_tree.h"
+#include "common.h"
 
 //Function displaying the binarytree menu
 int binaryTreeMenu (void) {
@@ -104,15 +105,6 @@ void treeMenuLogic(void) {
     freeTree(pStartTree);
     return;
 }
-
-void filename(char *pFileName, char *pSentence) {
-    printf("%s", pSentence);
-    scanf("%s", pFileName);
-    getchar();
-    return;
-}
-
-
 
 //Recursive function that helps with the writing process.
 void writeTreeNodes(FILE* write, NODE_BT* root) {

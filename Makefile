@@ -1,6 +1,6 @@
 # Main project files
-projekti: main.o linkedlist.o binarytree.o namelist.o avl_tree.o rb_tree.o balance_tree.o graph.o
-	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o avl_tree.o rb_tree.o balance_tree.o graph.o
+projekti: main.o linkedlist.o binarytree.o namelist.o avl_tree.o rb_tree.o balance_tree.o graph.o common.o
+	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o avl_tree.o rb_tree.o balance_tree.o graph.o common.o
 
 main.o: main.c linkedlist.h
 	gcc -c main.c -std=c99 -pedantic -Wall
@@ -25,6 +25,9 @@ balance_tree.o: balance_tree.c balance_tree.h
 
 graph.o: graph.c graph.h
 	gcc -c graph.c -std=c99 -pedantic -Wall
+
+common.o: common.c common.h
+	gcc -c common.c -std=c99 -pedantic -Wall
 
 # Test files
 test_sorting: test_sorting.o linkedlist.o

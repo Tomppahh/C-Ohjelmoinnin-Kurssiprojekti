@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "linkedlist.h"
+#include "common.h"
 
 #define ROW 60
 
@@ -62,12 +63,7 @@ void linkedListMenuLogic(void) {
     return;
 }
 
-void filename(char *pFileName, char *pSentence) {
-    printf("%s", pSentence);
-    scanf("%s", pFileName);
-    getchar();
-    return;
-}
+
 
 
 NODE_LL *createNode(NODE_LL *pA, char *pName, int iCount) {

@@ -29,7 +29,7 @@ typedef struct nodeGraph {
 
 int GraphMenu(void);
 void graphMenuLogic(void);
-void fileName(char *pFileName, char *pSentence);
+void filename(char *pFileName, char *pSentence);
 NODE_G* buildGraphFromFile (NODE_G *nodeList, const char *aFile);
 NODE_G* createGraphNode(NODE_G **nodeList, const char *name);
 NODE_G shortestPath(NODE_G *graph, const char *startNode, const char *goalNode, const char *outputFile);

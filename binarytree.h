@@ -22,7 +22,6 @@ typedef struct nodeTree {
 int binaryTreeMenu (void);
 int balanceSelectionMenu (void);
 void treeMenuLogic(void);
-void filename(char *pFileName, char *pSentence);
 NODE_BT* createTreeNode(const char* name, int number);
 NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile(const char* filename);

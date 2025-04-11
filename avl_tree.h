@@ -2,7 +2,7 @@
 #define AVL_TREE_H
 
 
-NODE_BT* createTreeNode(const char* name, int number);
+
 NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile_AVL(const char* filename);
 int height(NODE_BT *node);
