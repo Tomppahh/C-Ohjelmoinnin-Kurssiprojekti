@@ -48,7 +48,7 @@ NODE_BT* buildFromFile_RB(const char* filename) {
     return root;
 }
 
-void rotateLeft(NODE_BT** root, NODE_BT* x) {
+void rotateLeft_RB(NODE_BT** root, NODE_BT* x) {
     NODE_BT* y = x->right;
     x->right = y->left;
     if (y->left != NULL) {
@@ -67,7 +67,7 @@ void rotateLeft(NODE_BT** root, NODE_BT* x) {
     return;
 }
 
-void rotateRight(NODE_BT** root, NODE_BT* y) {
+void rotateRight_RB(NODE_BT** root, NODE_BT* y) {
     NODE_BT* x = y->left;
     y->left = x->right;
     if (x->right != NULL) {
@@ -102,12 +102,12 @@ void fixInsert(NODE_BT** root, NODE_BT* z) {
                 if (z == z->parent->right) {
                     // Case 2: left-right -> rotate left
                     z = z->parent;
-                    rotateLeft(root, z);
+                    rotateLeft_RB(root, z);
                 }
                 // Case 3: left-left -> rotate right
                 z->parent->color = BLACK;
                 gp->color = RED;
-                rotateRight(root, gp);
+                rotateRight_RB(root, gp);
             }
         } else {
             // Mirror case (right side)
@@ -123,12 +123,12 @@ void fixInsert(NODE_BT** root, NODE_BT* z) {
                 if (z == z->parent->left) {
                     // Case 2: right-left -> rotate right
                     z = z->parent;
-                    rotateRight(root, z);
+                    rotateRight_RB(root, z);
                 }
                 // Case 3: right-right -> rotate left
                 z->parent->color = BLACK;
                 gp->color = RED;
-                rotateLeft(root, gp);
+                rotateLeft_RB(root, gp);
             }
         }
     }
