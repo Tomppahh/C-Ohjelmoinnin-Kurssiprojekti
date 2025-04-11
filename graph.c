@@ -67,24 +67,24 @@ void graphMenuLogic(void){ // ehdotus miten valikko tehtäisiin - Tommi
 
 char *firstTimeAskName(const char *aFileName){
     static int file_asked = 0;
-    static char filename[MAX_FILENAME] = {0};
+    static char file_name[MAX_FILENAME] = {0};
 
     if (!file_asked){ // if filename hasn't been asked, use fileName function
         if (aFileName != NULL){
             // Just use the provided filename directly
-            strncpy(filename, aFileName, MAX_FILENAME - 1);
-            filename[MAX_FILENAME - 1] = '\0'; // Ensure null termination
+            strncpy(file_name, aFileName, MAX_FILENAME - 1);
+            file_name[MAX_FILENAME - 1] = '\0'; // Ensure null termination
         }
         else{
             // Ask user for filename directly
             char temp[MAX_FILENAME];
             filename(temp, "Anna reittitiedoston nimi: ");
-            strncpy(filename, temp, MAX_FILENAME - 1);
-            filename[MAX_FILENAME - 1] = '\0';
+            strncpy(file_name, temp, MAX_FILENAME - 1);
+            file_name[MAX_FILENAME - 1] = '\0';
         }
         file_asked = 1;
     }
-    return filename;
+    return file_name;
 }
 void freeGraph(NODE_G *graph){
     NODE_G *current = graph;
