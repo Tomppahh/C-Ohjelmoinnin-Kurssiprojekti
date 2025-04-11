@@ -1,3 +1,9 @@
+// Static Rebuild
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "binarytree.h"
+#include "balance_tree.h"
 
 //Creates a new node in the binary tree
 NODE_BT* createTreeNode(const char* name, int number) {
