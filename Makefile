@@ -1,6 +1,6 @@
 # Main project files
-projekti: main.o linkedlist.o binarytree.o namelist.o avl_tree.o graph.o
-	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o avl_tree.o graph.o
+projekti: main.o linkedlist.o binarytree.o namelist.o avl_tree.o rb_tree.o balance_tree.o graph.o
+	gcc -o projekti main.o linkedlist.o binarytree.o namelist.o avl_tree.o rb_tree.o balance_tree.o graph.o
 
 main.o: main.c linkedlist.h
 	gcc -c main.c -std=c99 -pedantic -Wall
@@ -16,6 +16,12 @@ namelist.o: namelist.c namelist.h
 
 avl_tree.o: avl_tree.c avl_tree.h
 	gcc -c avl_tree.c -std=c99 -pedantic -Wall
+
+rb_tree.o: rb_tree.c rb_tree.h
+	gcc -c rb_tree.c -std=c99 -pedantic -Wall
+
+balance_tree.o: balance_tree.c balance_tree.h
+	gcc -c balance_tree.c -std=c99 -pedantic -Wall
 
 graph.o: graph.c graph.h
 	gcc -c graph.c -std=c99 -pedantic -Wall
