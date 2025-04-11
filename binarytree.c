@@ -35,6 +35,7 @@ int balanceSelectionMenu (void) {
     printf("1) Static rebuild\n");
     printf("2) AVL-Tree\n");
     printf("3) Red-Black-Tree\n");
+    printf("Anna valintasi: ");
     scanf("%d", &iSelection);
     getchar();
     return iSelection;
