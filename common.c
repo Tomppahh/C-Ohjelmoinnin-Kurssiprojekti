@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "linkedlist.h"
+#include "binarytree.h"
+#include "graph.h"
 #include "common.h"
 
 void filename(char *pFileName, char *pSentence) {
