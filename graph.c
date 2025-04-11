@@ -78,7 +78,7 @@ char *firstTimeAskName(const char *aFileName){
         else{
             // Ask user for filename directly
             char temp[MAX_FILENAME];
-            fileName(temp, "Anna reittitiedoston nimi: ");
+            filename(temp, "Anna reittitiedoston nimi: ");
             strncpy(filename, temp, MAX_FILENAME - 1);
             filename[MAX_FILENAME - 1] = '\0';
         }

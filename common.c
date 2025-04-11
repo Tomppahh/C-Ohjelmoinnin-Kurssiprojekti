@@ -5,6 +5,7 @@
 #include "binarytree.h"
 #include "graph.h"
 #include "common.h"
+#include "namelist.h"
 
 void filename(char *pFileName, char *pSentence) {
     printf("%s", pSentence);
