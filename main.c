@@ -23,11 +23,10 @@ int mainMenu (void) {
 
 int main (void) {
     setlocale(LC_ALL, "en_US.UTF-8"); // Set locale to UTF-8
-    NODE_LL *pStartList = NULL;
-    NODE_BT *pStartTree = NULL;
+    
+    
     
     int iMainSelection;
-    char aReadName[LENGTH], aWriteName[LENGTH];
 
     do {
         iMainSelection = mainMenu();
@@ -35,8 +34,7 @@ int main (void) {
             linkedListMenuLogic();
         } else if (iMainSelection == 2) {
             treeMenuLogic();
-        }
-        else if (iMainSelection == 3){
+        } else if (iMainSelection == 3){
             graphMenuLogic();
         } else if (iMainSelection == 0) {
             printf("Lopetetaan.\n");

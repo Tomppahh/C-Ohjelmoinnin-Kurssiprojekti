@@ -42,7 +42,9 @@ int balanceSelectionMenu (void) {
 
 
 void treeMenuLogic(void) {
+    NODE_BT *pStartTree = NULL;
     int iSubSelection, iBalanceSelection;
+    char aReadName[LENGTH], aWriteName[LENGTH];
     do {
         iSubSelection = binaryTreeMenu();
         if (iSubSelection == 1) {

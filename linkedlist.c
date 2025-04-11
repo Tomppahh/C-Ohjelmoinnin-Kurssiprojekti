@@ -26,6 +26,9 @@ int linkedListMenu (void) {
 }
 
 void linkedListMenuLogic(void) {
+    NODE_LL *pStartList = NULL;
+    int iSubSelection;
+    char aReadName[LENGTH], aWriteName[LENGTH];
     do {
         iSubSelection = linkedListMenu();
         if(iSubSelection == 1) {
