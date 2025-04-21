@@ -22,8 +22,6 @@ typedef struct nodeTree {
 int binaryTreeMenu (void);
 int balanceSelectionMenu (void);
 void treeMenuLogic(void);
-NODE_BT* createTreeNode(const char* name, int number);
-NODE_BT* insertNode(NODE_BT* root, const char* name, int number);
 NODE_BT* buildFromFile(const char* filename);
 NODE_BT *depthFirstSearch(NODE_BT *root, const char *searchInput);
 NODE_BT *widthFirstSearch(NODE_BT *root, const char *searchInput);
@@ -31,7 +29,6 @@ void writeFileTree(const char* filename, NODE_BT* root);
 int askValue(void);
 void printTree(NODE_BT* root);
 void printTreeHelper(NODE_BT* root, int iSpace, int* iPrinted, int iMaxPrinted);
-void freeTree(NODE_BT* root);
 void freeNameList(NODE_BT* root);
 void writeFileDF(NODE_BT* root, const char* searchInput, const char* filename);
 NODE_BT *writeFileDFHelper(NODE_BT* root, const char* searchInput, FILE* write);
@@ -41,7 +38,7 @@ NODE_BT *removeNode(NODE_BT *root, const char *searchInput);
 void makeList(NODE_BT *root, NODE_BT **NodeList, int *iIndex);
 int countNodes(NODE_BT *root);
 NODE_BT *buildBalancedTree(NODE_BT **NodeList, int iStart, int iEnd);
-NODE_BT* balanceTree(NODE_BT *root);
+
 
 
 #endif

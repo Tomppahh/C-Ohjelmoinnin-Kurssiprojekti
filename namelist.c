@@ -1,3 +1,4 @@
+// namelist.c
 
 #include <stdio.h>
 #include <locale.h>
