@@ -92,11 +92,6 @@ int main(){
     createTestInputFile(testInputFilename);
     NODE_BT *fileTree = buildFromFile_AVL(testInputFilename);
 
-    // Instead of checking exact tree structure, verify:
-    // 1. The tree contains all three nodes
-    // 2. The tree maintains AVL balance property
-    // 3. The values are correctly stored
-
     // Check that all three names exist in the tree
     NODE_BT *tuomasNode = depthFirstSearch(fileTree, "Tuomas");
     NODE_BT *tommiNode = depthFirstSearch(fileTree, "Tommi");
