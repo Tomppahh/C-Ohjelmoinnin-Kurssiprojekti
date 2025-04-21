@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include "binarytree.h"
 #include "namelist.h"
+#include "balance_tree.h"
 #include "avl_tree.h"
 #include "rb_tree.h"
 #include "test_results.h" 
+#include "common.h"
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
 void runTest(int *passed, int *failed, int condition, const char *message){

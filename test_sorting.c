@@ -191,7 +191,7 @@ int main(){
     list = createAscendingSortedList();
     printList(list, "Test 5: Already ascending sorted list");
 
-    NODE_LL *originalList = list; // Save for comparison
+    
     list = sortAscending(list);
     updatePreviousPointers(list);
     printList(list, "Test 5a: sortAscending with already sorted list");
