@@ -4,7 +4,7 @@
 #include "binarytree.h"
 #include "namelist.h"
 #include "avl_tree.h"
-#include "rb_tree.h" // Make sure this is included for Red-Black Tree functions
+#include "rb_tree.h" 
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
 void runTest(int *passed, int *failed, int condition, const char *message){
