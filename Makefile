@@ -29,29 +29,35 @@ graph.o: graph.c graph.h
 common.o: common.c common.h
 	gcc -c common.c -std=c99 -pedantic -Wall
 
+# Test results implementation
+test_results.o: test_results.c test_results.h
+	gcc -c test_results.c -std=c99 -pedantic -Wall
+
+test_summary.o: test_summary.c test_results.h
+	gcc -c test_summary.c -std=c99 -pedantic -Wall
+
+test_summary: test_summary.o test_results.o
+	gcc -o test_summary test_summary.o test_results.o -std=c99 -pedantic -Wall
+
 # Test files
-test_sorting: test_sorting.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
-	gcc -o test_sorting test_sorting.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
+test_sorting: test_sorting.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o test_results.o
+	gcc -o test_sorting test_sorting.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o test_results.o
 
 test_sorting.o: test_sorting.c linkedlist.h
 	gcc -c test_sorting.c -std=c99 -pedantic -Wall
 
-binary_tree_tests: binary_tree_tests.o binarytree.o linkedlist.o namelist.o avl_tree.o rb_tree.o balance_tree.o common.o
-	gcc -o binary_tree_tests binary_tree_tests.o binarytree.o linkedlist.o namelist.o avl_tree.o rb_tree.o balance_tree.o common.o
+binary_tree_tests: binary_tree_tests.o binarytree.o linkedlist.o namelist.o avl_tree.o rb_tree.o balance_tree.o common.o test_results.o
+	gcc -o binary_tree_tests binary_tree_tests.o binarytree.o linkedlist.o namelist.o avl_tree.o rb_tree.o balance_tree.o common.o test_results.o
 
 binary_tree_tests.o: binary_tree_tests.c binarytree.h linkedlist.h
 	gcc -c binary_tree_tests.c -std=c99 -pedantic -Wall
 
-graph_tests: graph_tests.o graph.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
-	gcc -o graph_tests graph_tests.o graph.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
+graph_tests: graph_tests.o graph.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o test_results.o
+	gcc -o graph_tests graph_tests.o graph.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o test_results.o
 
 graph_tests.o: graph_tests.c graph.h linkedlist.h
 	gcc -c graph_tests.c -std=c99 -pedantic -Wall
 
-test: test_sorting binary_tree_tests graph_tests
-	@echo "\nRunning test_sorting:"
-	./test_sorting
-	@echo "\nRunning binary_tree_tests:"
-	./binary_tree_tests
-	@echo "\nRunning graph_tests:"
-	./graph_tests
+# Updated test target to use the test_summary
+test: test_sorting binary_tree_tests graph_tests test_summary
+	./test_summary

@@ -4,7 +4,8 @@
 #include "binarytree.h"
 #include "namelist.h"
 #include "avl_tree.h"
-#include "rb_tree.h" 
+#include "rb_tree.h"
+#include "test_results.h" 
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
 void runTest(int *passed, int *failed, int condition, const char *message){
@@ -347,6 +348,7 @@ int main(){
 
     // Print summary of passed and failed tests
     printf("\nBINARY TREE TEST SUMMARY: %d tests passed, %d tests failed\n\n", passed, failed);
+    recordTestResult("BINARY_TREE_TESTS", passed, failed); // pass the tests results to test_results.c
 
     return 0;
 }

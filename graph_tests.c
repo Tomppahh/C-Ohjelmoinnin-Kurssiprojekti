@@ -5,6 +5,7 @@
 #include "graph.h"
 #include "common.h"
 #include "namelist.h"
+#include "test_results.h"
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
 void runTest(int *passed, int *failed, int condition, const char *message) {
@@ -60,5 +61,6 @@ int main() {
     runTest(&passed, &failed, nodeList->next == NULL, "Solmu 'B' pitäisi olla poistunut graafista");
 
     printf("\nGRAPH TEST SUMMARY: %d tests passed, %d tests failed\n\n", passed, failed);
+    recordTestResult("GRAPH_TESTS", passed, failed); // pass test results to test_results.c
     return 0;
 }
