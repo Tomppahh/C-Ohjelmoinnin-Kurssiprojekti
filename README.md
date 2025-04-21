@@ -1,27 +1,7 @@
 # CT60A2600-Tiimi03
 
-# Käytetty aika L08:
-# /////Tuomas/////
-# 1h Luento
-# 1h Miitti
-# 1h WSL toiminnallisuus
-# 30min Pohjan luonti (Valikko+Kysy tiedosto) 
-# 1h 30min addNode aliohjelma, Makefile ja linkedlist.h ja .c luonti
-# 1h Luotu tiedoston lukeminen ja listan etuperin tulostus
-# 1,5h Korjailua ja testausta, sekä raporttien kirjoittelua.
-
-
-# /////Tommi/////
-# 1h Miitti
-# 5h test_sorting.c tiedoston ja sen funktioiden tekeminen
-# 3h namelist.c, namelist.h tiedostojen tekeminen
-# binarytree.c syvyys/leveysfunktiot, freeTree funktio binääripuun muistin vapautukseen memoryleakin korjaamiseksi
-# koodattuja rivejä 349
-
-# /////Eelis/////
-# 1h Miitti
-# 30min linkitetyn listan luonti ja tyhjennys aliohjelma + git ignore lisäys
-# 1,5h Korjailua ja testausta, sekä raporttien kirjoittelua.
-# 1,5h 9.00-10.30 Luotu aliohjelma, mikä järjestää listan nousevaan järjestykseen. Koodattuja rivejä: 31
-# 20.3.2025 10.00-14.50 Luotu mahdollisuus lukea tiedot binääripuuhun ja kirjoittaa siitä tiedosto, tehty valikosta kaksitasoinen. Luotu siis binarytree.c ja binarytree.h filet. Muokattu main.c funktiota kaksitasoisen valikon tarpeiden mukaan. Muokattu myös linkedlist.c ja linkedlist.h filejä tarpeiden mukaan. Koodattuja rivejä 155.
-# 22.3.2025 19.30-22.15 Luotu tiedostoon kirjoitukset molemmille algoritmeille.
+# Luotu ohjelma on valikkopohjainen ohjelma, jonka tarkoituksena on käsitellä erilaisia tietorakenteita.
+# Ohjelmassa on mahdollisuus käsitellä linkitettyjä listoja, binääripuita ja graafeja.
+# Ohjelman on luonut Tommi Paakkunainen, Tuomas Heinonen ja Eelis Pigg.
+# Käyttöohjeet:
+# Käyttääksesi tätä ohjelmaa tulee sinulla olla asennettuna oikein ohjelma, tähän on annettu asennusohjeet ohjelman zip. kansiossa. Asennettuasi ohjelman oikeaoppisesti tietokoneellesi voit käyttää sitä komentopäätteessä. Aluksi on hyvä varmistaa että kaikki tiedostot ovat ajan tasalla ja toiminnassa käyttämällä make komentoa, joka kääntää kaikki ohjelman koodit ja katsoo että niissä ei ole mitään ongelmia. Tämän jälkeen ohjelman pystyy avaamaan kirjoittamalla syötteen ./Projekti, jonka jälkeen ohjelma lähtee toimimaan ja tulostaa käyttäjälle ensimmäisen valikon. Ohjelman käyttö itsessään on hyvin selkeää ja siihen on selkeät ohjeet sitä käyttäessä sisällytettynä. Lyhyesti, Numeroita painamalla valitaan mitä tietorakennetta halutaan käyttää, jonka jälkeen kyseiselle tietorakenteelle avautuu valikko jossa numeroita painamalla voi valita mitä haluaa tehdä liittyen valittuun tietorakenteeseen. 
