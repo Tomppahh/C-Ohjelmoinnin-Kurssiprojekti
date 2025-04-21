@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "graph.h"
+#include "common.h"
+#include "namelist.h"
 
 // Function takes integers passed and failed from main, with the condition to pass the test and the message to print.
 void runTest(int *passed, int *failed, int condition, const char *message) {
@@ -57,6 +59,6 @@ int main() {
     removeGraphNode(&nodeList, "B");
     runTest(&passed, &failed, nodeList->next == NULL, "Solmu 'B' pitäisi olla poistunut graafista");
 
-    printf("\nSummary: %d tests passed, %d tests failed\n", passed, failed);
+    printf("\nGRAPH TEST SUMMARY: %d tests passed, %d tests failed\n\n", passed, failed);
     return 0;
 }

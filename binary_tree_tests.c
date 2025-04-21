@@ -346,7 +346,7 @@ int main(){
     freeTree(Node);
 
     // Print summary of passed and failed tests
-    printf("\nSummary: %d tests passed, %d tests failed\n", passed, failed);
+    printf("\nBINARY TREE TEST SUMMARY: %d tests passed, %d tests failed\n\n", passed, failed);
 
     return 0;
 }

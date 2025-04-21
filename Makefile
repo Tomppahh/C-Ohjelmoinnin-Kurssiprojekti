@@ -30,8 +30,8 @@ common.o: common.c common.h
 	gcc -c common.c -std=c99 -pedantic -Wall
 
 # Test files
-test_sorting: test_sorting.o linkedlist.o
-	gcc -o test_sorting test_sorting.o linkedlist.o
+test_sorting: test_sorting.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
+	gcc -o test_sorting test_sorting.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
 
 test_sorting.o: test_sorting.c linkedlist.h
 	gcc -c test_sorting.c -std=c99 -pedantic -Wall
@@ -42,16 +42,16 @@ binary_tree_tests: binary_tree_tests.o binarytree.o linkedlist.o namelist.o avl_
 binary_tree_tests.o: binary_tree_tests.c binarytree.h linkedlist.h
 	gcc -c binary_tree_tests.c -std=c99 -pedantic -Wall
 
-graph_tests: graph_tests.o graph.o linkedlist.o
-	gcc -o graph_tests graph_tests.o graph.o linkedlist.o
+graph_tests: graph_tests.o graph.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
+	gcc -o graph_tests graph_tests.o graph.o linkedlist.o common.o namelist.o binarytree.o balance_tree.o avl_tree.o rb_tree.o
 
 graph_tests.o: graph_tests.c graph.h linkedlist.h
 	gcc -c graph_tests.c -std=c99 -pedantic -Wall
 
 test: test_sorting binary_tree_tests graph_tests
-	@echo "Running test_sorting:"
+	@echo "\nRunning test_sorting:"
 	./test_sorting
-	@echo "Running binary_tree_tests:"
+	@echo "\nRunning binary_tree_tests:"
 	./binary_tree_tests
-	@echo "Running graph_tests:"
+	@echo "\nRunning graph_tests:"
 	./graph_tests

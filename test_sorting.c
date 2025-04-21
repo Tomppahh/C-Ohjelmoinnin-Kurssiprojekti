@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "linkedlist.h"
+#include "common.h"
+#include "namelist.h"
 // going to make a main function where the tests are done. in this function we create an empty list and add to that and titles.
 // then we give these lists and the titles to the print function. 
 
@@ -102,7 +104,7 @@ int main() {
     list = empty(list);
 
     // Print summary of passed and failed tests
-    printf("\nSummary: %d tests passed, %d tests failed\n", passed, failed);
+    printf("\nTEST SORTING SUMMARY: %d tests passed, %d tests failed\n\n", passed, failed);
 
     return 0;
 }
